@@ -9,6 +9,7 @@
 import UIKit
 
 public class SharedConstants: NSObject {
+    static let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
     // MARK: - Screen Aspect Ratio
     public static let ASPECT_RATIO_RESPECT = ScreenSize.BASE_SCREEN_HEIGHT / ScreenSize.maxWH
     public static let ENABLE_EMAIL_VERIFICATION = true

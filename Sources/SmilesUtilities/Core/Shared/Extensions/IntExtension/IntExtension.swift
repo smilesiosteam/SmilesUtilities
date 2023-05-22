@@ -20,7 +20,7 @@ public extension Int {
         return ""
     }
     
-    public var double: Double {
+    var double: Double {
         return Double(self)
     }
     
@@ -28,11 +28,11 @@ public extension Int {
         return Float(self)
     }
     
-    public var cgFloat: CGFloat {
+    var cgFloat: CGFloat {
         return CGFloat(self)
     }
     
-    public var string: String {
+    var string: String {
         return String(self)
     }
 }
