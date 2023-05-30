@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "cryptoswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzyzanowskim/CryptoSwift.git",
+      "state" : {
+        "revision" : "eee9ad754926c40a0f7e73f152357d37b119b7fa",
+        "version" : "1.7.1"
+      }
+    },
+    {
+      "identity" : "smileslanguagemanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/smilesiosteam/SmilesLanguageManager.git",
+      "state" : {
+        "revision" : "1ead4bcf578ffdeee7318bddfd3d8b2dbdcc2597",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "smilesstorage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hananahmad/SmilesStorage.git",
+      "state" : {
+        "revision" : "178135f1caa1013d7304ff62d02e6febaf40d666",
+        "version" : "1.0.2"
+      }
+    }
+  ],
+  "version" : 2
+}
