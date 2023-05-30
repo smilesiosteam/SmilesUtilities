@@ -29,7 +29,7 @@ public class BaseMainResponse : Codable {
         
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         additionalInfo = try values.decodeIfPresent([BaseMainResponseAdditionalInfo].self, forKey: .additionalInfo)
         responseCode = try values.decodeIfPresent(String.self, forKey: .responseCode)

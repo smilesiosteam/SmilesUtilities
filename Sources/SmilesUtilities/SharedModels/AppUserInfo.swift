@@ -34,7 +34,7 @@ public class AppUserInfo: Codable {
     
     public init() {}
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         isLocationUpdated = try values.decodeIfPresent(Bool.self, forKey: .isLocationUpdated)
         latitude = try values.decodeIfPresent(String.self, forKey: .latitude)
