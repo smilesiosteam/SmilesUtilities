@@ -45,3 +45,24 @@ public class SharedConstants: NSObject {
         public static let semiBold = "Montserrat-Semibold"
     }   
 }
+
+public enum UserDefaultKeys {
+    //tooltip
+    public static let isToolTopShown = "isToolTopShown"
+    // LocationState
+    public static let locationSaver = "locationSaver"
+    
+    public static let recentLocationSaver = "recentLocationSaver"
+    
+    public static let locationRegistered = "locationRegistered"
+    
+    public static let shouldUpdateLocation = "shouldUpdateLocation"
+    
+    public static let updateLocationInHome = "updateLocationInHome"
+    
+    public static let hideLocationToolTip = "hideLocationToolTip"
+    
+    public static let showLocationToolTipOnHome = "showLocationToolTip"
+    public static let showLocationToolTipOnRestaurant = "showLocationToolTipOnRestaurant"
+    public static let iOSRatingState = "iOSRatingState"
+}
