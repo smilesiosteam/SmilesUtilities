@@ -12,7 +12,7 @@ import MapKit
 import SmilesLanguageManager
 public class AppCommonMethods {
     
-    public var isGuestUser: Bool {
+    public static var isGuestUser: Bool {
         if let msisdn = UserDefaults.standard.string(forKey: .msisdn), !msisdn.isEmpty {
             return false
         } else {
