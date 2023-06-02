@@ -7,17 +7,52 @@
 //
 
 import Foundation
-import UIKit
-
+import SDWebImage
 
 public extension UIImageView {
     func makeRounded(radius: CGFloat) {
         self.layer.cornerRadius = radius
         self.layer.masksToBounds = true
     }
+    
+    func setProfileImageWithUrlString(_ urlString: String, defaultImage: String? = "") {
+        if let imageURL = URL(string: urlString) {
+            SDImageCache.shared.removeImage(forKey: urlString) {
+                self.sd_setImage(with: imageURL, placeholderImage: UIImage(named: defaultImage ?? ""))
+            }
+        }
+        else {
+            self.image = UIImage(named: defaultImage ?? "")
+        }
+    }
+
+    func setImageWithUrlString(_ urlString: String, defaultImage: String? = "") {
+        if let imageURL = URL(string: urlString) {
+            self.sd_setImage(with: imageURL, placeholderImage: UIImage(named: defaultImage ?? ""))
+        }
+        else {
+            self.image = UIImage(named: defaultImage ?? "")
+        }
+    }
+    
+    func setImageWithUrlString(_ urlString: String, defaultImage: String? = "", backgroundColor: UIColor? = .appRevampImageBackgroundColor, completionBlock: @escaping (_ image: UIImage?) -> ()) {
+        if let imageURL = URL(string: urlString) {
+            self.sd_setImage(with: imageURL) { (image, error, type, url) in
+                if (error != nil) {
+                    self.backgroundColor = backgroundColor
+                } else {
+                    completionBlock(image)
+                }
+            }
+        }
+        else {
+            self.image = UIImage(named: defaultImage ?? "")
+            completionBlock(self.image)
+        }
+    }
 }
 
-public extension UIImage {
+extension UIImage {
     func mergeWith(topImage: UIImage) -> UIImage {
         let bottomImage = self
 
