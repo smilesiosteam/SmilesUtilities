@@ -65,4 +65,13 @@ public extension UIButton {
     func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         self.setBackgroundImage(self.imageWithColor(color: color), for: state)
     }
+    func setImageWithUrlString(_ urlString: String?, defaultImage: String? = "", state: UIControl.State) {
+        if let imageURL = URL(string: urlString ?? "") {
+            self.sd_setImage(with: imageURL, for: state)
+        }
+        else {
+            self.setImage(UIImage(named: defaultImage ?? ""), for: state)
+        }
+    }
+    
 }
