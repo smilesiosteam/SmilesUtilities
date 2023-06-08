@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 public class GradientUtility {
     public static let shared = GradientUtility()
-    private init(){ }
     
-    func getGradientStartAndEndPoint (withDirection direction: String) -> (startPoint: CGPoint, endPoint: CGPoint) {
+    
+    public func getGradientStartAndEndPoint (withDirection direction: String) -> (startPoint: CGPoint, endPoint: CGPoint) {
         
         var startPoint: CGPoint?
         var endPoint: CGPoint?
@@ -69,7 +69,7 @@ public class GradientUtility {
         return (startPoint!, endPoint!)
     }
     
-    func getGradientLayer(forView: UIView, colors: [CGColor], direction: String) -> CAGradientLayer{
+    public func getGradientLayer(forView: UIView, colors: [CGColor], direction: String) -> CAGradientLayer{
         
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = colors
@@ -83,7 +83,7 @@ public class GradientUtility {
         return gradient
     }
     
-    func removeGradientLayersFrom(view: UIView) {
+    public func removeGradientLayersFrom(view: UIView) {
         
         var gradientLayers = [CAGradientLayer]()
         
