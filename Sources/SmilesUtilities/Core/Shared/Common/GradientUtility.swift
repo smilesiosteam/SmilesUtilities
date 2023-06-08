@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-class GradientUtility {
+public class GradientUtility {
     static let shared = GradientUtility()
     private init(){ }
     
