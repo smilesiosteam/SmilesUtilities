@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 public class GradientUtility {
-    static let shared = GradientUtility()
+    public static let shared = GradientUtility()
     private init(){ }
     
     func getGradientStartAndEndPoint (withDirection direction: String) -> (startPoint: CGPoint, endPoint: CGPoint) {
