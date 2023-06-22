@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SmilesFontsManager
+import SmilesLanguageManager
 
 @IBDesignable
 public class TextFieldWithValidation: UITextField {

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SmilesLanguageManager
 
 @IBDesignable
 public class UICustomButton: UIButton {
