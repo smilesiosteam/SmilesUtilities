@@ -19,6 +19,12 @@ public class UICustomButton: UIButton {
         layer as! CAGradientLayer
     }
     
+    @IBInspectable public var localizedTitle: String = "" {
+        didSet {
+            self.setTitle(SmilesLanguageManager.shared.getLocalizedString(for: localizedTitle), for: .normal)
+        }
+    }
+    
     // button corner radius
     @IBInspectable public var cornerRadius: CGFloat = 0 {
         didSet {

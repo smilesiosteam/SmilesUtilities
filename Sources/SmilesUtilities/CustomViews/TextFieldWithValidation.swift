@@ -17,6 +17,11 @@ public class TextFieldWithValidation: UITextField {
     @IBInspectable public var paddingRight: CGFloat = 12
     @IBInspectable public var paddingTop: CGFloat = 7
     @IBInspectable public var paddingBottom: CGFloat = 7
+    @IBInspectable public var localizedPlaceholder: String = "" {
+        didSet {
+            self.placeholder = SmilesLanguageManager.shared.getLocalizedString(for: localizedPlaceholder)
+        }
+    }
     private var errorMessage: String = "" {
         didSet {
             if errorMessage.isEmpty {
