@@ -22,10 +22,10 @@ class PickerOptionTableViewCell: UITableViewCell {
         wrapperVu.layer.cornerRadius = 10
         
         
-        
         icon.layer.borderWidth = 2
         icon.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
         icon.layer.cornerRadius = 10
+        selectionStyle = .none
         
     }
 
