@@ -11,7 +11,13 @@ import SmilesFontsManager
 
 @IBDesignable
 public class TextFieldWithValidation: UITextField {
-    
+    public override var placeholder: String?{
+        didSet{
+            if !(placeholder?.isEmpty ?? true) {
+                updatePlaceHolder()
+            }
+        }
+    }
     private var errorLabel = UILabel()
     @IBInspectable public var paddingLeft: CGFloat = 12
     @IBInspectable public var paddingRight: CGFloat = 12
@@ -77,7 +83,8 @@ public class TextFieldWithValidation: UITextField {
         setBorderColor()
         setupErrorLabel()
         addTarget(self, action: #selector(didChangeText(_:)), for: .editingChanged)
-        
+        backgroundColor = UIColor(white: 0.95, alpha: 1)
+        updatePlaceHolder()
     }
     
     @objc private func didChangeText(_ sender: UITextField) {
@@ -86,11 +93,15 @@ public class TextFieldWithValidation: UITextField {
             errorMessage = ""
             hideErrorMessage()
         }
-        
+        self.backgroundColor = !(text?.isEmpty ?? true) ? UIColor(white: 0.95, alpha: 1) : .white
+        UIView.animate(withDuration: 0.2, animations: {
+            self.backgroundColor = self.text?.isEmpty ?? true ? UIColor(white: 0.95, alpha: 1) : .white
+        })
+        setBorderColor()
     }
     
     func setBorderColor(isDefault: Bool = true) {
-        layer.borderColor = isDefault ? UIColor.black.withAlphaComponent(0.2).cgColor : UIColor(hex: "cc1900").cgColor
+        layer.borderColor = isDefault ? ((text?.isEmpty ?? true) ? UIColor.clear.cgColor : UIColor.black.withAlphaComponent(0.2).cgColor) : UIColor(hex: "cc1900").cgColor
     }
     
     private func setupErrorLabel() {
@@ -160,7 +171,12 @@ public class TextFieldWithValidation: UITextField {
                           height: textFieldIntrinsicContentSize.height + errorLabelHeight)
         }
     }
-    
+    func updatePlaceHolder(){
+        self.attributedPlaceholder = NSAttributedString(string:self.placeholder.asStringOrEmpty(), attributes:[
+            NSAttributedString.Key.foregroundColor: UIColor(hex:"797D8D"),
+            NSAttributedString.Key.font: UIFont.circularXXTTBookFont(size: 16)
+        ])
+    }
     public override func layoutSubviews() {
         super.layoutSubviews()
         
