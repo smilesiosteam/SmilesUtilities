@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SmilesLanguageManager
 
 @IBDesignable
 public class UICustomButton: UIButton {
@@ -17,6 +18,12 @@ public class UICustomButton: UIButton {
     
     private var gradientLayer: CAGradientLayer {
         layer as! CAGradientLayer
+    }
+    
+    @IBInspectable public var localizedTitle: String = "" {
+        didSet {
+            self.setTitle(SmilesLanguageManager.shared.getLocalizedString(for: localizedTitle), for: .normal)
+        }
     }
     
     // button corner radius
