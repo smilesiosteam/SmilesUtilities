@@ -99,7 +99,6 @@ public class TextFieldWithValidation: UITextField {
             errorMessage = ""
             hideErrorMessage()
         }
-        self.backgroundColor = !(text?.isEmpty ?? true) ? UIColor(white: 0.95, alpha: 1) : .white
         UIView.animate(withDuration: 0.2, animations: {
             self.backgroundColor = self.text?.isEmpty ?? true ? UIColor(white: 0.95, alpha: 1) : .white
         })
