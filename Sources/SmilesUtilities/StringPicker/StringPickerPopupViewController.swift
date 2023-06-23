@@ -125,7 +125,7 @@ extension StringPickerPopupViewController:UITableViewDataSource, UITableViewDele
                     totalHeight += size.height
                 }
                 
-                self.tableViewHeight.constant = min(totalHeight,self.view.frame.size.height*0.9)
+                self.tableViewHeight.constant = min(totalHeight,self.view.frame.size.height*0.77)
         }
     }
 }
