@@ -15,7 +15,8 @@ public class UILocalizableLabel: UILabel {
     // button corner radius
     @IBInspectable public var localizedString: String = "" {
         didSet {
-            self.text = SmilesLanguageManager.shared.getLocalizedString(for: localizedString)
+            let localized = SmilesLanguageManager.shared.getLocalizedString(for: localizedString)
+            self.text = localized.isEmpty ? localizedString : localized
         }
     }
     

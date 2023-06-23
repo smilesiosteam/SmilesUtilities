@@ -36,6 +36,15 @@
                                             <constraint firstAttribute="height" constant="5" id="rlS-Ws-v8f"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLk-j8-j7W" customClass="UILocalizableLabel" customModule="SmilesUtilities">
+                                        <rect key="frame" x="26" y="37" width="344" height="6"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.074509803921568626" green="0.090196078431372548" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline4"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6P-Zb-MmD">
                                         <rect key="frame" x="380" y="19" width="30" height="30"/>
                                         <constraints>
@@ -109,10 +118,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="lPJ-lA-rh3" firstAttribute="top" secondItem="hGy-b8-leL" secondAttribute="top" constant="8" id="Ar6-HW-wQ5"/>
+                                    <constraint firstItem="s6P-Zb-MmD" firstAttribute="leading" secondItem="aLk-j8-j7W" secondAttribute="trailing" constant="10" id="Lyx-mh-r8j"/>
+                                    <constraint firstItem="eLZ-IR-cj3" firstAttribute="top" secondItem="aLk-j8-j7W" secondAttribute="bottom" constant="24" id="Q3o-Ae-e3j"/>
                                     <constraint firstAttribute="trailing" secondItem="s6P-Zb-MmD" secondAttribute="trailing" constant="20" id="QQm-oQ-u0O"/>
                                     <constraint firstItem="s6P-Zb-MmD" firstAttribute="top" secondItem="hGy-b8-leL" secondAttribute="top" constant="19" id="XbD-IF-oHW"/>
                                     <constraint firstItem="eLZ-IR-cj3" firstAttribute="leading" secondItem="hGy-b8-leL" secondAttribute="leading" id="YJn-6t-cRY"/>
-                                    <constraint firstItem="eLZ-IR-cj3" firstAttribute="top" secondItem="s6P-Zb-MmD" secondAttribute="bottom" constant="18" id="dmJ-Vr-eI6"/>
+                                    <constraint firstItem="aLk-j8-j7W" firstAttribute="top" secondItem="lPJ-lA-rh3" secondAttribute="bottom" constant="24" id="YbP-Uk-g0W"/>
+                                    <constraint firstItem="eLZ-IR-cj3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="s6P-Zb-MmD" secondAttribute="bottom" constant="18" id="dmJ-Vr-eI6"/>
+                                    <constraint firstItem="aLk-j8-j7W" firstAttribute="leading" secondItem="hGy-b8-leL" secondAttribute="leading" constant="26" id="e8Z-cy-hoA"/>
                                     <constraint firstItem="lPJ-lA-rh3" firstAttribute="centerX" secondItem="hGy-b8-leL" secondAttribute="centerX" id="nnw-H0-jMN"/>
                                     <constraint firstAttribute="trailing" secondItem="eLZ-IR-cj3" secondAttribute="trailing" id="q9u-oF-pta"/>
                                 </constraints>
@@ -138,6 +151,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="crossBtn" destination="s6P-Zb-MmD" id="nTB-hh-4tm"/>
+                        <outlet property="headingLabel" destination="aLk-j8-j7W" id="cFm-Lt-flk"/>
                         <outlet property="mainView" destination="hGy-b8-leL" id="lhj-jP-bkL"/>
                         <outlet property="panDismissView" destination="1Pb-4T-T4A" id="n2T-PK-lTT"/>
                         <outlet property="tableView" destination="eLZ-IR-cj3" id="1DO-RI-eH4"/>
@@ -149,6 +163,9 @@
             <point key="canvasLocation" x="904.18604651162786" y="151.93133047210301"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="aLk-j8-j7W"/>
+    </designables>
     <resources>
         <image name="grayCross" width="21.666666030883789" height="21.333333969116211"/>
         <systemColor name="systemBackgroundColor">

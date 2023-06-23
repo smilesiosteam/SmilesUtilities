@@ -20,7 +20,8 @@ public class TextFieldWithValidation: UITextField {
     @IBInspectable public var paddingBottom: CGFloat = 7
     @IBInspectable public var localizedPlaceholder: String = "" {
         didSet {
-            self.placeholder = SmilesLanguageManager.shared.getLocalizedString(for: localizedPlaceholder)
+            let localized = SmilesLanguageManager.shared.getLocalizedString(for: localizedPlaceholder)
+            self.placeholder = localized.isEmpty ? localizedPlaceholder : localized
         }
     }
     private var errorMessage: String = "" {

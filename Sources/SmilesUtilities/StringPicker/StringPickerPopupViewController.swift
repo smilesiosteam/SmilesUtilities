@@ -11,12 +11,18 @@ import UIKit
 public class StringPickerPopupViewController: UIViewController {
     
     @IBOutlet weak var panDismissView: UIView!
+    @IBOutlet weak var headingLabel: UILocalizableLabel!
     
     var options:[String]=[]{
         didSet{
             if isViewLoaded{
                 setTableViewHeight()
             }
+        }
+    }
+    var heading: String = "" {
+        didSet {
+            headingLabel.localizedString = heading
         }
     }
     
@@ -127,10 +133,11 @@ extension StringPickerPopupViewController:UITableViewDataSource, UITableViewDele
     }
 }
 extension UIViewController {
-    public func present(options:[String], didPickOption:@escaping (Int)->Void) {
+    public func present(options:[String], heading: String = "", didPickOption:@escaping (Int)->Void) {
         let vc = UIStoryboard(name: "StringPickerPopup", bundle: Bundle.module).instantiateViewController(withIdentifier: "StringPickerPopupViewController") as! StringPickerPopupViewController
         vc.options=options
         vc.didPickOption=didPickOption
+        vc.heading = heading
         vc.modalPresentationStyle = .overFullScreen
         vc.modalPresentationCapturesStatusBarAppearance = true
         present(vc)
