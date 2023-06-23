@@ -20,6 +20,13 @@ public class TextFieldWithValidation: UITextField {
         }
     }
     
+    public override var text: String? {
+        didSet{
+            setBorderColor()
+            updateBackground()
+        }
+    }
+    
     private var errorLabel = UILabel()
     @IBInspectable public var paddingLeft: CGFloat = 12
     @IBInspectable public var paddingRight: CGFloat = 12
@@ -100,14 +107,16 @@ public class TextFieldWithValidation: UITextField {
             errorMessage = ""
             hideErrorMessage()
         }
+        updateBackground()
+        setBorderColor()
+    }
+    func updateBackground(){
         if (self.backgroundColor != .white) == !(self.text?.isEmpty ?? true) {
             UIView.animate(withDuration: 0.2, animations: {
                 self.backgroundColor = self.text?.isEmpty ?? true ? UIColor(white: 0.95, alpha: 1) : .white
             })
         }
-        setBorderColor()
     }
-    
     func setBorderColor(isDefault: Bool = true) {
         layer.borderColor = isDefault ? ((text?.isEmpty ?? true) ? UIColor.clear.cgColor : UIColor.black.withAlphaComponent(0.2).cgColor) : UIColor(hex: "cc1900").cgColor
     }

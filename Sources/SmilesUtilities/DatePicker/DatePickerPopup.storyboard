@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mrg-aK-cPW">
+    <device id="retina6_72" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Date Picker Popup View Controller-->
+        <scene sceneID="wNu-vz-AgM">
+            <objects>
+                <viewController storyboardIdentifier="DatePickerPopupViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mrg-aK-cPW" customClass="DatePickerPopupViewController" customModule="SmilesUtilities" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lNf-Tp-JWb"/>
+                        <viewControllerLayoutGuide type="bottom" id="PXa-7e-hdt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xRA-Nz-89m">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hGy-b8-leL">
+                                <rect key="frame" x="0.0" y="477.66666666666674" width="430" height="454.33333333333326"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPJ-lA-rh3">
+                                        <rect key="frame" x="192.66666666666666" y="8" width="45" height="5"/>
+                                        <color key="backgroundColor" red="0.20784313730000001" green="0.2156862745" blue="0.21960784310000001" alpha="0.20261074849999999" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="H3M-fg-RNi"/>
+                                            <constraint firstAttribute="height" constant="5" id="rlS-Ws-v8f"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6P-Zb-MmD">
+                                        <rect key="frame" x="384" y="19" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="s6P-Zb-MmD" secondAttribute="height" id="Kq6-WW-t0N"/>
+                                            <constraint firstAttribute="height" constant="26" id="kJG-8g-SR2"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="chekboxChecked"/>
+                                        <connections>
+                                            <action selector="tickBtnTapped:" destination="mrg-aK-cPW" eventType="touchUpInside" id="dTS-LI-8jI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dna-Tx-Ytq">
+                                        <rect key="frame" x="20" y="19" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Dna-Tx-Ytq" secondAttribute="height" multiplier="1:1" id="7N8-16-Ogq"/>
+                                            <constraint firstAttribute="height" constant="30" id="vbw-wJ-VE3"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.45882352939999999" green="0.25882352939999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="grayCross"/>
+                                        <connections>
+                                            <action selector="crossBtnTapped:" destination="mrg-aK-cPW" eventType="touchUpInside" id="syT-A5-LNL"/>
+                                        </connections>
+                                    </button>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="q97-qH-dpb">
+                                        <rect key="frame" x="0.0" y="62.999999999999943" width="430" height="375.33333333333331"/>
+                                        <color key="tintColor" red="0.46274509803921571" green="0.36470588235294116" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="375.33333333333331" id="MBE-jl-oGL"/>
+                                        </constraints>
+                                    </datePicker>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Dna-Tx-Ytq" firstAttribute="leading" secondItem="hGy-b8-leL" secondAttribute="leading" constant="20" id="2kg-oP-Xso"/>
+                                    <constraint firstItem="Dna-Tx-Ytq" firstAttribute="top" secondItem="s6P-Zb-MmD" secondAttribute="top" id="5DQ-VE-cEx"/>
+                                    <constraint firstItem="lPJ-lA-rh3" firstAttribute="top" secondItem="hGy-b8-leL" secondAttribute="top" constant="8" id="Ar6-HW-wQ5"/>
+                                    <constraint firstAttribute="trailing" secondItem="s6P-Zb-MmD" secondAttribute="trailing" constant="20" id="QQm-oQ-u0O"/>
+                                    <constraint firstItem="q97-qH-dpb" firstAttribute="top" secondItem="s6P-Zb-MmD" secondAttribute="bottom" constant="18" id="QXk-ya-8o5"/>
+                                    <constraint firstAttribute="bottom" secondItem="q97-qH-dpb" secondAttribute="bottom" constant="16" id="TRq-5C-R9m"/>
+                                    <constraint firstItem="q97-qH-dpb" firstAttribute="leading" secondItem="hGy-b8-leL" secondAttribute="leading" id="WR9-mP-KdC"/>
+                                    <constraint firstItem="s6P-Zb-MmD" firstAttribute="top" secondItem="hGy-b8-leL" secondAttribute="top" constant="19" id="XbD-IF-oHW"/>
+                                    <constraint firstAttribute="trailing" secondItem="q97-qH-dpb" secondAttribute="trailing" id="Zf5-N3-tkS"/>
+                                    <constraint firstItem="lPJ-lA-rh3" firstAttribute="centerX" secondItem="hGy-b8-leL" secondAttribute="centerX" id="nnw-H0-jMN"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Pb-4T-T4A" userLabel="PanDismissView">
+                                <rect key="frame" x="0.0" y="0.0" width="430" height="477.66666666666669"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="hGy-b8-leL" secondAttribute="bottom" id="1D3-V7-Gm9"/>
+                            <constraint firstItem="hGy-b8-leL" firstAttribute="top" secondItem="1Pb-4T-T4A" secondAttribute="bottom" id="IBJ-0M-Of2"/>
+                            <constraint firstAttribute="trailing" secondItem="hGy-b8-leL" secondAttribute="trailing" id="WgL-na-b4m"/>
+                            <constraint firstItem="1Pb-4T-T4A" firstAttribute="leading" secondItem="xRA-Nz-89m" secondAttribute="leading" id="b1G-Sp-9yM"/>
+                            <constraint firstItem="hGy-b8-leL" firstAttribute="leading" secondItem="xRA-Nz-89m" secondAttribute="leading" id="fM0-tc-twi"/>
+                            <constraint firstAttribute="trailing" secondItem="1Pb-4T-T4A" secondAttribute="trailing" id="lBS-Kg-ODj"/>
+                            <constraint firstItem="1Pb-4T-T4A" firstAttribute="top" secondItem="xRA-Nz-89m" secondAttribute="top" id="zHB-8C-3iA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="fO7-ju-87H"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="crossBtn" destination="Dna-Tx-Ytq" id="Amw-1Q-puW"/>
+                        <outlet property="datePicker" destination="q97-qH-dpb" id="3fH-fM-vEo"/>
+                        <outlet property="mainView" destination="hGy-b8-leL" id="lhj-jP-bkL"/>
+                        <outlet property="panDismissView" destination="1Pb-4T-T4A" id="n2T-PK-lTT"/>
+                        <outlet property="tickBtn" destination="s6P-Zb-MmD" id="35z-4t-yna"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SPs-1e-mb8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="904.18604651162786" y="151.93133047210301"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chekboxChecked" width="24" height="24"/>
+        <image name="grayCross" width="21.666666030883789" height="21.333333969116211"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
