@@ -14,6 +14,20 @@ public extension Decodable {
         }
         return nil
     }
+    
+    static func fromModuleFile()->Self? {
+        let name = String(describing: self)
+        let ext = "json"
+        if let url = Bundle.getResourceBundle(for: name, fileExtension: ext)?.url(forResource: name, withExtension: ext) {
+            if let data = try? Data(contentsOf: url){
+                if let obj = try? JSONDecoder().decode(Self.self, from: data){
+                    return obj
+                }
+            }
+        }
+        return nil
+    }
+    
 }
 public extension Encodable{
     func jsonString()->String?{
@@ -21,6 +35,19 @@ public extension Encodable{
         encoder.outputFormatting = .prettyPrinted
         if let data = try? encoder.encode(self){
             return String(data: data, encoding: .utf8)
+        }
+        return nil
+    }
+}
+
+extension Bundle {
+    public static func getResourceBundle(for fileName:String,fileExtension:String)->Bundle? {
+        Bundle.module.load()
+        Bundle.allBundles.forEach({$0.load()})
+        for bundle in Bundle.allBundles {
+            if bundle.url(forResource: fileName, withExtension: fileExtension) != nil {
+                return bundle
+            }
         }
         return nil
     }
