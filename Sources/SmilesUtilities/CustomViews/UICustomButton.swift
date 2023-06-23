@@ -22,7 +22,8 @@ public class UICustomButton: UIButton {
     
     @IBInspectable public var localizedTitle: String = "" {
         didSet {
-            self.setTitle(SmilesLanguageManager.shared.getLocalizedString(for: localizedTitle), for: .normal)
+            let localized = SmilesLanguageManager.shared.getLocalizedString(for: localizedTitle)
+            self.setTitle(localized.isEmpty ? localizedTitle : localized, for: .normal)
         }
     }
     
