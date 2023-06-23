@@ -20,11 +20,7 @@ public class StringPickerPopupViewController: UIViewController {
             }
         }
     }
-    var heading: String = "" {
-        didSet {
-            headingLabel.localizedString = heading
-        }
-    }
+    var heading: String = ""
     
     var calculatingCell:PickerOptionTableViewCell!
     var didPickOption:(Int)->Void = {_ in}
@@ -59,6 +55,7 @@ public class StringPickerPopupViewController: UIViewController {
     
     
     func setupUI() {
+        headingLabel.localizedString = heading
         tableView.dataSource = self
         tableView.delegate = self
         setTableViewHeight()
