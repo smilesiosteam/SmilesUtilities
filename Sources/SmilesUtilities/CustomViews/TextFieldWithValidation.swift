@@ -19,9 +19,12 @@ public class TextFieldWithValidation: UITextField {
             }
         }
     }
-    
+    public var continousValidation = false
     public override var text: String? {
         didSet{
+            if continousValidation {
+                _ = isDataValid
+            }
             setBorderColor()
             updateBackground()
         }
@@ -61,7 +64,6 @@ public class TextFieldWithValidation: UITextField {
         for validation in validationType {
             do {
                 try text.validatedText(validationType: validation)
-                isValid = true
             } catch (let error) {
                 if customErrorMessage.isEmpty {
                     errorMessage = (error as! ValidationError).message
@@ -100,6 +102,13 @@ public class TextFieldWithValidation: UITextField {
         addTarget(self, action: #selector(didChangeText(_:)), for: .editingChanged)
         backgroundColor = UIColor(white: 0.95, alpha: 1)
         updatePlaceHolder()
+        if SmilesLanguageManager.shared.currentLanguage == .ar {
+            semanticContentAttribute = .forceRightToLeft
+            textAlignment = .right
+        }else{
+            semanticContentAttribute = .forceLeftToRight
+            textAlignment = .left
+        }
     }
     
     @objc private func didChangeText(_ sender: UITextField) {
@@ -107,6 +116,9 @@ public class TextFieldWithValidation: UITextField {
         if !errorLabel.isHidden {
             errorMessage = ""
             hideErrorMessage()
+        }
+        if continousValidation{
+            _ = isDataValid
         }
         updateBackground()
         setBorderColor()
