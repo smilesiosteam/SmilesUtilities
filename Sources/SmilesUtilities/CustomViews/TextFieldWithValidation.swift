@@ -19,11 +19,10 @@ public class TextFieldWithValidation: UITextField {
             }
         }
     }
-    
+    public var continousValidation = false
     public override var text: String? {
         didSet{
-            setBorderColor()
-            updateBackground()
+            textChanged()
         }
     }
     
@@ -57,22 +56,20 @@ public class TextFieldWithValidation: UITextField {
     public var validationType = [ValidatorType]()
     public var isDataValid: Bool {
         guard let text = text else { return false}
-        var isValid = true
         for validation in validationType {
             do {
                 try text.validatedText(validationType: validation)
-                isValid = true
             } catch (let error) {
                 if customErrorMessage.isEmpty {
                     errorMessage = (error as! ValidationError).message
                 } else {
                     errorMessage = customErrorMessage
                 }
-                isValid = false
-                break
+                return false
             }
         }
-        return isValid
+        errorMessage = ""
+        return true
     }
     public var shakeTextField = true
     public override func awakeFromNib() {
@@ -100,16 +97,27 @@ public class TextFieldWithValidation: UITextField {
         addTarget(self, action: #selector(didChangeText(_:)), for: .editingChanged)
         backgroundColor = UIColor(white: 0.95, alpha: 1)
         updatePlaceHolder()
+        if SmilesLanguageManager.shared.currentLanguage == .ar {
+            semanticContentAttribute = .forceRightToLeft
+            textAlignment = .right
+        }else{
+            semanticContentAttribute = .forceLeftToRight
+            textAlignment = .left
+        }
     }
     
     @objc private func didChangeText(_ sender: UITextField) {
         
         if !errorLabel.isHidden {
             errorMessage = ""
-            hideErrorMessage()
+        }
+        textChanged()
+    }
+    func textChanged(){
+        if continousValidation {
+            _ = isDataValid
         }
         updateBackground()
-        setBorderColor()
     }
     func updateBackground(){
         if (self.backgroundColor != .white) == !(self.text?.isEmpty ?? true) {
