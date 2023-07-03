@@ -22,11 +22,7 @@ public class TextFieldWithValidation: UITextField {
     public var continousValidation = false
     public override var text: String? {
         didSet{
-            if continousValidation {
-                _ = isDataValid
-            }
-            setBorderColor()
-            updateBackground()
+            textChanged()
         }
     }
     
@@ -60,7 +56,6 @@ public class TextFieldWithValidation: UITextField {
     public var validationType = [ValidatorType]()
     public var isDataValid: Bool {
         guard let text = text else { return false}
-        var isValid = true
         for validation in validationType {
             do {
                 try text.validatedText(validationType: validation)
@@ -70,11 +65,11 @@ public class TextFieldWithValidation: UITextField {
                 } else {
                     errorMessage = customErrorMessage
                 }
-                isValid = false
-                break
+                return false
             }
         }
-        return isValid
+        errorMessage = ""
+        return true
     }
     public var shakeTextField = true
     public override func awakeFromNib() {
@@ -115,13 +110,14 @@ public class TextFieldWithValidation: UITextField {
         
         if !errorLabel.isHidden {
             errorMessage = ""
-            hideErrorMessage()
         }
-        if continousValidation{
+        textChanged()
+    }
+    func textChanged(){
+        if continousValidation {
             _ = isDataValid
         }
         updateBackground()
-        setBorderColor()
     }
     func updateBackground(){
         if (self.backgroundColor != .white) == !(self.text?.isEmpty ?? true) {
