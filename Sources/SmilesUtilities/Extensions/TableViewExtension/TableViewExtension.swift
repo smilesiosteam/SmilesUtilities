@@ -12,8 +12,8 @@ public extension UITableView {
         register(T.self, forCellReuseIdentifier: reuseIdentifier)
     }
     
-    func registerCellFromNib<T: UITableViewCell>(_ type: T.Type, withIdentifier reuseIdentifier: String = String(describing: T.self)) {
-        register(UINib(nibName: String(describing: T.self), bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+    func registerCellFromNib<T: UITableViewCell>(_ type: T.Type, withIdentifier reuseIdentifier: String = String(describing: T.self), bundle: Bundle? = nil) {
+        register(UINib(nibName: String(describing: T.self), bundle: bundle), forCellReuseIdentifier: reuseIdentifier)
     }
     
     public func dequeueCell<T: UITableViewCell>(_ type: T.Type = T.self, withIdentifier reuseIdentifier: String = String(describing: T.self)) -> T {
