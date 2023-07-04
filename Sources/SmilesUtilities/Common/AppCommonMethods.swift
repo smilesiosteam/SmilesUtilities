@@ -12,6 +12,14 @@ import MapKit
 import SmilesLanguageManager
 public class AppCommonMethods {
     
+    public static var serviceBaseUrl: String {
+        let plistInfo = Bundle.main.infoDictionary
+        if let value = plistInfo?["MAIN_URL"] as? String {
+            return value.replacingOccurrences(of: "\\", with: "")
+        }
+        return ""
+    }
+    
     public static var isGuestUser: Bool {
         if let msisdn = UserDefaults.standard.string(forKey: .msisdn), !msisdn.isEmpty {
             return false
