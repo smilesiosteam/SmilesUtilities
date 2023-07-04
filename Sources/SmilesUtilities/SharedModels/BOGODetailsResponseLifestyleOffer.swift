@@ -51,6 +51,7 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
     public let redirectionUrl: String?
     public let subscriptionSavings: Double?
     public let subscriptionSavingsFactor: Int?
+    public let benefits: [WhatYouGet]?
 
     enum CodingKeys: String, CodingKey {
         case autoRenewable
@@ -96,6 +97,7 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
         case redirectionUrl
         case subscriptionSavings
         case subscriptionSavingsFactor
+        case benefits = "whatYouGet"
     }
 
     public required init(from decoder: Decoder) throws {
@@ -145,6 +147,7 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
         redirectionUrl = try values.decodeIfPresent(String.self, forKey: .redirectionUrl)
         subscriptionSavings = try values.decodeIfPresent(Double.self, forKey: .subscriptionSavings)
         subscriptionSavingsFactor = try values.decodeIfPresent(Int.self, forKey: .subscriptionSavingsFactor)
+        benefits = try values.decodeIfPresent([WhatYouGet].self, forKey: .benefits)
     }
 
     public func asDictionary() -> [String: Any] {
