@@ -165,6 +165,18 @@ public class AppCommonMethods {
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         return dateFormatter.date(from: dateString)
     }
+    
+    public static func convert(date:Date,format:String)->String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.locale = Locale(identifier: "en_US")
+        if SmilesLanguageManager.shared.currentLanguage == .ar {
+            dateFormatter.locale = Locale(identifier: "ar_SA")
+        }
+        let gregianCalendar = Calendar(identifier: .gregorian)
+        dateFormatter.calendar = gregianCalendar
+        return dateFormatter.string(from: date)
+    }
     public static func getWithAEDValuePrefix(string: String) -> String {
         let doubleValue = string.toDouble().asDoubleOrEmpty()
         return "\(String(format: "%.2f", doubleValue)) \("AED".localizedString)"

@@ -71,6 +71,17 @@ public class TextFieldWithValidation: UITextField {
         errorMessage = ""
         return true
     }
+    public func validate() -> Bool {
+        guard let text = text else { return false}
+        for validation in validationType {
+            do {
+                try text.validatedText(validationType: validation)
+            } catch {
+                return false
+            }
+        }
+        return true
+    }
     public var shakeTextField = true
     public override func awakeFromNib() {
         super.awakeFromNib()
@@ -107,15 +118,13 @@ public class TextFieldWithValidation: UITextField {
     }
     
     @objc private func didChangeText(_ sender: UITextField) {
-        
-        if !errorLabel.isHidden {
-            errorMessage = ""
-        }
         textChanged()
     }
     func textChanged(){
         if continousValidation {
             _ = isDataValid
+        } else {
+            errorMessage = ""
         }
         updateBackground()
     }
