@@ -264,4 +264,16 @@ public class AppCommonMethods {
         
         return []
     }
+    
+    public static func extractYoutubeId(fromLink link: String) -> String {
+        let regexString: String = "((?<=(v|V)/)|(?<=be/)|(?<=(\\?|\\&)v=)|(?<=embed/))([\\w-]++)"
+        let regExp = try? NSRegularExpression(pattern: regexString, options: .caseInsensitive)
+        let array: [Any] = (regExp?.matches(in: link, options: [], range: NSRange(location: 0, length: (link.count ))))!
+        if array.count > 0 {
+            let result: NSTextCheckingResult? = array.first as? NSTextCheckingResult
+            return (link as NSString).substring(with: (result?.range)!)
+        }
+        
+        return ""
+    }
 }
