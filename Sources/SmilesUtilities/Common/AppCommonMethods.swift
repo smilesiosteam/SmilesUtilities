@@ -276,4 +276,9 @@ public class AppCommonMethods {
         
         return ""
     }
+    
+    public static func extractThumbnailFromYoutube(url: String) -> String {
+        let youtubeID = extractYoutubeId(fromLink: url)
+        return "https://i1.ytimg.com/vi/\(youtubeID)/mqdefault.jpg"
+    }
 }
