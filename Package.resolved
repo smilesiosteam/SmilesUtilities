@@ -28,21 +28,12 @@
       }
     },
     {
-      "identity" : "smilesbasemainrequest",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/smilesiosteam/SmilesBaseMainRequest.git",
-      "state" : {
-        "revision" : "132a0e82f71402e3ea78bcfb50a4a264e3a3585f",
-        "version" : "1.0.4"
-      }
-    },
-    {
       "identity" : "smilesfontsmanager",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/smilesiosteam/SmilesFontsManager.git",
       "state" : {
-        "revision" : "c84212ed0003bea914602469ede4a8c07911ec1f",
-        "version" : "1.0.5"
+        "branch" : "main",
+        "revision" : "1a7068cb5a728cb7761aceb44d1c1ab2e88eba74"
       }
     },
     {
@@ -50,17 +41,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/smilesiosteam/SmilesLanguageManager.git",
       "state" : {
-        "revision" : "1ead4bcf578ffdeee7318bddfd3d8b2dbdcc2597",
-        "version" : "1.0.0"
+        "branch" : "main",
+        "revision" : "c28ecadeb4df3785ba082363895b3d0248a9903a"
       }
     },
     {
       "identity" : "smilesstorage",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/hananahmad/SmilesStorage.git",
+      "location" : "https://github.com/smilesiosteam/SmilesStorage.git",
       "state" : {
-        "revision" : "178135f1caa1013d7304ff62d02e6febaf40d666",
-        "version" : "1.0.2"
+        "branch" : "main",
+        "revision" : "89a57c302aab530f033ba35f001b09cfee822707"
       }
     }
   ],
