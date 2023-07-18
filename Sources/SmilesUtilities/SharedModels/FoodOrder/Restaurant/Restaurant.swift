@@ -112,7 +112,7 @@ public class Restaurant: Codable {
         return Restaurant.makeRestaurantFeaturesText(liveTracking: self.liveTracking, restaurantOrderType: self.restaurantOrderType, minimumOrder: self.minimumOrder, deliveryCharges: self.deliveryCharges, isSubscriber: self.isFoodSubscription)
     }
     //Added static function to enhance reusability at other places
-    class func makeRestaurantFeaturesText(liveTracking:Bool?, restaurantOrderType:RestaurantOrderType, minimumOrder:Double?, deliveryCharges:Double?,isSubscriber:Bool?) -> NSAttributedString {
+    public class func makeRestaurantFeaturesText(liveTracking:Bool?, restaurantOrderType:RestaurantOrderType, minimumOrder:Double?, deliveryCharges:Double?,isSubscriber:Bool?) -> NSAttributedString {
         var restaurantFeatures = [NSAttributedString]()
         if let liveTracking = liveTracking, liveTracking {
             if restaurantOrderType != .isPickup {
