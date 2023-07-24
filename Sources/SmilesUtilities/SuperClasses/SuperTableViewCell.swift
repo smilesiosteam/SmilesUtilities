@@ -8,8 +8,8 @@
 
 import UIKit
 
-public class SuperTableViewCell: UITableViewCell {
-    public override func awakeFromNib() {
+open class SuperTableViewCell: UITableViewCell {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         //        CommonMethods.applyLocalizedStrings(toAllViews: self)
         
@@ -17,15 +17,15 @@ public class SuperTableViewCell: UITableViewCell {
         setupStyles()
     }
     
-    public override func setSelected(_ selected: Bool, animated: Bool) {
+    open override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
     /* Function added for Rowmodel */
-    public func updateCell(rowModel: BaseRowModel) {}
+    open func updateCell(rowModel: BaseRowModel) {}
     
     /* Function added for Rowmodel */
-    public func setupStyles() {}
+    open func setupStyles() {}
 }
