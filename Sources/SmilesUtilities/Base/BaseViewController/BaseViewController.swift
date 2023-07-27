@@ -81,24 +81,24 @@ import SmilesLoader
     }
     
     
-    func didSelectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath) {
+    public func didSelectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath) {
         // override in child classes
         
     }
     
-    func didDeselectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath) {
+    public func didDeselectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath) {
         // override in child classes
     }
     
-    @objc func scrollViewEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    @objc public func scrollViewEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         // override in child classes
     }
     
-    func viewDidScroll(_ scrollView: UIScrollView) {
+    public func viewDidScroll(_ scrollView: UIScrollView) {
         
     }
     
-    func refreshViewWithData(){
+    public func refreshViewWithData(){
         
     }
 }

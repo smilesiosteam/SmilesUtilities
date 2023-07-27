@@ -30,11 +30,11 @@ public class StickyGridCollectionViewLayout: UICollectionViewFlowLayout {
 
     // MARK: - Collection view flow layout methods
 
-    override var collectionViewContentSize: CGSize {
+    public override var collectionViewContentSize: CGSize {
         return contentSize
     }
 
-    override func prepare() {
+    public override func prepare() {
         setupAttributes()
         updateStickyItemsPositions()
 
@@ -42,7 +42,7 @@ public class StickyGridCollectionViewLayout: UICollectionViewFlowLayout {
         contentSize = CGSize(width: lastItemFrame.maxX, height: lastItemFrame.maxY)
     }
 
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    public override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
 
         for rowAttrs in allAttributes {
@@ -54,7 +54,7 @@ public class StickyGridCollectionViewLayout: UICollectionViewFlowLayout {
         return layoutAttributes
     }
 
-    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+    public override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
 
