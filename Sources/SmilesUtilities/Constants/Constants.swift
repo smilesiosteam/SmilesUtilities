@@ -66,3 +66,7 @@ public enum UserDefaultKeys {
     public static let showLocationToolTipOnRestaurant = "showLocationToolTipOnRestaurant"
     public static let iOSRatingState = "iOSRatingState"
 }
+
+public enum serviceErrorTypes : Int {
+    case noContent = 0, errorContent = 1, noRaffles = 2, noNotification = 3
+}
