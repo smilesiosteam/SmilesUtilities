@@ -17,12 +17,13 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/smilesiosteam/SmilesLanguageManager.git", .upToNextMinor(from: "1.0.0")),
+        .package(url: "https://github.com/smilesiosteam/SmilesLanguageManager.git", branch: "main"),
         .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .upToNextMinor(from: "1.7.1")),
-        .package(url: "https://github.com/smilesiosteam/SmilesBaseMainRequest.git", .upToNextMinor(from: "1.0.0")),
         .package(url: "https://github.com/Juanpe/SkeletonView.git", from: "1.7.0"),
         .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.1.0"),
-        .package(url: "https://github.com/smilesiosteam/SmilesFontsManager.git", .upToNextMajor(from: "1.0.0"))
+        .package(url: "https://github.com/smilesiosteam/SmilesFontsManager.git", branch: "main"),
+        .package(url: "https://github.com/smilesiosteam/SmilesLoader.git", .upToNextMinor(from: "1.0.0")),
+        .package(url: "https://github.com/smilesiosteam/SmilesAnalytics.git", branch: "develop")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -32,10 +33,11 @@ let package = Package(
             dependencies: [
                 .product(name: "SmilesLanguageManager", package: "SmilesLanguageManager"),
                 .product(name: "CryptoSwift", package: "CryptoSwift"),
-                .product(name: "SmilesBaseMainRequestManager", package: "SmilesBaseMainRequest"),
                 .product(name: "SkeletonView", package: "SkeletonView"),
                 .product(name: "SDWebImage", package: "SDWebImage"),
-                .product(name: "SmilesFontsManager", package: "SmilesFontsManager")
+                .product(name: "SmilesFontsManager", package: "SmilesFontsManager"),
+                .product(name: "SmilesLoader", package: "SmilesLoader"),
+                .product(name: "AnalyticsSmiles", package: "SmilesAnalytics")
             ]),
     ]
 )

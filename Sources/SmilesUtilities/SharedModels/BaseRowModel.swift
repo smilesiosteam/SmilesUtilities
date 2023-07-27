@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-public class BaseRowModel: NSObject {
+open class BaseRowModel: NSObject {
     public var rowCellIdentifier = ""
     public var rowValue: Any?
     public var rowTitle: String = ""

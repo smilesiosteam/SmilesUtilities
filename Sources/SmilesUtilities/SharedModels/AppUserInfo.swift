@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class AppUserInfo: Codable {
+@objc public class AppUserInfo: NSObject, Codable {
     
     public var isLocationUpdated: Bool?
     public var latitude: String?
@@ -32,7 +32,7 @@ public class AppUserInfo: Codable {
         case cityName
     }
     
-    public init() {}
+    public override init() {}
     
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
