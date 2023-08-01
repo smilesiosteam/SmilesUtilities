@@ -34,7 +34,7 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         super.init()
         self.eligibleFeatures = withDictionary["eligibleFeatures"] as? [Any]
         self.nonEligibleFeatures = withDictionary["nonEligibleFeatures"] as? [Any]
-        self.isEmailVerified = (withDictionary["isEmailVerified"] as? Bool) ?? false
+        self.isEmailVerified = (withDictionary["emailVerified"] as? Bool) ?? false
         self.accountType = withDictionary["accountType"] as? String
         self.isEtisalatUser = (withDictionary["isEtisalatUser"] as? Bool) ?? false
         self.accountTypeNumber = withDictionary["accountTypeNumber"] as? String
@@ -54,7 +54,7 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         self.extTransactionId = aDecoder.decodeObject(forKey: "extTransactionId") as? String
         self.eligibleFeatures = aDecoder.decodeObject(forKey: "eligibleFeatures") as? [Any]
         self.nonEligibleFeatures = aDecoder.decodeObject(forKey: "nonEligibleFeatures") as? [Any]
-        self.isEmailVerified = aDecoder.decodeBool(forKey: "isEmailVerified")
+        self.isEmailVerified = aDecoder.decodeBool(forKey: "emailVerified")
         self.accountType = aDecoder.decodeObject(forKey: "accountType") as? String
         self.isEtisalatUser = aDecoder.decodeBool(forKey: "isEtisalatUser")
         self.accountTypeNumber = aDecoder.decodeObject(forKey: "accountTypeNumber") as? String
@@ -71,7 +71,7 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         aCoder.encode(self.extTransactionId, forKey: "extTransactionId")
         aCoder.encode(self.eligibleFeatures, forKey: "eligibleFeatures")
         aCoder.encode(self.nonEligibleFeatures, forKey: "nonEligibleFeatures")
-        aCoder.encode(self.isEmailVerified, forKey: "isEmailVerified")
+        aCoder.encode(self.isEmailVerified, forKey: "emailVerified")
         aCoder.encode(self.accountType, forKey: "accountType")
         aCoder.encode(self.isEtisalatUser, forKey: "isEtisalatUser")
         aCoder.encode(self.accountTypeNumber, forKey: "accountTypeNumber")
@@ -108,7 +108,7 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         instance.extTransactionId = dict["extTransactionId"] as? String
         instance.eligibleFeatures = dict["eligibleFeatures"] as? [Any]
         instance.nonEligibleFeatures = dict["nonEligibleFeatures"] as? [Any]
-        instance.isEmailVerified = dict["isEmailVerified"] as? Bool ?? false
+        instance.isEmailVerified = dict["emailVerified"] as? Bool ?? false
         instance.accountType = dict["accountType"] as? String
         instance.isEtisalatUser = dict["isEtisalatUser"] as? Bool ?? false
         instance.accountTypeNumber = dict["accountTypeNumber"] as? String
@@ -127,7 +127,7 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         dictionary["extTransactionId"] = self.extTransactionId
         dictionary["eligibleFeatures"] = self.eligibleFeatures
         dictionary["nonEligibleFeatures"] = self.nonEligibleFeatures
-        dictionary["isEmailVerified"] = self.isEmailVerified
+        dictionary["emailVerified"] = self.isEmailVerified
         dictionary["accountType"] = self.accountType
         dictionary["isEtisalatUser"] = self.isEtisalatUser
         dictionary["accountTypeNumber"] = self.accountTypeNumber
