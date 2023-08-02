@@ -23,7 +23,6 @@ let package = Package(
         .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.1.0"),
         .package(url: "https://github.com/smilesiosteam/SmilesFontsManager.git", branch: "main"),
         .package(url: "https://github.com/smilesiosteam/SmilesLoader.git", .upToNextMinor(from: "1.0.0")),
-        .package(url: "https://github.com/smilesiosteam/SmilesAnalytics.git", branch: "develop")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -37,7 +36,6 @@ let package = Package(
                 .product(name: "SDWebImage", package: "SDWebImage"),
                 .product(name: "SmilesFontsManager", package: "SmilesFontsManager"),
                 .product(name: "SmilesLoader", package: "SmilesLoader"),
-                .product(name: "AnalyticsSmiles", package: "SmilesAnalytics")
             ]),
     ]
 )
