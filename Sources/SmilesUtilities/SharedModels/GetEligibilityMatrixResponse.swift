@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Abdul Rehman Amjad on 17/07/2023.
 //
@@ -16,7 +16,7 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
     public var extTransactionId: String?
     public var eligibleFeatures: [Any]?
     public var nonEligibleFeatures: [Any]?
-    public var isEmailVerified: Bool = false
+    public var emailVerified: Bool = false
     public var accountType: String?
     public var isEtisalatUser: Bool = false
     public var accountTypeNumber: String?
@@ -34,17 +34,13 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         super.init()
         self.eligibleFeatures = withDictionary["eligibleFeatures"] as? [Any]
         self.nonEligibleFeatures = withDictionary["nonEligibleFeatures"] as? [Any]
-        self.isEmailVerified = (withDictionary["isEmailVerified"] as? Bool) ?? false
+        self.emailVerified = (withDictionary["emailVerified"] as? Bool) ?? false
         self.accountType = withDictionary["accountType"] as? String
-        self.isEtisalatUser = (withDictionary["isEtisalatUser"] as? Bool) ?? false
+        self.isEtisalatUser = (withDictionary["etisalatUser"] as? Bool) ?? false
         self.accountTypeNumber = withDictionary["accountTypeNumber"] as? String
         self.loyaltyID = withDictionary["loyaltyID"] as? String
         self.emailAddress = withDictionary["emailAddress"] as? String
         self.hasLinkedAccounts = (withDictionary["hasLinkedAccounts"] as? Bool) ?? false
-        
-        if let notEligibleObjectDict = withDictionary["notEligibleObject"] as? [String: Any] {
-            self.notEligibleObject = NotEligibleObject.modelObject(withDictionary: notEligibleObjectDict)
-        }
     }
     
     public required init(coder aDecoder: NSCoder) {
@@ -54,14 +50,13 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         self.extTransactionId = aDecoder.decodeObject(forKey: "extTransactionId") as? String
         self.eligibleFeatures = aDecoder.decodeObject(forKey: "eligibleFeatures") as? [Any]
         self.nonEligibleFeatures = aDecoder.decodeObject(forKey: "nonEligibleFeatures") as? [Any]
-        self.isEmailVerified = aDecoder.decodeBool(forKey: "isEmailVerified")
+        self.emailVerified = aDecoder.decodeBool(forKey: "emailVerified")
         self.accountType = aDecoder.decodeObject(forKey: "accountType") as? String
-        self.isEtisalatUser = aDecoder.decodeBool(forKey: "isEtisalatUser")
+        self.isEtisalatUser = aDecoder.decodeBool(forKey: "etisalatUser")
         self.accountTypeNumber = aDecoder.decodeObject(forKey: "accountTypeNumber") as? String
         self.loyaltyID = aDecoder.decodeObject(forKey: "loyaltyID") as? String
         self.emailAddress = aDecoder.decodeObject(forKey: "emailAddress") as? String
         self.hasLinkedAccounts = aDecoder.decodeBool(forKey: "hasLinkedAccounts")
-        self.notEligibleObject = aDecoder.decodeObject(forKey: "notEligibleObject") as? NotEligibleObject
     }
     
     public func encode(with aCoder: NSCoder) {
@@ -71,14 +66,13 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         aCoder.encode(self.extTransactionId, forKey: "extTransactionId")
         aCoder.encode(self.eligibleFeatures, forKey: "eligibleFeatures")
         aCoder.encode(self.nonEligibleFeatures, forKey: "nonEligibleFeatures")
-        aCoder.encode(self.isEmailVerified, forKey: "isEmailVerified")
+        aCoder.encode(self.emailVerified, forKey: "emailVerified")
         aCoder.encode(self.accountType, forKey: "accountType")
-        aCoder.encode(self.isEtisalatUser, forKey: "isEtisalatUser")
+        aCoder.encode(self.isEtisalatUser, forKey: "etisalatUser")
         aCoder.encode(self.accountTypeNumber, forKey: "accountTypeNumber")
         aCoder.encode(self.loyaltyID, forKey: "loyaltyID")
         aCoder.encode(self.emailAddress, forKey: "emailAddress")
         aCoder.encode(self.hasLinkedAccounts, forKey: "hasLinkedAccounts")
-        aCoder.encode(self.notEligibleObject, forKey: "notEligibleObject")
     }
     
     public func copy(with zone: NSZone? = nil) -> Any {
@@ -89,14 +83,13 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         copy.extTransactionId = self.extTransactionId
         copy.eligibleFeatures = self.eligibleFeatures
         copy.nonEligibleFeatures = self.nonEligibleFeatures
-        copy.isEmailVerified = self.isEmailVerified
+        copy.emailVerified = self.emailVerified
         copy.accountType = self.accountType
         copy.isEtisalatUser = self.isEtisalatUser
         copy.accountTypeNumber = self.accountTypeNumber
         copy.loyaltyID = self.loyaltyID
         copy.emailAddress = self.emailAddress
         copy.hasLinkedAccounts = self.hasLinkedAccounts
-        copy.notEligibleObject = self.notEligibleObject
         return copy
     }
     
@@ -108,14 +101,13 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         instance.extTransactionId = dict["extTransactionId"] as? String
         instance.eligibleFeatures = dict["eligibleFeatures"] as? [Any]
         instance.nonEligibleFeatures = dict["nonEligibleFeatures"] as? [Any]
-        instance.isEmailVerified = dict["isEmailVerified"] as? Bool ?? false
+        instance.emailVerified = dict["emailVerified"] as? Bool ?? false
         instance.accountType = dict["accountType"] as? String
-        instance.isEtisalatUser = dict["isEtisalatUser"] as? Bool ?? false
+        instance.isEtisalatUser = dict["etisalatUser"] as? Bool ?? false
         instance.accountTypeNumber = dict["accountTypeNumber"] as? String
         instance.loyaltyID = dict["loyaltyID"] as? String
         instance.emailAddress = dict["emailAddress"] as? String
         instance.hasLinkedAccounts = dict["hasLinkedAccounts"] as? Bool ?? false
-        instance.notEligibleObject = dict["notEligibleObject"] as? NotEligibleObject
         return instance
     }
     
@@ -127,14 +119,13 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         dictionary["extTransactionId"] = self.extTransactionId
         dictionary["eligibleFeatures"] = self.eligibleFeatures
         dictionary["nonEligibleFeatures"] = self.nonEligibleFeatures
-        dictionary["isEmailVerified"] = self.isEmailVerified
+        dictionary["emailVerified"] = self.emailVerified
         dictionary["accountType"] = self.accountType
-        dictionary["isEtisalatUser"] = self.isEtisalatUser
+        dictionary["etisalatUser"] = self.isEtisalatUser
         dictionary["accountTypeNumber"] = self.accountTypeNumber
         dictionary["loyaltyID"] = self.loyaltyID
         dictionary["emailAddress"] = self.emailAddress
         dictionary["hasLinkedAccounts"] = self.hasLinkedAccounts
-        dictionary["notEligibleObject"] = self.notEligibleObject
         return dictionary
     }
     
@@ -142,7 +133,8 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
 }
 
 @objcMembers
-public class NotEligibleObject: NSObject, NSCoding, NSCopying {
+public class NotEligibleObject: NSObject, Codable {
+    
     public var devicesSmartpay: Bool = false
     public var devicesPromoCode: Bool = false
     public var devicesNotifyMe: Bool = false
@@ -178,127 +170,139 @@ public class NotEligibleObject: NSObject, NSCoding, NSCopying {
     public var accrualETServices: Bool = false
     public var bonusGiftFirstActivity: Bool = false
     public var accountCancellation: Bool = false
+    public var oTPLoginAdInfo: Bool = false
+    public var oTPLoginSignup: Bool = false
+    public var enroll: Bool = false
+    public var usernamePassLogin: Bool = false
     
     public required override init() {
         super.init()
     }
     
-    public required init(coder aDecoder: NSCoder) {
-        self.devicesSmartpay = aDecoder.decodeBool(forKey: "devicesSmartpay")
-        self.devicesPromoCode = aDecoder.decodeBool(forKey: "devicesPromoCode")
-        self.devicesNotifyMe = aDecoder.decodeBool(forKey: "devicesNotifyMe")
-        self.referFriend = aDecoder.decodeBool(forKey: "referFriend")
-        self.customizedEtisalatOffers = aDecoder.decodeBool(forKey: "customizedEtisalatOffers")
-        self.eTBillRecharge = aDecoder.decodeBool(forKey: "eTBillRecharge")
-        self.gamification = aDecoder.decodeBool(forKey: "gamification")
-        self.shareVoucher = aDecoder.decodeBool(forKey: "shareVoucher")
-        self.dealsForYou = aDecoder.decodeBool(forKey: "dealsForYou")
-        self.lifestyle = aDecoder.decodeBool(forKey: "lifestyle")
-        self.thirdPartyOffers = aDecoder.decodeBool(forKey: "thirdPartyOffers")
-        self.devicesStandalone = aDecoder.decodeBool(forKey: "devicesStandalone")
-        self.genericPromoCode = aDecoder.decodeBool(forKey: "genericPromoCode")
-        self.cinema = aDecoder.decodeBool(forKey: "cinema")
-        self.cbdAcquisition = aDecoder.decodeBool(forKey: "cbdAcquisition")
-        self.foodOrder = aDecoder.decodeBool(forKey: "foodOrder")
-        self.elGrocer = aDecoder.decodeBool(forKey: "elGrocer")
-        
-        // Ignore the keys that are not needed (No Need to Decode)
+    enum CodingKeys: String, CodingKey {
+        case devicesSmartpay = "Devices_Smartpay"
+        case redemptionServicesVouchers = "Redemption_services_vouchers"
+        case accrualETServices = "Accrual_ET_services"
+        case rechargeAccount = "Recharge_account"
+        case customizedEtisalatOffers = "Customized_Etisalat_offers"
+        case bonusGiftFirstActivity = "Bonus_gift_first_activity"
+        case devicesPromoCode = "devices_promo_code"
+        case devicesStandalone = "Devices_Standalone"
+        case payInternationalCC = "Pay_international_CC"
+        case dCBPayment = "DCB_payment"
+        case secureTransaction = "3D_secure_transaction"
+        case oTPLoginAdInfo = "OTP_login_ad_info"
+        case accrualPartnersPurchases = "Accrual_partners_purchases"
+        case payLocalCC = "Pay_local_CC"
+        case canParent = "can_parent"
+        case devicesNotifyMe = "devices_notify_me"
+        case pointsRecovery = "Points_recovery"
+        case genericPromoCode = "PROMO_CODE"
+        case payBill = "Pay_bill"
+        case referFriend = "refer_friend"
+        case eTBillRecharge = "ET_bill_Recharge"
+        case gamification = "Gamification"
+        case lifestyle = "Lifestyle"
+        case appZeroData = "app_zero_data"
+        case oTPLoginSignup = "OTP_login_signup"
+        case shareVoucher = "Share_voucher"
+        case coBrandedCard = "Co-branded_Card"
+        case referralBonusFirstTrx = "referral_bonus_first_trx"
+        case thirdPartyOffers = "Third_party_offers"
+        case dealsForYou = "Deals_for_you"
+        case enroll = "Enroll"
+        case cinema = "Cinema"
+        case usernamePassLogin = "username_pass_login"
+        case cbdAcquisition = "cbdAcquisition"
+        case foodOrder = "FoodOrder"
+        case elGrocer = "elGrocer"
+        case accountCancellation = "ACCOUNT_CANCELLATION"
     }
     
-    public func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.devicesSmartpay, forKey: "devicesSmartpay")
-        aCoder.encode(self.devicesPromoCode, forKey: "devicesPromoCode")
-        aCoder.encode(self.devicesNotifyMe, forKey: "devicesNotifyMe")
-        aCoder.encode(self.referFriend, forKey: "referFriend")
-        aCoder.encode(self.customizedEtisalatOffers, forKey: "customizedEtisalatOffers")
-        aCoder.encode(self.eTBillRecharge, forKey: "eTBillRecharge")
-        aCoder.encode(self.gamification, forKey: "gamification")
-        aCoder.encode(self.shareVoucher, forKey: "shareVoucher")
-        aCoder.encode(self.dealsForYou, forKey: "dealsForYou")
-        aCoder.encode(self.lifestyle, forKey: "lifestyle")
-        aCoder.encode(self.thirdPartyOffers, forKey: "thirdPartyOffers")
-        aCoder.encode(self.devicesStandalone, forKey: "devicesStandalone")
-        aCoder.encode(self.genericPromoCode, forKey: "genericPromoCode")
-        aCoder.encode(self.cinema, forKey: "cinema")
-        aCoder.encode(self.cbdAcquisition, forKey: "cbdAcquisition")
-        aCoder.encode(self.foodOrder, forKey: "foodOrder")
-        aCoder.encode(self.elGrocer, forKey: "elGrocer")
+    public required init(from aDecoder: Decoder) throws {
         
-        // Ignore the keys that are not needed (No Need to Encode)
+        let values = try aDecoder.container(keyedBy: CodingKeys.self)
+        self.devicesSmartpay = try values.decode(Bool.self, forKey: .devicesSmartpay)
+        self.devicesPromoCode = try values.decode(Bool.self, forKey: .devicesPromoCode)
+        self.devicesNotifyMe = try values.decode(Bool.self, forKey: .devicesNotifyMe)
+        self.referFriend = try values.decode(Bool.self, forKey: .referFriend)
+        self.customizedEtisalatOffers = try values.decode(Bool.self, forKey: .customizedEtisalatOffers)
+        self.eTBillRecharge = try values.decode(Bool.self, forKey: .eTBillRecharge)
+        self.gamification = try values.decode(Bool.self, forKey: .gamification)
+        self.shareVoucher = try values.decode(Bool.self, forKey: .shareVoucher)
+        self.dealsForYou = try values.decode(Bool.self, forKey: .dealsForYou)
+        self.lifestyle = try values.decode(Bool.self, forKey: .lifestyle)
+        self.thirdPartyOffers = try values.decode(Bool.self, forKey: .thirdPartyOffers)
+        self.devicesStandalone = try values.decode(Bool.self, forKey: .devicesStandalone)
+        self.genericPromoCode = try values.decode(Bool.self, forKey: .genericPromoCode)
+        self.cinema = try values.decode(Bool.self, forKey: .cinema)
+        self.cbdAcquisition = try values.decode(Bool.self, forKey: .cbdAcquisition)
+        self.foodOrder = try values.decode(Bool.self, forKey: .foodOrder)
+        self.elGrocer = try values.decode(Bool.self, forKey: .elGrocer)
+        self.redemptionServicesVouchers = try values.decode(Bool.self, forKey: .redemptionServicesVouchers)
+        self.accrualETServices = try values.decode(Bool.self, forKey: .accrualETServices)
+        self.rechargeAccount = try values.decode(Bool.self, forKey: .rechargeAccount)
+        self.bonusGiftFirstActivity = try values.decode(Bool.self, forKey: .bonusGiftFirstActivity)
+        self.payInternationalCC = try values.decode(Bool.self, forKey: .payInternationalCC)
+        self.dCBPayment = try values.decode(Bool.self, forKey: .dCBPayment)
+        self.secureTransaction = try values.decode(Bool.self, forKey: .secureTransaction)
+        self.oTPLoginAdInfo = try values.decode(Bool.self, forKey: .oTPLoginAdInfo)
+        self.accrualPartnersPurchases = try values.decode(Bool.self, forKey: .accrualPartnersPurchases)
+        self.payLocalCC = try values.decode(Bool.self, forKey: .payLocalCC)
+        self.canParent = try values.decode(Bool.self, forKey: .canParent)
+        self.pointsRecovery = try values.decode(Bool.self, forKey: .pointsRecovery)
+        self.payBill = try values.decode(Bool.self, forKey: .payBill)
+        self.appZeroData = try values.decode(Bool.self, forKey: .appZeroData)
+        self.oTPLoginSignup = try values.decode(Bool.self, forKey: .oTPLoginSignup)
+        self.coBrandedCard = try values.decode(Bool.self, forKey: .coBrandedCard)
+        self.referralBonusFirstTrx = try values.decode(Bool.self, forKey: .referralBonusFirstTrx)
+        self.enroll = try values.decode(Bool.self, forKey: .enroll)
+        self.usernamePassLogin = try values.decode(Bool.self, forKey: .usernamePassLogin)
+        self.accountCancellation = try values.decode(Bool.self, forKey: .accountCancellation)
+        
     }
     
-    public func copy(with zone: NSZone? = nil) -> Any {
-        let copy = type(of: self).init()
-        copy.devicesSmartpay = self.devicesSmartpay
-        copy.devicesPromoCode = self.devicesPromoCode
-        copy.devicesNotifyMe = self.devicesNotifyMe
-        copy.referFriend = self.referFriend
-        copy.customizedEtisalatOffers = self.customizedEtisalatOffers
-        copy.eTBillRecharge = self.eTBillRecharge
-        copy.gamification = self.gamification
-        copy.shareVoucher = self.shareVoucher
-        copy.dealsForYou = self.dealsForYou
-        copy.lifestyle = self.lifestyle
-        copy.thirdPartyOffers = self.thirdPartyOffers
-        copy.devicesStandalone = self.devicesStandalone
-        copy.genericPromoCode = self.genericPromoCode
-        copy.cinema = self.cinema
-        copy.cbdAcquisition = self.cbdAcquisition
-        copy.foodOrder = self.foodOrder
-        copy.elGrocer = self.elGrocer
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
         
-        // Ignore the keys that are not needed (No Need to Copy)
-        
-        return copy
+        // Encode each Bool property using the corresponding CodingKey
+        try container.encode(self.devicesSmartpay, forKey: .devicesSmartpay)
+        try container.encode(self.devicesPromoCode, forKey: .devicesPromoCode)
+        try container.encode(self.devicesNotifyMe, forKey: .devicesNotifyMe)
+        try container.encode(self.referFriend, forKey: .referFriend)
+        try container.encode(self.customizedEtisalatOffers, forKey: .customizedEtisalatOffers)
+        try container.encode(self.eTBillRecharge, forKey: .eTBillRecharge)
+        try container.encode(self.gamification, forKey: .gamification)
+        try container.encode(self.shareVoucher, forKey: .shareVoucher)
+        try container.encode(self.dealsForYou, forKey: .dealsForYou)
+        try container.encode(self.lifestyle, forKey: .lifestyle)
+        try container.encode(self.thirdPartyOffers, forKey: .thirdPartyOffers)
+        try container.encode(self.devicesStandalone, forKey: .devicesStandalone)
+        try container.encode(self.genericPromoCode, forKey: .genericPromoCode)
+        try container.encode(self.cinema, forKey: .cinema)
+        try container.encode(self.cbdAcquisition, forKey: .cbdAcquisition)
+        try container.encode(self.foodOrder, forKey: .foodOrder)
+        try container.encode(self.elGrocer, forKey: .elGrocer)
+        try container.encode(self.redemptionServicesVouchers, forKey: .redemptionServicesVouchers)
+        try container.encode(self.accrualETServices, forKey: .accrualETServices)
+        try container.encode(self.rechargeAccount, forKey: .rechargeAccount)
+        try container.encode(self.bonusGiftFirstActivity, forKey: .bonusGiftFirstActivity)
+        try container.encode(self.payInternationalCC, forKey: .payInternationalCC)
+        try container.encode(self.dCBPayment, forKey: .dCBPayment)
+        try container.encode(self.secureTransaction, forKey: .secureTransaction)
+        try container.encode(self.oTPLoginAdInfo, forKey: .oTPLoginAdInfo)
+        try container.encode(self.accrualPartnersPurchases, forKey: .accrualPartnersPurchases)
+        try container.encode(self.payLocalCC, forKey: .payLocalCC)
+        try container.encode(self.canParent, forKey: .canParent)
+        try container.encode(self.pointsRecovery, forKey: .pointsRecovery)
+        try container.encode(self.payBill, forKey: .payBill)
+        try container.encode(self.appZeroData, forKey: .appZeroData)
+        try container.encode(self.oTPLoginSignup, forKey: .oTPLoginSignup)
+        try container.encode(self.coBrandedCard, forKey: .coBrandedCard)
+        try container.encode(self.referralBonusFirstTrx, forKey: .referralBonusFirstTrx)
+        try container.encode(self.enroll, forKey: .enroll)
+        try container.encode(self.usernamePassLogin, forKey: .usernamePassLogin)
+        try container.encode(self.accountCancellation, forKey: .accountCancellation)
     }
     
-    public class func modelObject(withDictionary dict: [String: Any]) -> NotEligibleObject? {
-        let instance = NotEligibleObject()
-        instance.devicesSmartpay = dict["devicesSmartpay"] as? Bool ?? false
-        instance.devicesPromoCode = dict["devicesPromoCode"] as? Bool ?? false
-        instance.devicesNotifyMe = dict["devicesNotifyMe"] as? Bool ?? false
-        instance.referFriend = dict["referFriend"] as? Bool ?? false
-        instance.customizedEtisalatOffers = dict["customizedEtisalatOffers"] as? Bool ?? false
-        instance.eTBillRecharge = dict["eTBillRecharge"] as? Bool ?? false
-        instance.gamification = dict["gamification"] as? Bool ?? false
-        instance.shareVoucher = dict["shareVoucher"] as? Bool ?? false
-        instance.dealsForYou = dict["dealsForYou"] as? Bool ?? false
-        instance.lifestyle = dict["lifestyle"] as? Bool ?? false
-        instance.thirdPartyOffers = dict["thirdPartyOffers"] as? Bool ?? false
-        instance.devicesStandalone = dict["devicesStandalone"] as? Bool ?? false
-        instance.genericPromoCode = dict["genericPromoCode"] as? Bool ?? false
-        instance.cinema = dict["cinema"] as? Bool ?? false
-        instance.cbdAcquisition = dict["cbdAcquisition"] as? Bool ?? false
-        instance.foodOrder = dict["foodOrder"] as? Bool ?? false
-        instance.elGrocer = dict["elGrocer"] as? Bool ?? false
-        
-        // Ignore the keys that are not needed
-        
-        return instance
-    }
-    
-    public func dictionaryRepresentation() -> [String: Any] {
-        var dictionary: [String: Any] = [:]
-        dictionary["devicesSmartpay"] = self.devicesSmartpay
-        dictionary["devicesPromoCode"] = self.devicesPromoCode
-        dictionary["devicesNotifyMe"] = self.devicesNotifyMe
-        dictionary["referFriend"] = self.referFriend
-        dictionary["customizedEtisalatOffers"] = self.customizedEtisalatOffers
-        dictionary["eTBillRecharge"] = self.eTBillRecharge
-        dictionary["gamification"] = self.gamification
-        dictionary["shareVoucher"] = self.shareVoucher
-        dictionary["dealsForYou"] = self.dealsForYou
-        dictionary["lifestyle"] = self.lifestyle
-        dictionary["thirdPartyOffers"] = self.thirdPartyOffers
-        dictionary["devicesStandalone"] = self.devicesStandalone
-        dictionary["genericPromoCode"] = self.genericPromoCode
-        dictionary["cinema"] = self.cinema
-        dictionary["cbdAcquisition"] = self.cbdAcquisition
-        dictionary["foodOrder"] = self.foodOrder
-        dictionary["elGrocer"] = self.elGrocer
-        
-        // Ignore the keys that are not needed
-        
-        return dictionary
-    }
 }
