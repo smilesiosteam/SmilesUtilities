@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import SmilesLanguageManager
+
 public class AppCommonMethods {
     
     public static var serviceBaseUrl: String {
@@ -34,7 +35,7 @@ public class AppCommonMethods {
             if let data = NSData(contentsOf: url) {
                 do {
                     let dictionary = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments) as? NSDictionary
-
+                    
                     return dictionary
                 } catch {
                     print("Error!! Unable to parse  \(fileName).json")
@@ -42,7 +43,7 @@ public class AppCommonMethods {
             }
             print("Error!! Unable to load  \(fileName).json")
         }
-
+        
         return nil
     }
     
@@ -53,7 +54,7 @@ public class AppCommonMethods {
         }
         return false
     }
-
+    
     public static func setCollectionViewForArabic(_ collectionView: UICollectionView) {
         DispatchQueue.main.async {
             collectionView.transform = .identity
@@ -108,38 +109,38 @@ public class AppCommonMethods {
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = ""
-  
+        
         
         
         let application = UIApplication.shared
-          let coordinate = "\(latitude),\(longitude)"
-          let encodedTitle = ""
-          let handlers = [
-              ("Apple", "http://maps.apple.com/?q=\(encodedTitle)&ll=\(coordinate)"),
-              ("Google", "comgooglemaps://?q=\(coordinate)"),
-              ("Waze", "waze://?ll=\(coordinate)"),
-              ("Citymapper", "citymapper://directions?endcoord=\(coordinate)&endname=\(encodedTitle)")
-          ]
-              .compactMap { (name, address) in URL(string: address).map { (name, $0) } }
-              .filter { (_, url) in application.canOpenURL(url) }
-
-          guard handlers.count > 1 else {
+        let coordinate = "\(latitude),\(longitude)"
+        let encodedTitle = ""
+        let handlers = [
+            ("Apple", "http://maps.apple.com/?q=\(encodedTitle)&ll=\(coordinate)"),
+            ("Google", "comgooglemaps://?q=\(coordinate)"),
+            ("Waze", "waze://?ll=\(coordinate)"),
+            ("Citymapper", "citymapper://directions?endcoord=\(coordinate)&endname=\(encodedTitle)")
+        ]
+            .compactMap { (name, address) in URL(string: address).map { (name, $0) } }
+            .filter { (_, url) in application.canOpenURL(url) }
+        
+        guard handlers.count > 1 else {
             if let (_, _) = handlers.first {
                 mapItem.openInMaps(launchOptions: options)
-              }
-              return
-          }
-          let alert = UIAlertController(title:"", message: nil, preferredStyle: .actionSheet)
-          handlers.forEach { (name, url) in
-              alert.addAction(UIAlertAction(title: name, style: .default) { _ in
-                  application.open(url, options: [:])
-              })
-          }
+            }
+            return
+        }
+        let alert = UIAlertController(title:"", message: nil, preferredStyle: .actionSheet)
+        handlers.forEach { (name, url) in
+            alert.addAction(UIAlertAction(title: name, style: .default) { _ in
+                application.open(url, options: [:])
+            })
+        }
         alert.addAction(UIAlertAction(title: "btn_Cancel".localizedString, style: .cancel, handler: nil))
         
-//        if let topVC = UIApplication.getTopViewController() {
-//            topVC.present(alert, animated: true, completion: nil)
-//        }
+        //        if let topVC = UIApplication.getTopViewController() {
+        //            topVC.present(alert, animated: true, completion: nil)
+        //        }
     }
     
     public static func getWithAEDValue(string: String) -> String {
@@ -157,7 +158,7 @@ public class AppCommonMethods {
             let dateGMT = Date()
             let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: Date()))
             let currentDate = dateGMT.addingTimeInterval(secondFromGMT)
-
+            
             if dealExpiryDate >= currentDate {
                 let timeDifference: TimeInterval = dealExpiryDate.timeIntervalSince(currentDate)
                 return  timeDifference
@@ -281,4 +282,55 @@ public class AppCommonMethods {
         let youtubeID = extractYoutubeId(fromLink: url)
         return "https://i.ytimg.com/vi/\(youtubeID)/hqdefault.jpg"
     }
+    
+    public static func applyLocalizedStringsToAllViews(_ view: UIView) {
+        for subView in view.subviews {
+            if subView.subviews.count > 0 {
+                // UIView
+                applyLocalizedStringsToAllViews(subView)
+            }
+            else if let button = subView as? UIButton {
+                // UIButton
+                if button.tag == 90 {
+                    if SmilesLanguageManager.shared.currentLanguage == .ar {
+                        button.transform = CGAffineTransform(scaleX: -1, y: 1)
+                    } else {
+                        button.transform = CGAffineTransform.identity
+                    }
+                }
+                
+                if let hint = button.accessibilityHint, !hint.isEmpty {
+                    button.setTitle(SmilesLanguageManager.shared.getLocalizedString(for: button.accessibilityLabel ?? ""), for: .normal)
+                }
+            }
+            
+            else if let label = subView as? UILabel {
+                // UILabel
+                if let hint = label.accessibilityHint, !hint.isEmpty {
+                    label.text = SmilesLanguageManager.shared.getLocalizedString(for: label.accessibilityHint ?? "")
+                }
+            }
+            else if let textField = subView as? UITextField {
+                // UITextField
+                if let hint = textField.accessibilityHint, !hint.isEmpty {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                        textField.placeholder = SmilesLanguageManager.shared.getLocalizedString(for: textField.accessibilityHint ?? "")
+                    }
+                }
+            }
+            else if let textView = subView as? UITextView {
+                // UITextView
+                if let hint = textView.accessibilityHint, !hint.isEmpty {
+                    textView.text = SmilesLanguageManager.shared.getLocalizedString(for: textView.accessibilityHint ?? "")
+                }
+            }
+            else if let imageView = subView as? UIImageView {
+                // UIImageView
+                if let hint = imageView.accessibilityHint, !hint.isEmpty {
+                    imageView.image = UIImage(named: SmilesLanguageManager.shared.getLocalizedString(for: imageView.accessibilityHint ?? ""))
+                }
+            }
+        }
+    }
+    
 }
