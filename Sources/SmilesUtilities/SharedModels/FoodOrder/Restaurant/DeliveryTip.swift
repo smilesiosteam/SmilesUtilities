@@ -10,12 +10,15 @@ import Foundation
 public struct DeliveryTip : Codable {
     public var tipHeader : String?
     public var tipDescription : String?
+    public var tipHeaderHtml : String?
+    public var tipDescriptionHtml : String?
     public var tipDetails : [TipDetails]=[]
     
     enum CodingKeys: String, CodingKey {
         case tipHeader = "tipHeader"
         case tipDescription = "tipDescription"
         case tipDetails = "tipDetails"
+        case tipHeaderHtml, tipDescriptionHtml
     }
     
     public init(from decoder: Decoder) throws {
@@ -23,6 +26,8 @@ public struct DeliveryTip : Codable {
         tipHeader = try values.decodeIfPresent(String.self, forKey: .tipHeader)
         tipDescription = try values.decodeIfPresent(String.self, forKey: .tipDescription)
         tipDetails = try values.decodeIfPresent([TipDetails].self, forKey: .tipDetails) ?? []
+        tipHeaderHtml = try values.decodeIfPresent(String.self, forKey: .tipHeaderHtml)
+        tipDescriptionHtml = try values.decodeIfPresent(String.self, forKey: .tipDescriptionHtml)
     }
 }
 
