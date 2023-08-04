@@ -159,7 +159,7 @@ public extension String {
     
     // MARK: - Convert HTML to string
     
-    func attributedString(withRegularFont regularFont: UIFont, andBoldFont boldFont: UIFont) -> NSMutableAttributedString {
+    func attributedString(withRegularFont regularFont: UIFont, andBoldFont boldFont: UIFont, fontColor: UIColor) -> NSMutableAttributedString {
         var attributedString = NSMutableAttributedString()
         guard let data = self.data(using: .utf8) else { return NSMutableAttributedString() }
         do {
@@ -168,12 +168,13 @@ public extension String {
                                                                        .characterEncoding: String.Encoding.utf8.rawValue],
                                                              documentAttributes: nil)
             let range = NSRange(location: 0, length: attributedString.length)
+            attributedString.addAttributes([NSAttributedString.Key.foregroundColor: fontColor], range: range)
             attributedString.enumerateAttribute(NSAttributedString.Key.font, in: range, options: .longestEffectiveRangeNotRequired) { value, range, _ in
                 let currentFont: UIFont = value as! UIFont
                 var replacementFont: UIFont?
                 
                 if currentFont.fontName.contains("bold") || currentFont.fontName.contains("Bold") {
-                    replacementFont = regularFont
+                    replacementFont = boldFont
                 } else {
                     replacementFont = regularFont
                 }
