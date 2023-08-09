@@ -12,41 +12,41 @@ import SmilesUtilities
 import SmilesBaseMainRequestManager
 import SmilesFontsManager
 
-public class BaseViewController: UIViewController, BaseDataSourceDelegate {
+open class BaseViewController: UIViewController, BaseDataSourceDelegate {
     
-    @IBOutlet public weak var view_retry: RetryView!
-    @IBOutlet public weak var view_error: NoContentView!
-    @IBOutlet public weak var topConstraint: NSLayoutConstraint!
-    @IBOutlet public weak var view_holder: UIView!
+    @IBOutlet open weak var view_retry: RetryView!
+    @IBOutlet open weak var view_error: NoContentView!
+    @IBOutlet open weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet open weak var view_holder: UIView!
     
-    public var dataSource: BaseTableViewDataSource?
+    open var dataSource: BaseTableViewDataSource?
     
-    public var shareNavbarButton: UIButton?
-    public var backNavbarButton: UIButton?
-    public var infoNavbarButton: UIButton?
-    public var favouriteNavbarButton: UIButton?
-    public var notificationNavbarButton: UIButton?
+    open var shareNavbarButton: UIButton?
+    open var backNavbarButton: UIButton?
+    open var infoNavbarButton: UIButton?
+    open var favouriteNavbarButton: UIButton?
+    open var notificationNavbarButton: UIButton?
     
-    public var rightSideBarButtons: [NavbarButton]?
-    public var leftSideBarButtons: [NavbarButton]?
+    open var rightSideBarButtons: [NavbarButton]?
+    open var leftSideBarButtons: [NavbarButton]?
     
-    public var viewResizedForIPhoneX = false
+    open var viewResizedForIPhoneX = false
     
-    public var notificationBadge: String?
-    public var displayNotificationDot: UIView?
+    open var notificationBadge: String?
+    open var displayNotificationDot: UIView?
     
-    public var homeNotificationButton = UIButton()
+    open var homeNotificationButton = UIButton()
     let leftSideButtonTag = -85739
     let rightSideButtonTag = -85740
     
-    public var currentHeaderMode: SmilesHeaderMode = .withClearHeader
-    public var viewHeader: UIView?
-    public var viewControllerTitle: String?
-    public var viewControllerTitleFont: UIFont?
-    public var baseTitleLabel: UILabel?
-    public var isFirstTimeLaunch = false
-    public var baseLocationButton: UIButton?
-    public var showLocations = false
+    open var currentHeaderMode: SmilesHeaderMode = .withClearHeader
+    open var viewHeader: UIView?
+    open var viewControllerTitle: String?
+    open var viewControllerTitleFont: UIFont?
+    open var baseTitleLabel: UILabel?
+    open var isFirstTimeLaunch = false
+    open var baseLocationButton: UIButton?
+    open var showLocations = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -200,26 +200,26 @@ public class BaseViewController: UIViewController, BaseDataSourceDelegate {
     
     // MARK: - data Source
     
-    public func setUpTableViewDataSource(dataSource: [BaseRowModel], delegate: BaseDataSourceDelegate?, tableView: UITableView) {
+    open func setUpTableViewDataSource(dataSource: [BaseRowModel], delegate: BaseDataSourceDelegate?, tableView: UITableView) {
         self.dataSource = BaseTableViewDataSource(dataSource: dataSource, delegate: delegate)
         tableView.dataSource = self.dataSource
         tableView.delegate = self.dataSource
         tableView.reloadData()
     }
     
-    public func setUpTableViewSectionsDataSource(dataSource: [BaseSectionModel], delegate: BaseDataSourceDelegate, tableView: UITableView) {
+    open func setUpTableViewSectionsDataSource(dataSource: [BaseSectionModel], delegate: BaseDataSourceDelegate, tableView: UITableView) {
         self.dataSource = BaseTableViewDataSource(dataSourceWithSection: dataSource, delegate: delegate)
         tableView.dataSource = self.dataSource
         tableView.delegate = self.dataSource
         tableView.reloadData()
     }
     
-    public func reloadIndividualSectionOfTableViewOnly(dataSource: [BaseSectionModel], delegate: BaseDataSourceDelegate, tableView: UITableView, sectionNumber:Int) {
+    open func reloadIndividualSectionOfTableViewOnly(dataSource: [BaseSectionModel], delegate: BaseDataSourceDelegate, tableView: UITableView, sectionNumber:Int) {
         self.dataSource?.tableViewSectionItems[sectionNumber] = dataSource[sectionNumber]
         tableView.reloadSections(IndexSet(integersIn: sectionNumber...sectionNumber), with: .none)
     }
     
-    public func setUpTableViewDataSourceWithoutscroll(dataSource: [BaseRowModel], delegate: BaseDataSourceDelegate?, tableView: UITableView, offset: CGPoint) {
+    open func setUpTableViewDataSourceWithoutscroll(dataSource: [BaseRowModel], delegate: BaseDataSourceDelegate?, tableView: UITableView, offset: CGPoint) {
         self.dataSource = BaseTableViewDataSource(dataSource: dataSource, delegate: delegate)
         tableView.dataSource = self.dataSource
         tableView.delegate = self.dataSource
@@ -233,31 +233,31 @@ public class BaseViewController: UIViewController, BaseDataSourceDelegate {
     }
     
     
-    public func didSelectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath) {
+    open func didSelectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath) {
         // override in child classes
         
     }
     
-    public func didDeselectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath) {
+    open func didDeselectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath) {
         // override in child classes
     }
     
-    @objc public func scrollViewEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    @objc open func scrollViewEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         // override in child classes
     }
     
-    public func viewDidScroll(_ scrollView: UIScrollView) {
+    open func viewDidScroll(_ scrollView: UIScrollView) {
         
     }
     
-    public func refreshViewWithData(){
+    open func refreshViewWithData(){
         
     }
 }
 
 // MARK: - SuperViewController methods
-public extension BaseViewController {
-    public func setUpViewContent() {
+open extension BaseViewController {
+    open func setUpViewContent() {
 //        UIApplication.delegte().currentPresentedViewController = self
         
         if self.responds(to: #selector(getter: edgesForExtendedLayout)) {
@@ -342,7 +342,7 @@ public extension BaseViewController {
         }
     }
     
-    public func setupTitle() {
+    open func setupTitle() {
         let viewTitle = UIView(frame: CGRect(x: 50, y: (self.viewHeader?.frame.size.height ?? 0) - 64, width: self.view.frame.size.width - 100, height: 64))
         
         if let viewControllerTitle {
@@ -389,7 +389,7 @@ public extension BaseViewController {
         }
     }
     
-    public func setupLocationActions() {
+    open func setupLocationActions() {
         let locationView = UIView(frame: CGRect(x: ((self.viewHeader?.frame.size.width ?? 0) / 2) - 90, y: (self.viewHeader?.frame.size.height ?? 0) - 64, width: 180, height: 64))
         locationView.backgroundColor = .clear
         
@@ -417,7 +417,7 @@ public extension BaseViewController {
         viewHeader?.addSubview(locationView)
     }
     
-    public func setupInsetForButton() {
+    open func setupInsetForButton() {
         if !AppCommonMethods.languageIsArabic() {
             baseLocationButton?.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 15)
         } else {
@@ -428,25 +428,25 @@ public extension BaseViewController {
         baseLocationButton?.addTarget(self, action: #selector(openLocationController), for: .touchUpInside)
     }
     
-    public func updateHeader(backgroundColor: UIColor, titleLabelColor: UIColor) {
+    open func updateHeader(backgroundColor: UIColor, titleLabelColor: UIColor) {
         self.viewHeader?.backgroundColor = backgroundColor
         self.baseTitleLabel?.textColor = titleLabelColor
     }
     
-    public func updateHeaderTitle(fontTextStyle: UIFont.TextStyle, titleLabelColor: UIColor) {
+    open func updateHeaderTitle(fontTextStyle: UIFont.TextStyle, titleLabelColor: UIColor) {
         self.baseTitleLabel?.textColor = titleLabelColor
         self.baseTitleLabel?.fontTextStyle = fontTextStyle
     }
     
-    public func setHeaderGradientColor() {
+    open func setHeaderGradientColor() {
         self.viewHeader?.addGradientColors(UIColor.navigationGradientColorArray(), opacity: 1.0, direction: .diagnolLeftToRight)
     }
     
-    public func removeHeaderGradientColor() {
+    open func removeHeaderGradientColor() {
         self.viewHeader?.removeGradientColor()
     }
     
-    public func setHeader(withTitle title: String) {
+    open func setHeader(withTitle title: String) {
         if !title.isEmpty {
             let isViewHeaderBackgroundWhite = viewHeader?.backgroundColor?.isEqual(UIColor.white) ?? false
             
@@ -466,7 +466,7 @@ public extension BaseViewController {
         }
     }
     
-    public func setHeader(withWhiteTitle title: String) {
+    open func setHeader(withWhiteTitle title: String) {
         if !title.isEmpty {
             let isViewHeaderBackgroundWhite = viewHeader?.backgroundColor?.isEqual(UIColor.white) ?? false
             
@@ -482,27 +482,27 @@ public extension BaseViewController {
         }
     }
     
-    @objc public func openLocationController() {
+    @objc open func openLocationController() {
         
     }
     
-    public func setIsFirstTime() {
+    open func setIsFirstTime() {
         self.isFirstTimeLaunch = false
     }
     
-    @objc public func adjustViewContent() {
+    @objc open func adjustViewContent() {
         AppCommonMethods.adjustSubviewsLanguage(view: self.view, withoutFlipping: true)
     }
 }
 
 // MARK: - MasterViewController methods
 
-public extension BaseViewController {
-    @objc public func menuButtonTapped(_ sender: UIButton) {
+open extension BaseViewController {
+    @objc open func menuButtonTapped(_ sender: UIButton) {
         
     }
     
-    @objc public func backButtonTapped(_ sender: UIButton) {
+    @objc open func backButtonTapped(_ sender: UIButton) {
         if let navigationController {
             navigationController.popViewController()
         } else {
@@ -510,23 +510,23 @@ public extension BaseViewController {
         }
     }
     
-    @objc public func shareBarButtonTapped(_ sender: UIButton) {
+    @objc open func shareBarButtonTapped(_ sender: UIButton) {
         
     }
     
-    @objc public func favouriteButtonTapped(_ sender: UIButton) {
+    @objc open func favouriteButtonTapped(_ sender: UIButton) {
         
     }
     
-    @objc public func playAndWinButtonTapped(_ sender: UIButton) {
+    @objc open func playAndWinButtonTapped(_ sender: UIButton) {
         
     }
     
-    @objc public func nearByButtonTapped(_ sender: UIButton) {
+    @objc open func nearByButtonTapped(_ sender: UIButton) {
         
     }
     
-    @objc public func notificationButtonTapped(_ sender: UIButton) {
+    @objc open func notificationButtonTapped(_ sender: UIButton) {
         if let notificationVC = CommonMethods.getViewController(fromStoryboardName: "Notifications", andIdentifier: "NotificationInboxViewController") as? NotificationInboxViewController {
             
             notificationVC.hidesBottomBarWhenPushed = false
@@ -535,21 +535,21 @@ public extension BaseViewController {
         
     }
     
-    @objc public func applyButtonTapped(_ sender: UIButton) {
+    @objc open func applyButtonTapped(_ sender: UIButton) {
         
     }
     
-    @objc public func searchButtonTapAction(_ sender: UIButton) {
+    @objc open func searchButtonTapAction(_ sender: UIButton) {
         let globalSearchVC = GlobalSearchRouter.setupModule()
         globalSearchVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(viewController: globalSearchVC)
     }
     
-    @objc public func infoButtonTapped() {
+    @objc open func infoButtonTapped() {
         
     }
     
-    @objc public func configureChildViews() {
+    @objc open func configureChildViews() {
         self.notificationBadge = "no_notification"
         self.displayNotificationDot?.isHidden = true
         
@@ -570,7 +570,7 @@ public extension BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.fetchUnreadNotificationCount), name: NSNotification.Name("NotificationCounter"), object: nil)
     }
     
-    @objc public func updateButtons() {
+    @objc open func updateButtons() {
         if !AppCommonMethods.languageIsArabic() {
             self.view.subviews.forEach { subview in
                 if let button = subview as? UIButton {
@@ -584,21 +584,21 @@ public extension BaseViewController {
         }
     }
     
-    @objc public func configureNavigationBar(withTitle title: String?, rightButtons: [String]) {
+    @objc open func configureNavigationBar(withTitle title: String?, rightButtons: [String]) {
         self.viewControllerTitle = title ?? ""
         self.currentHeaderMode = .withHeader
         self.leftSideBarButtons = [.backButton]
         self.rightSideBarButtons = rightButtons.map { NavbarButton(rawValue: $0) ?? .empty }
     }
     
-    @objc public func configureNavigationBar(withTitle title: String?, rightButtons: [String], leftButtons: [String]) {
+    @objc open func configureNavigationBar(withTitle title: String?, rightButtons: [String], leftButtons: [String]) {
         self.viewControllerTitle = title ?? ""
         self.currentHeaderMode = .withHeader
         self.leftSideBarButtons = leftButtons.map { NavbarButton(rawValue: $0) ?? .empty }
         self.rightSideBarButtons = rightButtons.map { NavbarButton(rawValue: $0) ?? .empty }
     }
     
-    @objc public func configureNavigationBar(withTitle title: String?, backButtonImg: String?, clearHeader: Bool, rightSideButtons: [String]) {
+    @objc open func configureNavigationBar(withTitle title: String?, backButtonImg: String?, clearHeader: Bool, rightSideButtons: [String]) {
         self.viewControllerTitle = title ?? ""
         self.currentHeaderMode = clearHeader ? .withClearHeader : .withHeader
         if backButtonImg?.elementsEqual("noBackNeeded") ?? false {
@@ -610,7 +610,7 @@ public extension BaseViewController {
         self.backNavbarButton?.setImage(UIImage(named: backButtonImg ?? ""), for: .normal)
     }
     
-    @objc public func setRightSideBarButtons() {
+    @objc open func setRightSideBarButtons() {
         if let view = self.viewHeader?.viewWithTag(rightSideButtonTag) {
             view.removeFromSuperview()
         }
@@ -854,7 +854,7 @@ public extension BaseViewController {
         }
     }
     
-    @objc public func setLeftSideBarButtons() {
+    @objc open func setLeftSideBarButtons() {
         if let view = self.viewHeader?.viewWithTag(leftSideButtonTag) {
             view.removeFromSuperview()
         }
@@ -958,7 +958,7 @@ public extension BaseViewController {
         self.viewHeader?.addSubview(leftSideButtonsView)
     }
     
-    @objc public func registerEventWebService(with eventType: Int, shareType: Int, additionalInfo: [Any]?) {
+    @objc open func registerEventWebService(with eventType: Int, shareType: Int, additionalInfo: [Any]?) {
         let event = EventTypeSwift(rawValue: eventType)
         let _ = ShareTypeSwift(rawValue: shareType)
         
@@ -1005,7 +1005,7 @@ public extension BaseViewController {
         }
     }
     
-    @objc public func showShareResultPopup(bonus: String?) {
+    @objc open func showShareResultPopup(bonus: String?) {
         if let gamificationShareResultViewController = CommonMethods.getViewController(fromStoryboardName: "Gamification", andIdentifier: "GamificationShareResultViewController") as? GamificationShareResultViewController {
             
             gamificationShareResultViewController.bonusPoint = bonus ?? nil
@@ -1014,7 +1014,7 @@ public extension BaseViewController {
         }
     }
     
-    @objc public func deleteLocalNotification(objectId: String?, type: String) {
+    @objc open func deleteLocalNotification(objectId: String?, type: String) {
         if type.lowercased().elementsEqual("offer") {
 //            CommonMethods.fireEvent(withName: SharedConstants.cancelledNotification, parameters: [:])
         } else if type.lowercased().elementsEqual("recharge") {
@@ -1030,11 +1030,11 @@ public extension BaseViewController {
         }
     }
     
-    @objc public func configureViewContent() {
+    @objc open func configureViewContent() {
         AppCommonMethods.adjustSubviewsLanguage(view: self.view, withoutFlipping: true)
     }
     
-    @objc public func fetchUnreadNotificationCount() {
+    @objc open func fetchUnreadNotificationCount() {
         if let notificationBadge = CommonMethods.loadCustomObject(withKey: SharedConstants.notificationBadge) as? String, !notificationBadge.isEmpty {
             notificationNavbarButton?.setImage(UIImage(named: "Notification"), for: .normal)
             homeNotificationButton.setImage(UIImage(named: "Notification"), for: .normal)
@@ -1064,7 +1064,7 @@ public extension BaseViewController {
         }
     }
     
-    @objc public func didReceiveNotification(notification: Notification) {
+    @objc open func didReceiveNotification(notification: Notification) {
         if let notification = notification.object as? [String: Any], !notification.isEmpty {
             CommonMethods.fireEvent(withName: SharedConstants.pushNotificationOpened, parameters: [:])
             
