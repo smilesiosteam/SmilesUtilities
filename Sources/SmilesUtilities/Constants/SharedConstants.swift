@@ -8,11 +8,41 @@
 
 import UIKit
 
-public class SharedConstants: NSObject {
+public class SharedConstants {
     static let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
     // MARK: - Screen Aspect Ratio
     public static let ASPECT_RATIO_RESPECT = ScreenSize.BASE_SCREEN_HEIGHT / ScreenSize.maxWH
     public static let ENABLE_EMAIL_VERIFICATION = true
+    public static var isAcceptLanguageEnabled = false
+    public static let ENABLE_IPHONEX_CHANGES = 1
+    
+    public static let tagViewResizeOnlyForIPhoneX = 1101
+    public static let tagViewShiftOnlyForIPhoneX = 1102
+    public static let tagViewShiftOnlyForIPhoneXWithTabbar = 1103
+    public static let tagViewShiftOnlyForIPhoneXWithModelView = 1104
+    public static let tagFullViewShiftOnlyForIPhoneX = 1105
+    
+    public static let baseViewControllerTitleLabelTag = 770
+
+    public static let cancelledNotification = "acln_canceled"
+    public static let cancelledNotificationBillPayment = "acln_canceled_bill_payment"
+    public static let cancelledNotificationRecharge = "acln_canceled_recharge"
+    
+    public static let notificationBadge = "badge"
+    
+    public static let pushNotificationReceived = "push_notification_received"
+    public static let pushNotificationOpened = "push_notification_opened"
+    public static let selectNotificationNC = "select_notifaction_NC"
+    public static let openNotificationNC = "open_notifaction_NC"
+    
+    public static let menuDidChangeLanguageNotification = "DidChangeLanguage"
+    
+    public static let VAT_INCLUDED = "VatIncluded"
+    public static let VAT_PERCENTAGE = "VatPercentage"
+    public static let MSISDN_NUMBER = "msisdn"
+    
+    public static let nonFlippedViewTag = 999
+    public static let flippedViewWithoutAlignmentChangedTag = 1000
     
     // MARK: - Device Screens Size
     public struct ScreenSize {

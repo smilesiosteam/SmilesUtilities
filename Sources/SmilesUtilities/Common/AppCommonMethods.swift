@@ -333,4 +333,95 @@ public class AppCommonMethods {
         }
     }
     
+    func isToBeFlipped(withView view: UIView) -> Bool {
+        var tag = 0
+        
+        if let uiImageView = view as? UIImageView {
+            tag = uiImageView.tag
+        } else if let uiButton = view as? UIButton {
+            tag = uiButton.tag
+        } else if let uiView = view as? UIView {
+            tag = uiView.tag
+        } else if let uiTextView = view as? UITextView {
+            tag = uiTextView.tag
+        } else if let uiTextField = view as? UITextField {
+            tag = uiTextField.tag
+        } else if let uiLabel = view as? UILabel {
+            tag = uiLabel.tag
+        } else if let uiSegmentedControl = view as? UISegmentedControl {
+            tag = uiSegmentedControl.tag
+        }
+        
+        return (tag != SharedConstants.nonFlippedViewTag)
+    }
+    
+    public static func adjustSubviewsLanguage(view: UIView, withoutFlipping toBeFlipped: Bool) {
+        for subview in view.subviews {
+            let isToBeFlipped = self.isToBeFlipped(withView: subview)
+            
+            if isToBeFlipped {
+                if toBeFlipped {
+                    subview.frame = CGRect(x: view.frame.size.width - subview.frame.origin.x - subview.frame.size.width, y: subview.frame.origin.y, width: subview.frame.size.width, height: subview.frame.size.height)
+                }
+            }
+            
+            if let buttonView = subview as? UIButton {
+                if buttonView.accessibilityHint?.count > 0 {
+                    let newString = SmilesLanguageManager.shared.getLocalizedString(for: buttonView.accessibilityHint ?? "")
+                    buttonView.setTitle(newString.removingPercentEncoding, for: .normal)
+                }
+            } else if let plainView = subview as? UIView, plainView.subviews.count > 0 {
+                if plainView.tag != SharedConstants.nonFlippedViewTag {
+                    self.adjustSubviewsLanguage(view: plainView, toBeFlipped: toBeFlipped)
+                }
+            } else if let labelView = subview as? UILabel {
+                if labelView.accessibilityHint.count > 0 {
+                    let newString = SmilesLanguageManager.shared.getLocalizedString(for: labelView.accessibilityHint ?? "")
+                    labelView.text = newString.removingPercentEncoding
+                }
+                
+                if (!(labelView.textAlignment == .center) && isToBeFlipped) {
+                    if labelView.tag != SharedConstants.flippedViewWithoutAlignmentChangedTag {
+                        if toBeFlipped {
+                            if labelView.textAlignment == .right {
+                                labelView.textAlignment = .left
+                            } else {
+                                labelView.textAlignment = .right
+                            }
+                        }
+                    }
+                }
+            } else if let textFieldView = subview as? UITextField {
+                if textFieldView.accessibilityHint.count > 0 {
+                    let delayInMilliSeconds = 10
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delayInMilliSeconds)) {
+                        let newString = SmilesLanguageManager.shared.getLocalizedString(for: textFieldView.accessibilityHint ?? "")
+                        textFieldView.placeholder = newString.removingPercentEncoding
+                    }
+                }
+                
+                if (!(textFieldView.textAlignment == .center) && isToBeFlipped) {
+                    if textFieldView.tag != SharedConstants.flippedViewWithoutAlignmentChangedTag {
+                        if toBeFlipped {
+                            if languageIsArabic() {
+                                textFieldView.textAlignment = .right
+                            } else {
+                                textFieldView.textAlignment = .left
+                            }
+                        }
+                    }
+                }
+            } else if let textView = subview as? UITextView {
+                if textView.tag != SharedConstants.flippedViewWithoutAlignmentChangedTag {
+                    if toBeFlipped {
+                        if languageIsArabic() {
+                            textView.textAlignment = .right
+                        } else {
+                            textView.textAlignment = .left
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

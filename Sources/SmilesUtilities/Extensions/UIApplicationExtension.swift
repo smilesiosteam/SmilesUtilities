@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-extension UIApplication {
+public extension UIApplication {
     
     public static var appVersion: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
@@ -19,13 +19,13 @@ extension UIApplication {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
     }
     
-    func baseViewController() -> UIViewController? {
+    public static func baseViewController() -> UIViewController? {
         return UIApplication.shared.windows.first { $0.isKeyWindow }?.rootViewController
     }
     
-    
-    
-    
+    public static func topMostViewController() -> UIViewController? {
+        return baseViewController()?.topmostViewController()
+    }
 }
 
 
