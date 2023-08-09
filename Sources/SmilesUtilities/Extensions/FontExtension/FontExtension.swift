@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SmilesLanguageManager
 
 @objc public extension UIFont {
     @objc static func latoRegularFont(size: CGFloat) -> UIFont {
@@ -64,6 +65,10 @@ import UIKit
     
     @objc static func circularXXTTRegularFont(size: CGFloat) -> UIFont {
         return customFont(name: "CircularXXTT-Regular", size: size)
+    }
+    
+    @objc static func thmTextStyle1(size: CGFloat) -> UIFont {
+        return customFont(name: SmilesLanguageManager.shared.getLocalizedString(for: "NeoTechAlt"), size: size)
     }
     
     private static func customFont(name: String, size: CGFloat) -> UIFont {

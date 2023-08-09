@@ -8,18 +8,18 @@
 
 import UIKit
 import SmilesLoader
-import SmilesUtilities
-import SmilesBaseMainRequestManager
 import SmilesFontsManager
+import SwiftTheme
+import HPParallaxHeader
 
 open class BaseViewController: UIViewController, BaseDataSourceDelegate {
     
-    @IBOutlet open weak var view_retry: RetryView!
-    @IBOutlet open weak var view_error: NoContentView!
+    @IBOutlet public weak var view_retry: RetryView!
+    @IBOutlet public weak var view_error: NoContentView!
     @IBOutlet open weak var topConstraint: NSLayoutConstraint!
     @IBOutlet open weak var view_holder: UIView!
     
-    open var dataSource: BaseTableViewDataSource?
+    public var dataSource: BaseTableViewDataSource?
     
     open var shareNavbarButton: UIButton?
     open var backNavbarButton: UIButton?
@@ -48,7 +48,7 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
     open var baseLocationButton: UIButton?
     open var showLocations = false
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         // Code transferred from SuperViewController
@@ -62,13 +62,13 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
         //        self.hideHud()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
     
@@ -77,17 +77,17 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(appMovingToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovingToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    open override func viewDidDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: UIApplication.willEnterForegroundNotification.rawValue), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: UIApplication.didEnterBackgroundNotification.rawValue), object: nil)
     }
     
-    override func viewWillLayoutSubviews() {
+    open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
         if self.isFirstTimeLaunch {
@@ -120,7 +120,6 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
                     viewFrame?.size.height -= 0
                 } else {
                     viewFrame?.size.height -= (UIApplication.baseViewController()?.tabBarController?.tabBar.frame.size.height ?? 0.0)
-                    UIApplication.shared.pre
                 }
             } else if view_holder?.tag == SharedConstants.tagFullViewShiftOnlyForIPhoneX {
                 
@@ -168,10 +167,12 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
                 if let parentnav = (self.navigationController?.presentingViewController as? UINavigationController), self.navigationController?.presentingViewController != nil {
                     self.dismiss(animated: true, completion: {
                         for controller in (parentnav.viewControllers) as Array {
-                            if controller.isKind(of: DashboardRevampViewController.self) {
-                                parentnav.popToViewController(controller, animated: true)
-                                break
-                            }
+                            
+                            // MARK: -- DashboardRevampViewController.self is inaccessible in module
+//                            if controller.isKind(of: DashboardRevampViewController.self) {
+//                                parentnav.popToViewController(controller, animated: true)
+//                                break
+//                            }
                         }
                     })
                 }else{
@@ -256,8 +257,8 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
 }
 
 // MARK: - SuperViewController methods
-open extension BaseViewController {
-    open func setUpViewContent() {
+extension BaseViewController {
+    @objc open func setUpViewContent() {
 //        UIApplication.delegte().currentPresentedViewController = self
         
         if self.responds(to: #selector(getter: edgesForExtendedLayout)) {
@@ -342,7 +343,7 @@ open extension BaseViewController {
         }
     }
     
-    open func setupTitle() {
+    @objc open func setupTitle() {
         let viewTitle = UIView(frame: CGRect(x: 50, y: (self.viewHeader?.frame.size.height ?? 0) - 64, width: self.view.frame.size.width - 100, height: 64))
         
         if let viewControllerTitle {
@@ -362,7 +363,7 @@ open extension BaseViewController {
                 baseTitleLabel?.tag = SharedConstants.baseViewControllerTitleLabelTag
                 baseTitleLabel?.fontTextStyle = .smilesTitle1
                 baseTitleLabel?.textAlignment = .center
-                baseTitleLabel?.textColor = .thm_white()
+                baseTitleLabel?.textColor = .white
                 baseTitleLabel?.backgroundColor = .clear
                 
                 let isViewHeaderBackgroundWhite = viewHeader?.backgroundColor?.isEqual(UIColor.white) ?? false
@@ -389,7 +390,7 @@ open extension BaseViewController {
         }
     }
     
-    open func setupLocationActions() {
+    @objc open func setupLocationActions() {
         let locationView = UIView(frame: CGRect(x: ((self.viewHeader?.frame.size.width ?? 0) / 2) - 90, y: (self.viewHeader?.frame.size.height ?? 0) - 64, width: 180, height: 64))
         locationView.backgroundColor = .clear
         
@@ -404,7 +405,7 @@ open extension BaseViewController {
         }
         
         baseLocationButton?.setImage(UIImage(named: "location-title-pin"), for: .normal)
-        baseLocationButton?.titleLabel?.font = .thm_textStyle1()
+        baseLocationButton?.titleLabel?.font = .thmTextStyle1(size: 16.0)
         self.setupInsetForButton()
         
         baseLocationButton?.tag = 776
@@ -417,7 +418,7 @@ open extension BaseViewController {
         viewHeader?.addSubview(locationView)
     }
     
-    open func setupInsetForButton() {
+    @objc open func setupInsetForButton() {
         if !AppCommonMethods.languageIsArabic() {
             baseLocationButton?.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 15)
         } else {
@@ -428,25 +429,25 @@ open extension BaseViewController {
         baseLocationButton?.addTarget(self, action: #selector(openLocationController), for: .touchUpInside)
     }
     
-    open func updateHeader(backgroundColor: UIColor, titleLabelColor: UIColor) {
+    @objc open func updateHeader(backgroundColor: UIColor, titleLabelColor: UIColor) {
         self.viewHeader?.backgroundColor = backgroundColor
         self.baseTitleLabel?.textColor = titleLabelColor
     }
     
-    open func updateHeaderTitle(fontTextStyle: UIFont.TextStyle, titleLabelColor: UIColor) {
+    @objc open func updateHeaderTitle(fontTextStyle: UIFont.TextStyle, titleLabelColor: UIColor) {
         self.baseTitleLabel?.textColor = titleLabelColor
         self.baseTitleLabel?.fontTextStyle = fontTextStyle
     }
     
-    open func setHeaderGradientColor() {
+    @objc open func setHeaderGradientColor() {
         self.viewHeader?.addGradientColors(UIColor.navigationGradientColorArray(), opacity: 1.0, direction: .diagnolLeftToRight)
     }
     
-    open func removeHeaderGradientColor() {
+    @objc open func removeHeaderGradientColor() {
         self.viewHeader?.removeGradientColor()
     }
     
-    open func setHeader(withTitle title: String) {
+    @objc open func setHeader(withTitle title: String) {
         if !title.isEmpty {
             let isViewHeaderBackgroundWhite = viewHeader?.backgroundColor?.isEqual(UIColor.white) ?? false
             
@@ -459,14 +460,15 @@ open extension BaseViewController {
                 (self.viewHeader?.viewWithTag(SharedConstants.baseViewControllerTitleLabelTag) as? UILabel)?.text = title.capitalized
                 (self.viewHeader?.viewWithTag(SharedConstants.baseViewControllerTitleLabelTag) as? UILabel)?.textColor = isViewHeaderBackgroundWhite ? UIColor.appDarkGrayColor : UIColor.white
                 
-                if UIApplication.topMostViewController()?.isKind(of: RestaurantDetailRevampViewController.self) ?? false {
-                    (self.viewHeader?.viewWithTag(SharedConstants.baseViewControllerTitleLabelTag) as? UILabel)?.transform = CGAffineTransformMakeScale(-1, 1)
-                }
+                // MARK: -- RestaurantDetailRevampViewController not accessible here
+//                if UIApplication.topMostViewController()?.isKind(of: RestaurantDetailRevampViewController.self) ?? false {
+//                    (self.viewHeader?.viewWithTag(SharedConstants.baseViewControllerTitleLabelTag) as? UILabel)?.transform = CGAffineTransformMakeScale(-1, 1)
+//                }
             }
         }
     }
     
-    open func setHeader(withWhiteTitle title: String) {
+    @objc open func setHeader(withWhiteTitle title: String) {
         if !title.isEmpty {
             let isViewHeaderBackgroundWhite = viewHeader?.backgroundColor?.isEqual(UIColor.white) ?? false
             
@@ -486,7 +488,7 @@ open extension BaseViewController {
         
     }
     
-    open func setIsFirstTime() {
+    @objc open func setIsFirstTime() {
         self.isFirstTimeLaunch = false
     }
     
@@ -497,7 +499,7 @@ open extension BaseViewController {
 
 // MARK: - MasterViewController methods
 
-open extension BaseViewController {
+extension BaseViewController {
     @objc open func menuButtonTapped(_ sender: UIButton) {
         
     }
@@ -527,12 +529,11 @@ open extension BaseViewController {
     }
     
     @objc open func notificationButtonTapped(_ sender: UIButton) {
-        if let notificationVC = CommonMethods.getViewController(fromStoryboardName: "Notifications", andIdentifier: "NotificationInboxViewController") as? NotificationInboxViewController {
+        if let notificationVC = AppCommonMethods.getViewController(fromStoryboardName: "Notifications", andIdentifier: "NotificationInboxViewController") {
             
             notificationVC.hidesBottomBarWhenPushed = false
             self.navigationController?.pushViewController(viewController: notificationVC)
         }
-        
     }
     
     @objc open func applyButtonTapped(_ sender: UIButton) {
@@ -540,9 +541,10 @@ open extension BaseViewController {
     }
     
     @objc open func searchButtonTapAction(_ sender: UIButton) {
-        let globalSearchVC = GlobalSearchRouter.setupModule()
-        globalSearchVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(viewController: globalSearchVC)
+        // MARK: -- GlobalSearchRouter not accessible here
+//        let globalSearchVC = GlobalSearchRouter.setupModule()
+//        globalSearchVC.hidesBottomBarWhenPushed = true
+//        self.navigationController?.pushViewController(viewController: globalSearchVC)
     }
     
     @objc open func infoButtonTapped() {
@@ -576,7 +578,7 @@ open extension BaseViewController {
                 if let button = subview as? UIButton {
                     if (button.accessibilityHint?.count ?? 0) > 0 {
                         if let accessibilityHint = button.accessibilityHint?.localizedString {
-                            button.setAttributedTitle(CommonMethods.styleText(withSpacesLetter: accessibilityHint, space: 1.9, font: .thm_textStyle3(), color: .white), for: .normal)
+                            button.setAttributedTitle(AppCommonMethods.styleText(withSpacesLetter: accessibilityHint, space: 1.9, font: .latoRegularFont(size: 16.0), color: .white), for: .normal)
                         }
                     }
                 }
@@ -722,7 +724,7 @@ open extension BaseViewController {
             }
             
             applyButton.setTitle("ApplyTitle".localizedString, for: .normal)
-            applyButton.titleLabel?.font = .thm_textStyle3()
+            applyButton.titleLabel?.font = .latoRegularFont(size: 16.0)
             applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
             rightSideButtonsView.addSubview(applyButton)
             self.viewHeader?.addSubview(rightSideButtonsView)
@@ -909,13 +911,14 @@ open extension BaseViewController {
             
             self.backNavbarButton?.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
             
-            if UIApplication.topMostViewController()?.isKind(of: RestaurantDetailRevampViewController.self) ?? false {
-                if AppCommonMethods.languageIsArabic() {
-                    self.backNavbarButton?.imageView?.transform = CGAffineTransformMakeScale(-1, 1)
-                } else {
-                    self.backNavbarButton?.imageView?.transform = .identity
-                }
-            }
+            // MARK: -- RestaurantDetailRevampViewController not accessible here
+//            if UIApplication.topMostViewController()?.isKind(of: RestaurantDetailRevampViewController.self) ?? false {
+//                if AppCommonMethods.languageIsArabic() {
+//                    self.backNavbarButton?.imageView?.transform = CGAffineTransformMakeScale(-1, 1)
+//                } else {
+//                    self.backNavbarButton?.imageView?.transform = .identity
+//                }
+//            }
             
             if let backNavbarButton {
                 leftSideButtonsView.addSubview(backNavbarButton)
@@ -962,56 +965,59 @@ open extension BaseViewController {
         let event = EventTypeSwift(rawValue: eventType)
         let _ = ShareTypeSwift(rawValue: shareType)
         
-        if getUserProfileResponse.sharedClient().onAppStartObjectResponse?.isGamificationEnabled == "true" {
-            let registerEventRequest = registerEventRequest(dictionary: SmilesBaseMainRequestManager.shared.getConfigsAsDictionary())
-            registerEventRequest?.eventType = Double(eventType)
-            registerEventRequest?.additionalInfo = additionalInfo
-            
-            GamificationLogic.registerEvents(with: registerEventRequest) { [weak self] statusResponse in
-                if statusResponse?.status == 204 {
-                    if event == .PUZZLE_PIECE_SHARE_EVENT {
-                        if let sharingText = SharingDetails.sharedClient().sharingText, SharingDetails.sharedClient().shareFrom == Double(EventTypeSwift.PUZZLE_PIECE_SHARE_EVENT.rawValue) {
-                            
-                            self?.navigationController?.popViewController()
-                            DispatchQueue.main.async {
-                                self?.showShareResultPopup(bonus: sharingText)
-                            }
-                        }
-                    }
-                } else {
-                    if event == .PUZZLE_PIECE_SHARE_EVENT {
-                        if SharingDetails.sharedClient().shareFrom == Double(EventTypeSwift.PUZZLE_PIECE_SHARE_EVENT.rawValue) {
-                            self?.navigationController?.popViewController()
-                            
-                            DispatchQueue.main.async {
-                                self?.showShareResultPopup(bonus: nil)
-                            }
-                        }
-                    }
-                }
-                
-                if event == .BADGE_EVENT || event == .PUZZLE_SHARE_EVENT || event == .VIEW_SPEICAL_RAFFLE_EVENT {
-                    DispatchQueue.main.async {
-                        self?.navigationController?.popViewController()
-                    }
-                }
-            } failureBlock: { error, message in
-                if (event == .BADGE_EVENT || event == .PUZZLE_SHARE_EVENT) || (event == .VIEW_SPEICAL_RAFFLE_EVENT || event == .PUZZLE_PIECE_SHARE_EVENT) {
-                    DispatchQueue.main.async {
-                        self.navigationController?.popViewController()
-                    }
-                }
-            }
-        }
+        // MARK: -- Multiple access issues here like getUserProfileResponse, registerEventRequest, GamificationLogic etc and SmilesBaseMainRequestManager.shared.getConfigsAsDictionary() cannot be accessed due to cyclic dependency
+//        if getUserProfileResponse.sharedClient().onAppStartObjectResponse?.isGamificationEnabled == "true" {
+//            let registerEventRequest = registerEventRequest(dictionary: SmilesBaseMainRequestManager.shared.getConfigsAsDictionary())
+//            registerEventRequest?.eventType = Double(eventType)
+//            registerEventRequest?.additionalInfo = additionalInfo
+//
+//            GamificationLogic.registerEvents(with: registerEventRequest) { [weak self] statusResponse in
+//                if statusResponse?.status == 204 {
+//                    if event == .PUZZLE_PIECE_SHARE_EVENT {
+//                        if let sharingText = SharingDetails.sharedClient().sharingText, SharingDetails.sharedClient().shareFrom == Double(EventTypeSwift.PUZZLE_PIECE_SHARE_EVENT.rawValue) {
+//
+//                            self?.navigationController?.popViewController()
+//                            DispatchQueue.main.async {
+//                                self?.showShareResultPopup(bonus: sharingText)
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    if event == .PUZZLE_PIECE_SHARE_EVENT {
+//                        if SharingDetails.sharedClient().shareFrom == Double(EventTypeSwift.PUZZLE_PIECE_SHARE_EVENT.rawValue) {
+//                            self?.navigationController?.popViewController()
+//
+//                            DispatchQueue.main.async {
+//                                self?.showShareResultPopup(bonus: nil)
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                if event == .BADGE_EVENT || event == .PUZZLE_SHARE_EVENT || event == .VIEW_SPEICAL_RAFFLE_EVENT {
+//                    DispatchQueue.main.async {
+//                        self?.navigationController?.popViewController()
+//                    }
+//                }
+//            } failureBlock: { error, message in
+//                if (event == .BADGE_EVENT || event == .PUZZLE_SHARE_EVENT) || (event == .VIEW_SPEICAL_RAFFLE_EVENT || event == .PUZZLE_PIECE_SHARE_EVENT) {
+//                    DispatchQueue.main.async {
+//                        self.navigationController?.popViewController()
+//                    }
+//                }
+//            }
+//        }
     }
     
     @objc open func showShareResultPopup(bonus: String?) {
-        if let gamificationShareResultViewController = CommonMethods.getViewController(fromStoryboardName: "Gamification", andIdentifier: "GamificationShareResultViewController") as? GamificationShareResultViewController {
-            
-            gamificationShareResultViewController.bonusPoint = bonus ?? nil
-            gamificationShareResultViewController.modalPresentationStyle = .overCurrentContext
-            UIApplication.baseViewController()?.tabBarController?.present(gamificationShareResultViewController, animated: true)
-        }
+        
+        // MARK: -- GamificationShareResultViewController inaccessible here
+//        if let gamificationShareResultViewController = CommonMethods.getViewController(fromStoryboardName: "Gamification", andIdentifier: "GamificationShareResultViewController") as? GamificationShareResultViewController {
+//
+//            gamificationShareResultViewController.bonusPoint = bonus ?? nil
+//            gamificationShareResultViewController.modalPresentationStyle = .overCurrentContext
+//            UIApplication.baseViewController()?.tabBarController?.present(gamificationShareResultViewController, animated: true)
+//        }
     }
     
     @objc open func deleteLocalNotification(objectId: String?, type: String) {
@@ -1035,7 +1041,7 @@ open extension BaseViewController {
     }
     
     @objc open func fetchUnreadNotificationCount() {
-        if let notificationBadge = CommonMethods.loadCustomObject(withKey: SharedConstants.notificationBadge) as? String, !notificationBadge.isEmpty {
+        if let notificationBadge = AppCommonMethods.loadCustomObject(withKey: SharedConstants.notificationBadge) as? String, !notificationBadge.isEmpty {
             notificationNavbarButton?.setImage(UIImage(named: "Notification"), for: .normal)
             homeNotificationButton.setImage(UIImage(named: "Notification"), for: .normal)
             self.displayNotificationDot?.isHidden = false
@@ -1065,53 +1071,55 @@ open extension BaseViewController {
     }
     
     @objc open func didReceiveNotification(notification: Notification) {
-        if let notification = notification.object as? [String: Any], !notification.isEmpty {
-            CommonMethods.fireEvent(withName: SharedConstants.pushNotificationOpened, parameters: [:])
-            
-            if let msisdn = CommonMethods.loadCustomObject(withKey: SharedConstants.MSISDN_NUMBER) as? String, !msisdn.isEmpty {
-                let payload = NotificationPayloadResponse(dictionary: notification)
-                payload?.deeplinkSource = "notification"
-                
-                CommonMethods.fireEvent(withName: "notification_opened", parameters: [:])
-                CommonMethods.fireEvent(withName: String(format: "notification_opened_%d", payload?.notificationType ?? 0), parameters: [:])
-                
-                appICE.sharedInstance().updateInboxMessage(4, payload?.mId ?? "")
-                UIApplication.shared.applicationIconBadgeNumber = 0
-                self.fetchUnreadNotificationCount()
-                
-                let windows = UIApplication.shared.windows
-                var keyWindow: UIWindow? = nil
-                
-                for window in windows {
-                    if window.isKeyWindow {
-                        keyWindow = window
-                        break
-                    }
-                }
-                
-                DispatchQueue.main.async {
-                    let baseVC = keyWindow?.rootViewController
-                    baseVC?.dismiss()
-                }
-                
-                if let navController = UIApplication.getTopViewController() as? UINavigationController {
-                    NotificationRedirections.performNavigationBased(onType: payload, with: navController, appWasClosed: false, redirectedFrom: RedirectionType.notification)
-                } else {
-                    NotificationRedirections.performNavigationBased(onType: payload, with: UIApplication.getTopViewController()?.navigationController, appWasClosed: false, redirectedFrom: RedirectionType.notification)
-                }
-            }
-        } else if let notification = notification.object as? String, !notification.isEmpty {
-            if let msisdn = CommonMethods.loadCustomObject(withKey: SharedConstants.MSISDN_NUMBER) as? String, !msisdn.isEmpty {
-                
-                CommonMethods.removeCustomObject(withKey: "mocaLink")
-                
-                if let navController = UIApplication.getTopViewController() as? UINavigationController {
-                    HouseConfig.handleBannerDeepLinkRedirections(notification, with: navController, additionalInfo: nil)
-                } else {
-                    HouseConfig.handleBannerDeepLinkRedirections(notification, with: UIApplication.getTopViewController()?.navigationController, additionalInfo: nil)
-                }
-            }
-        }
+        
+        // MARK: -- Multiple access issues here like CommonMethods, NotificationPayloadResponse, appICE, NotificationRedirections, HouseConfig
+//        if let notification = notification.object as? [String: Any], !notification.isEmpty {
+//            CommonMethods.fireEvent(withName: SharedConstants.pushNotificationOpened, parameters: [:])
+//
+//            if let msisdn = AppCommonMethods.loadCustomObject(withKey: SharedConstants.MSISDN_NUMBER) as? String, !msisdn.isEmpty {
+//                let payload = NotificationPayloadResponse(dictionary: notification)
+//                payload?.deeplinkSource = "notification"
+//
+//                CommonMethods.fireEvent(withName: "notification_opened", parameters: [:])
+//                CommonMethods.fireEvent(withName: String(format: "notification_opened_%d", payload?.notificationType ?? 0), parameters: [:])
+//
+//                appICE.sharedInstance().updateInboxMessage(4, payload?.mId ?? "")
+//                UIApplication.shared.applicationIconBadgeNumber = 0
+//                self.fetchUnreadNotificationCount()
+//
+//                let windows = UIApplication.shared.windows
+//                var keyWindow: UIWindow? = nil
+//
+//                for window in windows {
+//                    if window.isKeyWindow {
+//                        keyWindow = window
+//                        break
+//                    }
+//                }
+//
+//                DispatchQueue.main.async {
+//                    let baseVC = keyWindow?.rootViewController
+//                    baseVC?.dismiss()
+//                }
+//
+//                if let navController = UIApplication.getTopViewController() as? UINavigationController {
+//                    NotificationRedirections.performNavigationBased(onType: payload, with: navController, appWasClosed: false, redirectedFrom: RedirectionType.notification)
+//                } else {
+//                    NotificationRedirections.performNavigationBased(onType: payload, with: UIApplication.getTopViewController()?.navigationController, appWasClosed: false, redirectedFrom: RedirectionType.notification)
+//                }
+//            }
+//        } else if let notification = notification.object as? String, !notification.isEmpty {
+//            if let msisdn = AppCommonMethods.loadCustomObject(withKey: SharedConstants.MSISDN_NUMBER) as? String, !msisdn.isEmpty {
+//
+//                AppCommonMethods.removeCustomObject(withKey: "mocaLink")
+//
+//                if let navController = UIApplication.getTopViewController() as? UINavigationController {
+//                    HouseConfig.handleBannerDeepLinkRedirections(notification, with: navController, additionalInfo: nil)
+//                } else {
+//                    HouseConfig.handleBannerDeepLinkRedirections(notification, with: UIApplication.getTopViewController()?.navigationController, additionalInfo: nil)
+//                }
+//            }
+//        }
     }
 }
 

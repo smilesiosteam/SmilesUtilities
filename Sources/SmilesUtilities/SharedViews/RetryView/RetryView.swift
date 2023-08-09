@@ -10,16 +10,16 @@ import Foundation
 import UIKit
 import AnalyticsSmiles
 
-protocol RetryViewDelegate {
+public protocol RetryViewDelegate {
     func retryButtonClicked(withErrorType: ErrorTypes)
     func dismissButtonClicked()
 }
 
-enum ErrorTypes {
+public enum ErrorTypes {
     case somethingWrong, paymentFailed, readySoon, noSignal, noSearchResults, customMsg, noFavouriteRestaurants, noFavouriteVouchers, lifestyleSubscriptionFailed
 }
 
-class RetryView: UIView {
+public class RetryView: UIView {
     @IBOutlet var detailLabel: UILabel!
     @IBOutlet var errorImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
@@ -37,7 +37,7 @@ class RetryView: UIView {
     //        set { retryButton.isHidden = newValue }
     //    }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         var newFrame: CGRect = frame
         newFrame.size.height -= frame.origin.y

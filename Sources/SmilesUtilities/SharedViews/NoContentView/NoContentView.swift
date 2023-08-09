@@ -15,7 +15,7 @@ protocol NoContentViewDelegate {
     func retryButtonAction()
 }
 
-class NoContentView: UIView, NibLoadable {
+public class NoContentView: UIView, NibLoadable {
     
     @IBOutlet weak var retryBtnParentView: UIView!
     @IBOutlet weak private var lbl_error : UILabel!

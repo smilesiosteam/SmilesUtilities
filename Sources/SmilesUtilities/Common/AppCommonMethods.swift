@@ -333,15 +333,13 @@ public class AppCommonMethods {
         }
     }
     
-    func isToBeFlipped(withView view: UIView) -> Bool {
+    static func isToBeFlipped(withView view: UIView) -> Bool {
         var tag = 0
         
         if let uiImageView = view as? UIImageView {
             tag = uiImageView.tag
         } else if let uiButton = view as? UIButton {
             tag = uiButton.tag
-        } else if let uiView = view as? UIView {
-            tag = uiView.tag
         } else if let uiTextView = view as? UITextView {
             tag = uiTextView.tag
         } else if let uiTextField = view as? UITextField {
@@ -350,6 +348,8 @@ public class AppCommonMethods {
             tag = uiLabel.tag
         } else if let uiSegmentedControl = view as? UISegmentedControl {
             tag = uiSegmentedControl.tag
+        } else {
+            tag = view.tag
         }
         
         return (tag != SharedConstants.nonFlippedViewTag)
@@ -357,7 +357,7 @@ public class AppCommonMethods {
     
     public static func adjustSubviewsLanguage(view: UIView, withoutFlipping toBeFlipped: Bool) {
         for subview in view.subviews {
-            let isToBeFlipped = self.isToBeFlipped(withView: subview)
+            let isToBeFlipped = AppCommonMethods.isToBeFlipped(withView: subview)
             
             if isToBeFlipped {
                 if toBeFlipped {
@@ -366,16 +366,12 @@ public class AppCommonMethods {
             }
             
             if let buttonView = subview as? UIButton {
-                if buttonView.accessibilityHint?.count > 0 {
+                if (buttonView.accessibilityHint?.count ?? 0) > 0 {
                     let newString = SmilesLanguageManager.shared.getLocalizedString(for: buttonView.accessibilityHint ?? "")
                     buttonView.setTitle(newString.removingPercentEncoding, for: .normal)
                 }
-            } else if let plainView = subview as? UIView, plainView.subviews.count > 0 {
-                if plainView.tag != SharedConstants.nonFlippedViewTag {
-                    self.adjustSubviewsLanguage(view: plainView, toBeFlipped: toBeFlipped)
-                }
             } else if let labelView = subview as? UILabel {
-                if labelView.accessibilityHint.count > 0 {
+                if (labelView.accessibilityHint?.count ?? 0) > 0 {
                     let newString = SmilesLanguageManager.shared.getLocalizedString(for: labelView.accessibilityHint ?? "")
                     labelView.text = newString.removingPercentEncoding
                 }
@@ -392,7 +388,7 @@ public class AppCommonMethods {
                     }
                 }
             } else if let textFieldView = subview as? UITextField {
-                if textFieldView.accessibilityHint.count > 0 {
+                if (textFieldView.accessibilityHint?.count ?? 0) > 0 {
                     let delayInMilliSeconds = 10
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delayInMilliSeconds)) {
                         let newString = SmilesLanguageManager.shared.getLocalizedString(for: textFieldView.accessibilityHint ?? "")
@@ -421,7 +417,34 @@ public class AppCommonMethods {
                         }
                     }
                 }
+            } else if subview.subviews.count > 0 {
+                if subview.tag != SharedConstants.nonFlippedViewTag {
+                    self.adjustSubviewsLanguage(view: subview, withoutFlipping: toBeFlipped)
+                }
             }
         }
+    }
+    
+    public static func loadCustomObject(withKey key: String) -> Any? {
+        let defaults = UserDefaults.standard
+        return defaults.object(forKey: key)
+    }
+    
+    public static func removeCustomObject(withKey key: String) {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: key)
+    }
+    
+    public static func getViewController(fromStoryboardName storyboardName: String, andIdentifier identifier: String) -> UIViewController? {
+        let storyboard = UIStoryboard(name: storyboardName, bundle: .main)
+        return storyboard.instantiateViewController(withIdentifier: identifier)
+    }
+    
+    public static func styleText(withSpacesLetter title: String, space: Double, font: UIFont, color: UIColor) -> NSMutableAttributedString {
+        
+        let attributedString = NSMutableAttributedString(string: title)
+        attributedString.setAttributes([.foregroundColor: color, .font: font, .kern: space], range: NSMakeRange(0, title.count))
+        
+        return attributedString
     }
 }

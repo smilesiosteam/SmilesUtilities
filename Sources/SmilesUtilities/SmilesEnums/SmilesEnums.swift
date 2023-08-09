@@ -133,3 +133,11 @@ public enum RestaurantFiltersType : Int {
 public enum FilterDictTags: String {
     case FiltersDict, FiltersForListingsDict
 }
+
+public enum ShareTypeSwift: Int {
+        case FACEBOOK_SHARE_TYPE = 85, TWITTER_SHARE_TYPE = 86, EMAIL_SHARE_TYPE = 100034, WHATAPP_SHARE_TYPE = 210, INTSAGRAM_SHARE_TYPE = 211, NO_SHARING = 0
+}
+
+public enum EventTypeSwift: Int {
+    case BADGE_EVENT = 1, SENDCOUPON_EVENT = 2, PUZZLE_SHARE_EVENT = 3, VIEW_LUCKY_DEAL_EVENT = 4, VIEW_SPEICAL_RAFFLE_EVENT = 5, PUZZLE_PIECE_SHARE_EVENT = 6, INVITE_FRIEND_EVENT = 7, OFFER_SHARING_EVENT = 8
+}

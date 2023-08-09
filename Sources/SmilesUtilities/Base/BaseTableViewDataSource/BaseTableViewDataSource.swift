@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import SmilesUtilities
 
-class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
+public class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     // MARK: - Var
     
     var tableViewItems: [BaseRowModel] = []
@@ -36,7 +35,7 @@ class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
     
     // MARK: - UITableViewDelegate
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableViewSectionItems.count > 0 {
             if let items = tableViewSectionItems[safe: indexPath.section], let item = items.rowItems[safe: indexPath.row] {
                 if let itemValue = item.rowValue {
@@ -52,7 +51,7 @@ class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if tableViewSectionItems.count > 0 {
             if let items = tableViewSectionItems[safe: indexPath.section], let item = items.rowItems[safe: indexPath.row] {
                 let itemValue = item.rowValue
@@ -66,25 +65,25 @@ class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         dataSourceDelegate?.scrollViewEndDragging(scrollView, willDecelerate: decelerate)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         dataSourceDelegate?.viewDidScroll(scrollView)
     }
     
     // MARK: - UITableViewDataSource
 
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView(frame: .zero)
     }
 
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return CGFloat.zero
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let view = tableViewSectionItems[section].sectionView {
             return view
         } else {
@@ -92,15 +91,15 @@ class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return tableViewSectionItems.count > 0 ? tableViewSectionItems.count : 1
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return tableViewSectionItems.count > 0 ? tableViewSectionItems[section].sectionHeight : CGFloat.zero
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableViewSectionItems.count > 0 {
             return tableViewSectionItems[section].rowItems.count
         } else {
@@ -108,7 +107,7 @@ class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableViewSectionItems.count > 0 {
             if let item = tableViewSectionItems[indexPath.section].rowItems[safe: indexPath.row] {
                 return item.rowHeight
@@ -121,7 +120,7 @@ class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var item = BaseRowModel()
         if tableViewSectionItems.count > 0 {
             if tableViewSectionItems[indexPath.section].rowItems.count > 0 {
@@ -148,11 +147,11 @@ class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         dataSourceDelegate?.tableView(tableView, willDisplay: cell, forRowAt: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if !tableViewSectionItems.isEmpty {
             if let items = tableViewSectionItems[safe: indexPath.section], !items.rowItems.isEmpty {
                 if let item = items.rowItems[safe: indexPath.row] {
@@ -171,7 +170,7 @@ class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         return dataSourceDelegate?.tableView(tableView, leadingSwipeActionsConfigurationForRowAt: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if !tableViewSectionItems.isEmpty {
             if let items = tableViewSectionItems[safe: indexPath.section], !items.rowItems.isEmpty {
                 if let item = items.rowItems[safe: indexPath.row] {
@@ -190,7 +189,7 @@ class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         return dataSourceDelegate?.tableView(tableView, trailingSwipeActionsConfigurationForRowAt: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         self.dataSourceDelegate?.tableView(tableView, didEndDisplaying: cell, forRowAt: indexPath)
     }
 }

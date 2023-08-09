@@ -82,6 +82,15 @@
       }
     },
     {
+      "identity" : "hpparallaxheader",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ngochiencse/HPParallaxHeader",
+      "state" : {
+        "revision" : "32a420427ac92169a022cb02a0efd62e5631512e",
+        "version" : "1.1.8"
+      }
+    },
+    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
@@ -187,6 +196,15 @@
       "state" : {
         "revision" : "f25867a208f459d3c5a06935dceb9083b11cd539",
         "version" : "1.22.0"
+      }
+    },
+    {
+      "identity" : "swifttheme",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wxxsw/SwiftTheme.git",
+      "state" : {
+        "revision" : "f6a5442da8527f88e5b61b42131c003bd2d56803",
+        "version" : "0.6.4"
       }
     }
   ],

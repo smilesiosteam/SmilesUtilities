@@ -23,7 +23,9 @@ let package = Package(
         .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.1.0"),
         .package(url: "https://github.com/smilesiosteam/SmilesFontsManager.git", branch: "main"),
         .package(url: "https://github.com/smilesiosteam/SmilesLoader.git", .upToNextMinor(from: "1.0.0")),
-        .package(url: "https://github.com/smilesiosteam/SmilesAnalytics.git", branch: "develop")
+        .package(url: "https://github.com/smilesiosteam/SmilesAnalytics.git", branch: "develop"),
+        .package(url: "https://github.com/wxxsw/SwiftTheme.git", .upToNextMajor(from: "0.6.4")),
+        .package(url: "https://github.com/ngochiencse/HPParallaxHeader", .upToNextMajor(from: "1.1.8"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -37,7 +39,9 @@ let package = Package(
                 .product(name: "SDWebImage", package: "SDWebImage"),
                 .product(name: "SmilesFontsManager", package: "SmilesFontsManager"),
                 .product(name: "SmilesLoader", package: "SmilesLoader"),
-                .product(name: "AnalyticsSmiles", package: "SmilesAnalytics")
+                .product(name: "AnalyticsSmiles", package: "SmilesAnalytics"),
+                .product(name: "SwiftTheme", package: "SwiftTheme"),
+                .product(name: "HPParallaxHeader", package: "HPParallaxHeader")
             ]),
     ]
 )
