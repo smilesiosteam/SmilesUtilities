@@ -147,8 +147,6 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
         UserDefaults.standard.set(Date(), forKey: "RefreshViewTime")
       }
     
-    
-    
     @objc func appMovingToForeground() {
         print("app did enter foreground")
         let currentDate = Date()
