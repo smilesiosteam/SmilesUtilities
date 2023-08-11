@@ -17,7 +17,7 @@ public class DimmedView: UIView {
      Represents the possible states of the dimmed view.
      max, off or a percentage of dimAlpha.
      */
-    enum DimState {
+    public enum DimState {
         case max
         case off
         case percent(CGFloat)
@@ -28,7 +28,7 @@ public class DimmedView: UIView {
     /**
      The state of the dimmed view
      */
-    var dimState: DimState = .off {
+    public var dimState: DimState = .off {
         didSet {
             switch dimState {
             case .max:
@@ -44,7 +44,7 @@ public class DimmedView: UIView {
     /**
      The closure to be executed when a tap occurs
      */
-    var didTap: ((_ recognizer: UIGestureRecognizer) -> Void)?
+    public var didTap: ((_ recognizer: UIGestureRecognizer) -> Void)?
 
     /**
      Tap gesture recognizer
@@ -55,7 +55,7 @@ public class DimmedView: UIView {
 
     // MARK: - Initializers
 
-    init(dimColor: UIColor = UIColor.black.withAlphaComponent(0.7)) {
+    public init(dimColor: UIColor = UIColor.black.withAlphaComponent(0.7)) {
         super.init(frame: .zero)
         alpha = 0.0
         backgroundColor = dimColor

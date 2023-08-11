@@ -12,7 +12,7 @@ import UIKit
  ⚠️ [Internal Only] ⚠️
  Helper extensions that handle layout in the PanModalPresentationController
  */
-extension PanModalPresentable where Self: UIViewController {
+public extension PanModalPresentable where Self: UIViewController {
 
     /**
      Cast the presentation controller to PanModalPresentationController

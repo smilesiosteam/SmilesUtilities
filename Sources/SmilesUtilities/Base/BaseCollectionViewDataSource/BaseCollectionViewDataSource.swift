@@ -17,7 +17,7 @@ open class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     // MARK: - Methods
     
-    init(dataSource: [BaseRowModel]?, delegate: BaseDataSourceDelegate?) {
+    public init(dataSource: [BaseRowModel]?, delegate: BaseDataSourceDelegate?) {
         if let object = dataSource {
             collectionViewItems = object
             dataSourceDelegate = delegate
@@ -25,7 +25,7 @@ open class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         super.init()
     }
     
-    init(dataSourceWithSection: [BaseSectionModel]?, delegate: BaseDataSourceDelegate) {
+    public init(dataSourceWithSection: [BaseSectionModel]?, delegate: BaseDataSourceDelegate) {
         if let object = dataSourceWithSection {
             collectionSectionItems = object
             dataSourceDelegate = delegate

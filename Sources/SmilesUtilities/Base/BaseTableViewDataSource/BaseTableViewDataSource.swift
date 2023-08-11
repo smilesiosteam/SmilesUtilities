@@ -11,13 +11,13 @@ import UIKit
 public class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     // MARK: - Var
     
-    var tableViewItems: [BaseRowModel] = []
-    var tableViewSectionItems: [BaseSectionModel] = []
-    var dataSourceDelegate: BaseDataSourceDelegate?
+    public var tableViewItems: [BaseRowModel] = []
+    public var tableViewSectionItems: [BaseSectionModel] = []
+    public var dataSourceDelegate: BaseDataSourceDelegate?
     
     // MARK: - Methods
     
-    init(dataSource: [BaseRowModel]?, delegate: BaseDataSourceDelegate?) {
+    public init(dataSource: [BaseRowModel]?, delegate: BaseDataSourceDelegate?) {
         if let object = dataSource {
             tableViewItems = object
             dataSourceDelegate = delegate
@@ -25,7 +25,7 @@ public class BaseTableViewDataSource: NSObject, UITableViewDataSource, UITableVi
         super.init()
     }
     
-    init(dataSourceWithSection: [BaseSectionModel]?, delegate: BaseDataSourceDelegate) {
+    public init(dataSourceWithSection: [BaseSectionModel]?, delegate: BaseDataSourceDelegate) {
         if let object = dataSourceWithSection {
             tableViewSectionItems = object
             dataSourceDelegate = delegate

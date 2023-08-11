@@ -8,4 +8,4 @@
 
 import Foundation
 
-protocol ViperInteractor: AnyObject {}
+public protocol ViperInteractor: AnyObject {}

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import AnalyticsSmiles
+//import AnalyticsSmiles
 
 public protocol RetryViewDelegate {
     func retryButtonClicked(withErrorType: ErrorTypes)
@@ -29,8 +29,8 @@ public class RetryView: UIView {
     @IBOutlet var dismissButton: UIButton!
     @IBOutlet var actionOnError: UIButton!
     
-    var retryDelegate: RetryViewDelegate?
-    var errorType: ErrorTypes = .somethingWrong
+    public var retryDelegate: RetryViewDelegate?
+    public var errorType: ErrorTypes = .somethingWrong
     
     //    var showRetryButton: Bool {
     //        get { return false }
@@ -86,8 +86,8 @@ public class RetryView: UIView {
         
         switch errorType {
         case .somethingWrong:
-            let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
-            analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.FD_Error_generic).name, parameters: [:]))
+//            let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
+//            analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.FD_Error_generic).name, parameters: [:]))
             
             titleLabel.text = "Something went wrong".localizedString
             if let msg = errorMsg, msg.count > 0 {
@@ -97,8 +97,8 @@ public class RetryView: UIView {
             }
             errorImageView.image = UIImage(named: "somethingWrong")
         case .readySoon:
-            let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
-            analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.FD_Error_ready_soon).name, parameters: [:]))
+//            let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
+//            analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.FD_Error_ready_soon).name, parameters: [:]))
             
             titleLabel.text = "We will be ready soon!".localizedString
             if let msg = errorMsg, msg.count > 0 {
@@ -109,8 +109,8 @@ public class RetryView: UIView {
             errorImageView.image = UIImage(named: "somethingWrong")
             
         case .paymentFailed:
-            let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
-            analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.FD_Error_payment_failed).name, parameters: [:]))
+//            let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
+//            analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.FD_Error_payment_failed).name, parameters: [:]))
             
             titleLabel.text = "paymentFailedTitle".localizedString
             if let msg = errorMsg, msg.count > 0 {
@@ -121,8 +121,8 @@ public class RetryView: UIView {
             errorImageView.image = UIImage(named: "paymentFailed")
             
         case .noSignal:
-            let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
-            analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.FD_Error_no_internet).name, parameters: [:]))
+//            let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
+//            analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.FD_Error_no_internet).name, parameters: [:]))
             
             titleLabel.text = "No signal".localizedString
             detailLabel.text = "NoInternetConnection".localizedString
@@ -198,13 +198,13 @@ public class RetryView: UIView {
         self.layoutIfNeeded()
     }
     
-    func showErrorWith(errorType: ErrorTypes = .somethingWrong, errorMsg: String? = nil, dontShowBackButton: Bool? = false) {
+    public func showErrorWith(errorType: ErrorTypes = .somethingWrong, errorMsg: String? = nil, dontShowBackButton: Bool? = false) {
         DispatchQueue.main.async {
             self.showErrorTextByType(errorType: errorType, errorMsg: errorMsg, dontShowBackButton: dontShowBackButton)
         }
     }
     
-    func showErrorWith(errorType: ErrorTypes = .somethingWrong, errorMsg: String? = nil, errorTitle: String? = nil, dontShowBackButton: Bool? = false) {
+    public func showErrorWith(errorType: ErrorTypes = .somethingWrong, errorMsg: String? = nil, errorTitle: String? = nil, dontShowBackButton: Bool? = false) {
         DispatchQueue.main.async {
             self.showErrorTextByType(errorType: errorType, errorMsg: errorMsg, errorTitle: errorTitle, dontShowBackButton: dontShowBackButton)
         }

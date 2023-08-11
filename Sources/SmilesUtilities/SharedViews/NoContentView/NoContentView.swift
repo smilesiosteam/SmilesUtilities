@@ -11,7 +11,7 @@
 import UIKit
 import SmilesLanguageManager
 
-protocol NoContentViewDelegate {
+public protocol NoContentViewDelegate {
     func retryButtonAction()
 }
 
@@ -83,7 +83,7 @@ public class NoContentView: UIView, NibLoadable {
         }
     }
     
-    func showError(errorText : String?, errorType : serviceErrorTypes){
+    public func showError(errorText : String?, errorType : serviceErrorTypes){
         if let text = errorText, !text.isEmpty{
             self.lbl_error.text = text
         }

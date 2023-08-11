@@ -12,13 +12,13 @@ import SmilesLanguageManager
 @IBDesignable
 public class BaseLabel: UILabel {
     
-    @IBInspectable var setUpperCase: Bool = false {
+    @IBInspectable public var setUpperCase: Bool = false {
         didSet {
             _setupLabel()
         }
     }
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         _setupLabel()
     }
@@ -73,13 +73,13 @@ public class BaseLabel: UILabel {
 @IBDesignable
 public class BaseTextField: UITextField {
     
-    @IBInspectable var setUpperCase: Bool = false {
+    @IBInspectable public var setUpperCase: Bool = false {
         didSet {
             _setupLabel()
         }
     }
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         _setupLabel()
     }

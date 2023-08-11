@@ -61,7 +61,7 @@ extension BaseDataSourceDelegate {
 
 }
 
-protocol UpdateLocationDataSourceDelegate {
+public protocol UpdateLocationDataSourceDelegate {
     func didSelectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath)
     func didDeselectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath)
     
@@ -75,18 +75,18 @@ protocol UpdateLocationDataSourceDelegate {
 }
 
 extension UpdateLocationDataSourceDelegate {
-    func didDeselectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath) {}
-    func viewDidScroll(_ scrollView: UIScrollView) {}
-    func scrollViewEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {}
+    public func didDeselectItemInRowModel(rowModel model: BaseRowModel, rowModelValue value: Any, atIndexPath indexPath: IndexPath) {}
+    public func viewDidScroll(_ scrollView: UIScrollView) {}
+    public func scrollViewEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {}
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         UISwipeActionsConfiguration(actions:
                   [])
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {}
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {}
 }

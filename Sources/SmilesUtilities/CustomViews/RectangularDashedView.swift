@@ -22,7 +22,7 @@ public class RectangularDashedView: UIView {
     @IBInspectable public var dashLength: CGFloat = 0
     @IBInspectable public var betweenDashesSpace: CGFloat = 0
     
-    var dashBorder: CAShapeLayer?
+    public var dashBorder: CAShapeLayer?
     
     public override func layoutSubviews() {
         super.layoutSubviews()

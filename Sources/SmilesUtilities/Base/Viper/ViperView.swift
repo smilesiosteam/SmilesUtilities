@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-protocol ViperView: Loadable {
+public protocol ViperView: Loadable {
 }
 
 extension ViperView where Self: BaseViewController {

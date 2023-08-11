@@ -15,7 +15,7 @@ open class BaseRouter {
     }
 }
 
-protocol ViperRouter {
+public protocol ViperRouter {
     func navigateToViewController(viewController: UIViewController)
     func presentViewControllerAsPanModel(viewController: UIViewController&PanModalPresentable)
     func popToViewController(viewController: AnyClass)
@@ -24,10 +24,11 @@ protocol ViperRouter {
 }
 
 extension ViperRouter {
-    func navigateToViewController(viewController: UIViewController) {}
-    func presentViewControllerAsPanModel(viewController: UIViewController&PanModalPresentable) {}
-    func popToViewController(viewController: AnyClass) {}
-    func presentViewController(vc: UIViewController) {}
+    public func navigateToViewController(viewController: UIViewController) {}
+    public func presentViewControllerAsPanModel(viewController: UIViewController&PanModalPresentable) {}
+    public func popToViewController(viewController: AnyClass) {}
+    public func presentViewController(vc: UIViewController) {}
+    public func presentGuestLogin(vc: UIViewController?) {}
     
 //    func presentGuestLogin(vc: UIViewController?) {
 //        if let controller = vc {

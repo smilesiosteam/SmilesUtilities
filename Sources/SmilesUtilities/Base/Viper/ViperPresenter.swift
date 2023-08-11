@@ -6,5 +6,5 @@
 //  Copyright © 2020 UsmanTarar. All rights reserved.
 //
 
-protocol ViperPresenter: AnyObject {}
+public protocol ViperPresenter: AnyObject {}
 

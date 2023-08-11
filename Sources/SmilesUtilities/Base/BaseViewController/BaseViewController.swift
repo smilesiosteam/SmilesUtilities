@@ -14,8 +14,8 @@ import HPParallaxHeader
 
 open class BaseViewController: UIViewController, BaseDataSourceDelegate {
     
-    @IBOutlet public weak var view_retry: RetryView!
-    @IBOutlet public weak var view_error: NoContentView!
+    @IBOutlet open weak var view_retry: RetryView!
+    @IBOutlet open weak var view_error: NoContentView!
     @IBOutlet open weak var topConstraint: NSLayoutConstraint!
     @IBOutlet open weak var view_holder: UIView!
     
@@ -72,7 +72,7 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
         .lightContent
     }
     
-    func styleViewUI(){
+    open func styleViewUI(){
         // override in child classes
         
     }
@@ -1123,17 +1123,17 @@ extension BaseViewController {
 
 // MARK: - Protocol Loadable
 
-protocol Loadable: AnyObject {
+public protocol Loadable: AnyObject {
     func showHud()
     func hideHud()
 }
 
 extension BaseViewController: Loadable {
-    func showHud() {
+    public func showHud() {
         SmilesLoader.show(with: "LoadingTitle".localizedString)
     }
     
-    func hideHud() {
+    public func hideHud() {
         SmilesLoader.dismiss()
     }
 }

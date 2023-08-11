@@ -13,6 +13,7 @@ open class SuperCollectionViewCell: UICollectionViewCell {
     open override func awakeFromNib() {
         super.awakeFromNib()
 
+        AppCommonMethods.applyLocalizedStringsToAllViews(self)
         setupStyles()
     }
     

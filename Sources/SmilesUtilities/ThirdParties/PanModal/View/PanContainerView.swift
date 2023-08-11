@@ -14,9 +14,9 @@ import UIKit
  This allows us to make modifications to the presented view without
  having to do those changes directly on the view
  */
-class PanContainerView: UIView {
+public class PanContainerView: UIView {
 
-    init(presentedView: UIView, frame: CGRect) {
+    public init(presentedView: UIView, frame: CGRect) {
         super.init(frame: frame)
         addSubview(presentedView)
     }
@@ -28,7 +28,7 @@ class PanContainerView: UIView {
 
 }
 
-extension UIView {
+public extension UIView {
 
     /**
      Convenience property for retrieving a PanContainerView instance
