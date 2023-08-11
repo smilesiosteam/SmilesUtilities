@@ -48,6 +48,9 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
     open var baseLocationButton: UIButton?
     open var showLocations = false
     
+    public weak var baseViewControllerDelegate: BaseViewControllerDelegate?
+    public var currentPresentedViewController: UIViewController?
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -258,6 +261,7 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
 extension BaseViewController {
     @objc open func setUpViewContent() {
 //        UIApplication.delegte().currentPresentedViewController = self
+        self.currentPresentedViewController = self
         
         if self.responds(to: #selector(getter: edgesForExtendedLayout)) {
             self.edgesForExtendedLayout = []
@@ -458,10 +462,11 @@ extension BaseViewController {
                 (self.viewHeader?.viewWithTag(SharedConstants.baseViewControllerTitleLabelTag) as? UILabel)?.text = title.capitalized
                 (self.viewHeader?.viewWithTag(SharedConstants.baseViewControllerTitleLabelTag) as? UILabel)?.textColor = isViewHeaderBackgroundWhite ? UIColor.appDarkGrayColor : UIColor.white
                 
-                // MARK: -- RestaurantDetailRevampViewController not accessible here
+                // Code will be called with protocol conformance in RestaurantDetailRevampViewController
 //                if UIApplication.topMostViewController()?.isKind(of: RestaurantDetailRevampViewController.self) ?? false {
 //                    (self.viewHeader?.viewWithTag(SharedConstants.baseViewControllerTitleLabelTag) as? UILabel)?.transform = CGAffineTransformMakeScale(-1, 1)
 //                }
+                self.baseViewControllerDelegate?.shouldTransformViewHeaderAsLabel()
             }
         }
     }
@@ -538,8 +543,8 @@ extension BaseViewController {
         
     }
     
+    // Method is overridden in child class
     @objc open func searchButtonTapAction(_ sender: UIButton) {
-        // MARK: -- GlobalSearchRouter not accessible here
 //        let globalSearchVC = GlobalSearchRouter.setupModule()
 //        globalSearchVC.hidesBottomBarWhenPushed = true
 //        self.navigationController?.pushViewController(viewController: globalSearchVC)
@@ -909,7 +914,7 @@ extension BaseViewController {
             
             self.backNavbarButton?.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
             
-            // MARK: -- RestaurantDetailRevampViewController not accessible here
+            // Code will be called with protocol conformance in RestaurantDetailRevampViewController
 //            if UIApplication.topMostViewController()?.isKind(of: RestaurantDetailRevampViewController.self) ?? false {
 //                if AppCommonMethods.languageIsArabic() {
 //                    self.backNavbarButton?.imageView?.transform = CGAffineTransformMakeScale(-1, 1)
@@ -917,6 +922,8 @@ extension BaseViewController {
 //                    self.backNavbarButton?.imageView?.transform = .identity
 //                }
 //            }
+            
+            self.baseViewControllerDelegate?.shouldTransformBackNavbarButton()
             
             if let backNavbarButton {
                 leftSideButtonsView.addSubview(backNavbarButton)
@@ -957,81 +964,6 @@ extension BaseViewController {
         }
         
         self.viewHeader?.addSubview(leftSideButtonsView)
-    }
-    
-    @objc open func registerEventWebService(with eventType: Int, shareType: Int, additionalInfo: [Any]?) {
-        let event = EventTypeSwift(rawValue: eventType)
-        let _ = ShareTypeSwift(rawValue: shareType)
-        
-        // MARK: -- Multiple access issues here like getUserProfileResponse, registerEventRequest, GamificationLogic etc and SmilesBaseMainRequestManager.shared.getConfigsAsDictionary() cannot be accessed due to cyclic dependency
-//        if getUserProfileResponse.sharedClient().onAppStartObjectResponse?.isGamificationEnabled == "true" {
-//            let registerEventRequest = registerEventRequest(dictionary: SmilesBaseMainRequestManager.shared.getConfigsAsDictionary())
-//            registerEventRequest?.eventType = Double(eventType)
-//            registerEventRequest?.additionalInfo = additionalInfo
-//
-//            GamificationLogic.registerEvents(with: registerEventRequest) { [weak self] statusResponse in
-//                if statusResponse?.status == 204 {
-//                    if event == .PUZZLE_PIECE_SHARE_EVENT {
-//                        if let sharingText = SharingDetails.sharedClient().sharingText, SharingDetails.sharedClient().shareFrom == Double(EventTypeSwift.PUZZLE_PIECE_SHARE_EVENT.rawValue) {
-//
-//                            self?.navigationController?.popViewController()
-//                            DispatchQueue.main.async {
-//                                self?.showShareResultPopup(bonus: sharingText)
-//                            }
-//                        }
-//                    }
-//                } else {
-//                    if event == .PUZZLE_PIECE_SHARE_EVENT {
-//                        if SharingDetails.sharedClient().shareFrom == Double(EventTypeSwift.PUZZLE_PIECE_SHARE_EVENT.rawValue) {
-//                            self?.navigationController?.popViewController()
-//
-//                            DispatchQueue.main.async {
-//                                self?.showShareResultPopup(bonus: nil)
-//                            }
-//                        }
-//                    }
-//                }
-//
-//                if event == .BADGE_EVENT || event == .PUZZLE_SHARE_EVENT || event == .VIEW_SPEICAL_RAFFLE_EVENT {
-//                    DispatchQueue.main.async {
-//                        self?.navigationController?.popViewController()
-//                    }
-//                }
-//            } failureBlock: { error, message in
-//                if (event == .BADGE_EVENT || event == .PUZZLE_SHARE_EVENT) || (event == .VIEW_SPEICAL_RAFFLE_EVENT || event == .PUZZLE_PIECE_SHARE_EVENT) {
-//                    DispatchQueue.main.async {
-//                        self.navigationController?.popViewController()
-//                    }
-//                }
-//            }
-//        }
-    }
-    
-    @objc open func showShareResultPopup(bonus: String?) {
-        
-        // MARK: -- GamificationShareResultViewController inaccessible here
-//        if let gamificationShareResultViewController = CommonMethods.getViewController(fromStoryboardName: "Gamification", andIdentifier: "GamificationShareResultViewController") as? GamificationShareResultViewController {
-//
-//            gamificationShareResultViewController.bonusPoint = bonus ?? nil
-//            gamificationShareResultViewController.modalPresentationStyle = .overCurrentContext
-//            UIApplication.baseViewController()?.tabBarController?.present(gamificationShareResultViewController, animated: true)
-//        }
-    }
-    
-    @objc open func deleteLocalNotification(objectId: String?, type: String) {
-        if type.lowercased().elementsEqual("offer") {
-//            CommonMethods.fireEvent(withName: SharedConstants.cancelledNotification, parameters: [:])
-        } else if type.lowercased().elementsEqual("recharge") {
-//            CommonMethods.fireEvent(withName: SharedConstants.cancelledNotificationRecharge, parameters: [:])
-        } else {
-//            CommonMethods.fireEvent(withName: SharedConstants.cancelledNotificationRecharge, parameters: [:])
-        }
-        
-//        UIApplication.delegte().notificationCenter = UNUserNotificationCenter.current()
-        
-        if let objectId = objectId {
-//            UIApplication.delegte().notificationCenter?.removePendingNotificationRequests(withIdentifiers: [objectId])
-        }
     }
     
     @objc open func configureViewContent() {
