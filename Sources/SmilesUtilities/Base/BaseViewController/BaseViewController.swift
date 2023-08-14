@@ -200,7 +200,6 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
 // MARK: - SuperViewController methods
 extension BaseViewController {
     @objc open func setUpViewContent() {
-//        UIApplication.delegte().currentPresentedViewController = self
         self.currentPresentedViewController = self
         
         if self.responds(to: #selector(getter: edgesForExtendedLayout)) {
@@ -389,7 +388,7 @@ extension BaseViewController {
         self.viewHeader?.removeGradientColor()
     }
     
-    @objc open func setHeader(withTitle title: String) {
+    @objc open func setHeader(withTitle title: String, isFromRestaurantDetail: Bool = false) {
         if !title.isEmpty {
             let isViewHeaderBackgroundWhite = viewHeader?.backgroundColor?.isEqual(UIColor.white) ?? false
             
@@ -402,10 +401,9 @@ extension BaseViewController {
                 (self.viewHeader?.viewWithTag(SharedConstants.baseViewControllerTitleLabelTag) as? UILabel)?.text = title.capitalized
                 (self.viewHeader?.viewWithTag(SharedConstants.baseViewControllerTitleLabelTag) as? UILabel)?.textColor = isViewHeaderBackgroundWhite ? UIColor.appDarkGrayColor : UIColor.white
                 
-                // Code will be called with protocol conformance in RestaurantDetailRevampViewController
-//                if UIApplication.topMostViewController()?.isKind(of: RestaurantDetailRevampViewController.self) ?? false {
-//                    (self.viewHeader?.viewWithTag(SharedConstants.baseViewControllerTitleLabelTag) as? UILabel)?.transform = CGAffineTransformMakeScale(-1, 1)
-//                }
+                if isFromRestaurantDetail {
+                    (self.viewHeader?.viewWithTag(SharedConstants.baseViewControllerTitleLabelTag) as? UILabel)?.transform = CGAffineTransformMakeScale(-1, 1)
+                }
                 self.baseViewControllerDelegate?.shouldTransformViewHeaderAsLabel()
             }
         }
@@ -507,11 +505,7 @@ extension BaseViewController {
         }
         
         self.updateButtons()
-        
-//        UIApplication.delegte().currentPresentedViewController = self
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveNotification), name: NSNotification.Name("didGetNotification"), object: nil)
-        
+        self.currentPresentedViewController = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.fetchUnreadNotificationCount), name: NSNotification.Name("NotificationCounter"), object: nil)
     }
     
@@ -853,16 +847,6 @@ extension BaseViewController {
             }
             
             self.backNavbarButton?.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-            
-            // Code will be called with protocol conformance in RestaurantDetailRevampViewController
-//            if UIApplication.topMostViewController()?.isKind(of: RestaurantDetailRevampViewController.self) ?? false {
-//                if AppCommonMethods.languageIsArabic() {
-//                    self.backNavbarButton?.imageView?.transform = CGAffineTransformMakeScale(-1, 1)
-//                } else {
-//                    self.backNavbarButton?.imageView?.transform = .identity
-//                }
-//            }
-            
             self.baseViewControllerDelegate?.shouldTransformBackNavbarButton()
             
             if let backNavbarButton {
@@ -940,57 +924,6 @@ extension BaseViewController {
         }
     }
     
-    @objc open func didReceiveNotification(notification: Notification) {
-        
-        // MARK: -- Multiple access issues here like CommonMethods, NotificationPayloadResponse, appICE, NotificationRedirections, HouseConfig
-//        if let notification = notification.object as? [String: Any], !notification.isEmpty {
-//            CommonMethods.fireEvent(withName: SharedConstants.pushNotificationOpened, parameters: [:])
-//
-//            if let msisdn = AppCommonMethods.loadCustomObject(withKey: SharedConstants.MSISDN_NUMBER) as? String, !msisdn.isEmpty {
-//                let payload = NotificationPayloadResponse(dictionary: notification)
-//                payload?.deeplinkSource = "notification"
-//
-//                CommonMethods.fireEvent(withName: "notification_opened", parameters: [:])
-//                CommonMethods.fireEvent(withName: String(format: "notification_opened_%d", payload?.notificationType ?? 0), parameters: [:])
-//
-//                appICE.sharedInstance().updateInboxMessage(4, payload?.mId ?? "")
-//                UIApplication.shared.applicationIconBadgeNumber = 0
-//                self.fetchUnreadNotificationCount()
-//
-//                let windows = UIApplication.shared.windows
-//                var keyWindow: UIWindow? = nil
-//
-//                for window in windows {
-//                    if window.isKeyWindow {
-//                        keyWindow = window
-//                        break
-//                    }
-//                }
-//
-//                DispatchQueue.main.async {
-//                    let baseVC = keyWindow?.rootViewController
-//                    baseVC?.dismiss()
-//                }
-//
-//                if let navController = UIApplication.getTopViewController() as? UINavigationController {
-//                    NotificationRedirections.performNavigationBased(onType: payload, with: navController, appWasClosed: false, redirectedFrom: RedirectionType.notification)
-//                } else {
-//                    NotificationRedirections.performNavigationBased(onType: payload, with: UIApplication.getTopViewController()?.navigationController, appWasClosed: false, redirectedFrom: RedirectionType.notification)
-//                }
-//            }
-//        } else if let notification = notification.object as? String, !notification.isEmpty {
-//            if let msisdn = AppCommonMethods.loadCustomObject(withKey: SharedConstants.MSISDN_NUMBER) as? String, !msisdn.isEmpty {
-//
-//                AppCommonMethods.removeCustomObject(withKey: "mocaLink")
-//
-//                if let navController = UIApplication.getTopViewController() as? UINavigationController {
-//                    HouseConfig.handleBannerDeepLinkRedirections(notification, with: navController, additionalInfo: nil)
-//                } else {
-//                    HouseConfig.handleBannerDeepLinkRedirections(notification, with: UIApplication.getTopViewController()?.navigationController, additionalInfo: nil)
-//                }
-//            }
-//        }
-    }
 }
 
 // MARK: - Protocol Loadable
