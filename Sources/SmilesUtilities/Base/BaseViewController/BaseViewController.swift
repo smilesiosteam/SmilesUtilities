@@ -80,11 +80,6 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
         
     }
     
-    open override func viewDidAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(appMovingToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(appMovingToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-    }
-    
     open override func viewDidDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: UIApplication.willEnterForegroundNotification.rawValue), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: UIApplication.didEnterBackgroundNotification.rawValue), object: nil)
@@ -144,61 +139,6 @@ open class BaseViewController: UIViewController, BaseDataSourceDelegate {
             view_holder?.frame = viewFrame ?? CGRect()
         }
     }
-    
-    @objc func appMovingToBackground() {
-        print("app did enter background")
-        UserDefaults.standard.set(Date(), forKey: "RefreshViewTime")
-      }
-    
-    @objc func appMovingToForeground() {
-        print("app did enter foreground")
-        let currentDate = Date()
-        let hours   = (Calendar.current.component(.hour, from: currentDate))
-        // 3. Show the time
-        print("\(hours)")
-        
-        if let oldTime = UserDefaults.standard.object(forKey: "RefreshViewTime") as? Date{
-            print(oldTime)
-            
-            let diffComponents = Calendar.current.dateComponents([.hour], from: oldTime, to: currentDate)
-            let hours = diffComponents.hour
-            UserDefaults.standard.removeObject(forKey: "RefreshViewTime")
-            
-            if let hours = hours, hours >= 3 {
-                if let parentnav = (self.navigationController?.presentingViewController as? UINavigationController), self.navigationController?.presentingViewController != nil {
-                    self.dismiss(animated: true, completion: {
-                        for controller in (parentnav.viewControllers) as Array {
-                            
-                            // MARK: -- DashboardRevampViewController.self is inaccessible in module
-//                            if controller.isKind(of: DashboardRevampViewController.self) {
-//                                parentnav.popToViewController(controller, animated: true)
-//                                break
-//                            }
-                        }
-                    })
-                }else{
-                    let viewController = self.topmostViewController()
-                    
-                        if viewController.isModal{
-                            dismiss(animated: false, completion: nil)
-                        }
-                        
-                    if let tabbar =  self.tabBarController?.selectedIndex , tabbar != 0{
-                            self.tabBarController?.selectedIndex = 0
-                        }
-                        
-                        if (self.isPanModalPresented){
-                            self.dismiss(animated: false, completion:nil)
-                        }
-                        self.navigationController?.popToRootViewController()
-                    
-                    self.refreshViewWithData()
-                }
-            }
-        }
-      }
-    
-    
     
     // MARK: - data Source
     
@@ -1072,7 +1012,7 @@ extension BaseViewController: Loadable {
 
 
 
-extension UIViewController {
+public extension UIViewController {
     var isModal: Bool {
         if let index = navigationController?.viewControllers.firstIndex(of: self), index > 0 {
             return false
