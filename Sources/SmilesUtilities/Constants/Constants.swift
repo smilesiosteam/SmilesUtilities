@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class SharedConstants: NSObject {
+@objc public class SharedConstants: NSObject {
     static let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
     // MARK: - Screen Aspect Ratio
     public static let ASPECT_RATIO_RESPECT = ScreenSize.BASE_SCREEN_HEIGHT / ScreenSize.maxWH
@@ -43,7 +43,9 @@ public class SharedConstants: NSObject {
         public static let regular = "Montserrat-Regular"
         public static let bold = "Montserrat-Bold"
         public static let semiBold = "Montserrat-Semibold"
-    }   
+    }
+    
+    @objc public static var personalizationEventSource = "app"
 }
 
 public enum UserDefaultKeys {
