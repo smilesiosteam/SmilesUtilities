@@ -45,7 +45,7 @@ import UIKit
         public static let semiBold = "Montserrat-Semibold"
     }
     
-    @objc public static var personalizationEventSource = "app"
+    @objc public static var personalizationEventSource: String?
 }
 
 public enum UserDefaultKeys {
