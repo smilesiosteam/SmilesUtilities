@@ -169,8 +169,8 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
 
 public class WhatYouGet: Codable {
     
-    public let text: String
-    public let iconURL: String
+    public let text: String?
+    public let iconURL: String?
 
     enum CodingKeys: String, CodingKey {
         case text
