@@ -72,7 +72,7 @@ public class FiltersCollectionViewCellRevamp: UICollectionViewCell {
         
         if isSelected {
             self.layer.borderColor = UIColor.appRevampBorderGrayColor.cgColor
-            self.roundCornerView.backgroundColor = UIColor.appRevampEnableStateColor
+            self.roundCornerView.backgroundColor = UIColor.appRevampWhiteBackgroundColor
             self.rightImageView.image = self.rightImageView.image?.withRenderingMode(.alwaysTemplate)
             self.rightImageView.tintColor = UIColor.appRevampFilterTextColor
             self.titleLabel.textColor = .appRevampFilterTextColor

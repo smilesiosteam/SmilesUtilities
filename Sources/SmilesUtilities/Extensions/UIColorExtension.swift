@@ -276,6 +276,8 @@ public extension UIColor {
     
     static var appRevampImageBackgroundColor: UIColor { return UIColor(red: 175.0 / 255.0, green: 175.0 / 255.0, blue: 175.0 / 255.0, alpha: 1.0) }
 
+    static var appRevampWhiteBackgroundColor: UIColor { return UIColor(red: 255.0 / 255.0, green: 255.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0) }
+    
     @objc class func navigationGradientColorArray() -> [UIColor] {
         return [UIColor.navGradientStart, UIColor.navGradientEnd]
     }
