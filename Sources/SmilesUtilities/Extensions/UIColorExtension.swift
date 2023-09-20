@@ -279,7 +279,7 @@ public extension UIColor {
     static var appRevampWhiteBackgroundColor: UIColor { return UIColor(red: 255.0 / 255.0, green: 255.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0) }
     
     @objc class func navigationGradientColorArray() -> [UIColor] {
-        return [UIColor.appRevampPurpleMainColor]
+        return [UIColor.appRevampPurpleMainColor, UIColor.appRevampPurpleMainColor]
     }
     
     @objc class func ramadanGradientColorArray() -> [UIColor] {
