@@ -8,6 +8,11 @@
 import Foundation
 
 public class BOGODetailsResponseLifestyleOffer: Codable {
+    public let catalogImageUrl: String?
+    public let whatYouMissTitle: String?
+    public let priceBeforeDiscount: Int?
+    public let disclaimerText: String?
+    public let whatYouMissTextList: [String?]
     public let autoRenewable: Bool?
     public let duration: Int?
     public let expiry: String?
@@ -54,6 +59,13 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
     public let benefits: [WhatYouGet]?
 
     enum CodingKeys: String, CodingKey {
+        
+        case catalogImageUrl
+        case whatYouMissTitle
+        case whatYouMissTextList
+        case disclaimerText
+        case priceBeforeDiscount
+        
         case autoRenewable
         case duration
         case expiry
@@ -102,6 +114,14 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
 
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        catalogImageUrl = try values.decodeIfPresent(String.self, forKey: .catalogImageUrl)
+        whatYouMissTitle = try values.decodeIfPresent(String.self, forKey: .whatYouMissTitle)
+        whatYouMissTextList = try values.decodeIfPresent([String?].self, forKey: .whatYouMissTextList) ?? []
+        disclaimerText = try values.decodeIfPresent(String.self, forKey: .disclaimerText)
+        priceBeforeDiscount = try values.decodeIfPresent(Int.self, forKey: .priceBeforeDiscount)
+        
+        
         autoRenewable = try values.decodeIfPresent(Bool.self, forKey: .autoRenewable)
         duration = try values.decodeIfPresent(Int.self, forKey: .duration)
         expiry = try values.decodeIfPresent(String.self, forKey: .expiry)
