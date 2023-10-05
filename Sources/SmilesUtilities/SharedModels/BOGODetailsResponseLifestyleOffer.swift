@@ -8,7 +8,6 @@
 import Foundation
 
 public class BOGODetailsResponseLifestyleOffer: Codable {
-    public let discountedPrice: Double?
     public let catalogImageUrl: String?
     public let whatYouMissTitle: String?
     public let priceBeforeDiscount: Int?
@@ -66,7 +65,7 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
         case whatYouMissTextList
         case disclaimerText
         case priceBeforeDiscount
-        case discountedPrice
+        
         case autoRenewable
         case duration
         case expiry
@@ -116,7 +115,6 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
-        discountedPrice = try values.decodeIfPresent(Double.self, forKey: .discountedPrice)
         catalogImageUrl = try values.decodeIfPresent(String.self, forKey: .catalogImageUrl)
         whatYouMissTitle = try values.decodeIfPresent(String.self, forKey: .whatYouMissTitle)
         whatYouMissTextList = try values.decodeIfPresent([String?].self, forKey: .whatYouMissTextList) ?? []
