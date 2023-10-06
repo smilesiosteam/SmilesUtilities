@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import SmilesLanguageManager
+import SmilesFontsManager
 
 public class AppCommonMethods {
     
@@ -79,6 +80,14 @@ public class AppCommonMethods {
     public static func getAutoWidthWith(_ title: String, font: UIFont, additionalWidth: CGFloat = 0.0) -> CGFloat {
         let label = UILabel(frame: CGRect.zero)
         label.font = font
+        label.text = title
+        label.sizeToFit()
+        return label.frame.width + additionalWidth
+    }
+    
+    public static func getAutoWidthWith(_ title: String, fontTextStyle: UIFont.TextStyle, additionalWidth: CGFloat = 0.0) -> CGFloat {
+        let label = UILabel(frame: CGRect.zero)
+        label.fontTextStyle = fontTextStyle
         label.text = title
         label.sizeToFit()
         return label.frame.width + additionalWidth
