@@ -14,6 +14,7 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
     public let whatYouMissTitle: String?
     public let priceBeforeDiscount: Int?
     public let disclaimerText: String?
+    public let subscriptionIcon: String?
     public let whatYouMissTextList: [String?]
     public let autoRenewable: Bool?
     public let duration: Int?
@@ -67,6 +68,7 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
         case whatYouMissTitle
         case whatYouMissTextList
         case disclaimerText
+        case subscriptionIcon
         case priceBeforeDiscount
         
         case autoRenewable
@@ -123,6 +125,7 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
         whatYouMissTitle = try values.decodeIfPresent(String.self, forKey: .whatYouMissTitle)
         whatYouMissTextList = try values.decodeIfPresent([String?].self, forKey: .whatYouMissTextList) ?? []
         disclaimerText = try values.decodeIfPresent(String.self, forKey: .disclaimerText)
+        subscriptionIcon = try values.decodeIfPresent(String.self, forKey: .subscriptionIcon)
         priceBeforeDiscount = try values.decodeIfPresent(Int.self, forKey: .priceBeforeDiscount)
         
         
