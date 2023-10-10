@@ -41,7 +41,8 @@ public class FiltersCollectionViewCellRevamp: UICollectionViewCell {
     
     @IBOutlet public weak var filterCountLbl: UILabel! {
         didSet {
-            filterCountLbl.fontTextStyle = .smilesBody4
+            filterCountLbl.fontTextStyle = .smilesTitle3
+            filterCountLbl.textColor = .white
         }
     }
     
@@ -59,10 +60,10 @@ public class FiltersCollectionViewCellRevamp: UICollectionViewCell {
     func setupUI() {
         RoundedViewConrner(cornerRadius: 8)
         layer.borderWidth = 1.0
-        layer.borderColor = UIColor.appRevampLayerBorderColor.cgColor
+        layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
         
-        titleLabel.fontTextStyle = .smilesBody3
-        titleLabel.textColor = .appRevampFilterTextColor
+        titleLabel.fontTextStyle = .smilesTitle1
+        titleLabel.textColor = .black
     }
     
     public func updateCell(model: FiltersCollectionViewCellRevampModel) {
@@ -71,19 +72,19 @@ public class FiltersCollectionViewCellRevamp: UICollectionViewCell {
         self.isSelected = model.isFilterSelected
         
         if isSelected {
-            self.layer.borderColor = UIColor.appRevampBorderGrayColor.cgColor
-            self.roundCornerView.backgroundColor = UIColor.appRevampEnableStateColor
+            self.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
+            self.roundCornerView.backgroundColor = UIColor.appRevampWhiteBackgroundColor
             self.rightImageView.image = self.rightImageView.image?.withRenderingMode(.alwaysTemplate)
             self.rightImageView.tintColor = UIColor.appRevampFilterTextColor
-            self.titleLabel.textColor = .appRevampFilterTextColor
+            self.titleLabel.textColor = .black
             self.filterCountLbl.backgroundColor = UIColor.appRevampFilterCountBGColor
             self.filterCountLbl.textColor = UIColor.white
         } else {
-            self.layer.borderColor = UIColor.appRevampLayerBorderColor.cgColor
-            self.backgroundColor = UIColor.appRevampEnableStateColor
-            self.roundCornerView.backgroundColor = UIColor.appRevampEnableStateColor
+            self.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
+//            self.backgroundColor = .appRevampFilterCountBGColor.withAlphaComponent(0.2)
+            self.roundCornerView.backgroundColor = .appRevampFilterCountBGColor.withAlphaComponent(0.2)
             self.rightImageView.image = self.rightImageView.image?.imageWithColor(color1: .appRevampFilterTextColor)
-            self.titleLabel.textColor = .appRevampFilterTextColor
+            self.titleLabel.textColor = .black
             self.filterCountLbl.backgroundColor = UIColor.appRevampFilterCountBGColor
             self.filterCountLbl.textColor = UIColor.white
         }

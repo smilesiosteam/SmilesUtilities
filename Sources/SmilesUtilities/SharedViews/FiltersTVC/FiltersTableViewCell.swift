@@ -17,14 +17,14 @@ public class FiltersTableViewCell: UITableViewCell {
     @IBOutlet public weak var collectionView: UICollectionView!
     @IBOutlet public weak var title: UILabel! {
         didSet {
-            title.textColor = .appRevampFilterTextColor
+            title.textColor = .black
             title.fontTextStyle = .smilesHeadline2
         }
     }
     
     @IBOutlet public weak var subTitle: UILabel! {
         didSet {
-            subTitle.textColor = .appRevampSubtitleColor
+            subTitle.textColor = .black.withAlphaComponent(0.8)
             subTitle.fontTextStyle = .smilesBody3
         }
     }
@@ -98,8 +98,8 @@ extension FiltersTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
 extension FiltersTableViewCell: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if let data = filtersData?[indexPath.row], let rowWidth = data.rowWidth {
-            return CGSize(width: rowWidth, height: 32.0)
+            return CGSize(width: rowWidth, height: 40.0)
         }
-        return CGSize(width: 110.0, height: 32.0)
+        return CGSize(width: 110.0, height: 40.0)
     }
 }

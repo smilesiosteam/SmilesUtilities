@@ -26,7 +26,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JeR-4w-fBb">
-                        <rect key="frame" x="0.0" y="23" width="320" height="102"/>
+                        <rect key="frame" x="0.0" y="15" width="320" height="110"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="HhV-6Q-kv7">
                                 <rect key="frame" x="16" y="0.0" width="288" height="46"/>
@@ -46,7 +46,7 @@
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="OPl-o2-Rgd">
-                                <rect key="frame" x="16" y="62" width="304" height="40"/>
+                                <rect key="frame" x="16" y="70" width="304" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Bdd-f0-pBw"/>
@@ -64,7 +64,7 @@
                             <constraint firstItem="HhV-6Q-kv7" firstAttribute="leading" secondItem="JeR-4w-fBb" secondAttribute="leading" constant="16" id="Bd9-n5-nFi"/>
                             <constraint firstItem="HhV-6Q-kv7" firstAttribute="top" secondItem="JeR-4w-fBb" secondAttribute="top" id="V54-Qj-TRx"/>
                             <constraint firstItem="OPl-o2-Rgd" firstAttribute="leading" secondItem="JeR-4w-fBb" secondAttribute="leading" constant="16" id="XKq-oh-ZZT"/>
-                            <constraint firstItem="OPl-o2-Rgd" firstAttribute="top" secondItem="HhV-6Q-kv7" secondAttribute="bottom" constant="16" id="cs7-Cj-ANg"/>
+                            <constraint firstItem="OPl-o2-Rgd" firstAttribute="top" secondItem="HhV-6Q-kv7" secondAttribute="bottom" constant="24" id="cs7-Cj-ANg"/>
                             <constraint firstAttribute="trailing" secondItem="OPl-o2-Rgd" secondAttribute="trailing" id="iUb-mJ-5Bk"/>
                             <constraint firstAttribute="trailing" secondItem="HhV-6Q-kv7" secondAttribute="trailing" constant="16" id="zRh-EN-6BR"/>
                         </constraints>

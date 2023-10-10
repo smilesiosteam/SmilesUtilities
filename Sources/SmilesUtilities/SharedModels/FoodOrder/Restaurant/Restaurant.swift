@@ -108,6 +108,7 @@ public class Restaurant: Codable {
     public var recommendationModelEvent: String?
     public var userComments:String?
     public var cookingInstruction:String?
+    public var sourceClick: String?
     public var restaurantFeatures: NSAttributedString {
         return Restaurant.makeRestaurantFeaturesText(liveTracking: self.liveTracking, restaurantOrderType: self.restaurantOrderType, minimumOrder: self.minimumOrder, deliveryCharges: self.deliveryCharges, isSubscriber: self.isFoodSubscription)
     }
@@ -324,6 +325,7 @@ public class Restaurant: Codable {
         case recommendationModelEvent
         case userComments
         case cookingInstruction
+        case sourceClick
     }
     
     
@@ -413,6 +415,7 @@ public class Restaurant: Codable {
             recommendationModelEvent = try values.decodeIfPresent(String.self, forKey: .recommendationModelEvent)
             userComments = try values.decodeIfPresent(String.self, forKey: .userComments)
             cookingInstruction = try values.decodeIfPresent(String.self, forKey: .cookingInstruction)
+            sourceClick = try values.decodeIfPresent(String.self, forKey: .sourceClick)
         }
         catch {
             print(error)
