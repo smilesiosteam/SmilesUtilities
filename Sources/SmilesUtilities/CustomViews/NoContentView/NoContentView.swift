@@ -46,7 +46,7 @@ public class NoContentView: UIView, NibLoadable {
         }
     }
     
-    func showError(errorText: String?, errorType: ServiceErrorTypes){
+    public func showError(errorText: String?, errorType: ServiceErrorTypes){
         if let text = errorText, !text.isEmpty{
             self.lbl_error.text = text
         }
