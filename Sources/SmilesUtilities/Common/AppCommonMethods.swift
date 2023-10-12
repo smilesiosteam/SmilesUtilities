@@ -187,6 +187,29 @@ public class AppCommonMethods {
         dateFormatter.calendar = gregianCalendar
         return dateFormatter.string(from: date)
     }
+    
+    
+    func convertToDate(dateString: String, format: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US")
+        
+        // Uncomment the following lines if you need to set a specific locale (e.g., Arabic)
+        // if LanguageManager.shared.currentLanguage == .arabic {
+        //     dateFormatter.locale = Locale(identifier: "ar_SA")
+        // }
+        
+        let timeZone = TimeZone.current
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateFormat = format
+        
+        if let dateFromString = dateFormatter.date(from: dateString) {
+            return dateFromString
+        }
+        
+        return nil
+    }
+    
+
     public static func getWithAEDValuePrefix(string: String) -> String {
         let doubleValue = string.toDouble().asDoubleOrEmpty()
         return "\(String(format: "%.2f", doubleValue)) \("AED".localizedString)"
