@@ -189,7 +189,7 @@ public class AppCommonMethods {
     }
     
     
-    func convertToDate(dateString: String, format: String) -> Date? {
+   public static func convertToDate(dateString: String, format: String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         
