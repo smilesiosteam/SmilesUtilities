@@ -28,6 +28,7 @@ public class NoContentView: UIView, NibLoadable {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupFromNib()
+        img_error.image = UIImage(named: NoContentKeys.errorImageString.text)
     }
     
     private func showErrorTextByType(errorType: ServiceErrorTypes){
