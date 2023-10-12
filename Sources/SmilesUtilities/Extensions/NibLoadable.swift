@@ -17,13 +17,13 @@ public extension NibLoadable where Self: UIView {
         return String(describing: Self.self) // defaults to the name of the class implementing this protocol.
     }
 
-    static var nib: UINib {
-        let bundle = Bundle(for: Self.self)
+    static var nibModule: UINib {
+        let bundle =  Bundle.module
         return UINib(nibName: Self.nibName, bundle: bundle)
     }
 
     func setupFromNib() {
-        guard let view = Self.nib.instantiate(withOwner: self, options: nil).first as? UIView else { fatalError("Error loading \(self) from nib") }
+        guard let view = Self.nibModule.instantiate(withOwner: self, options: nil).first as? UIView else { fatalError("Error loading \(self) from nib") }
         addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
