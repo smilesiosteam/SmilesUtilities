@@ -13,10 +13,3 @@ public enum OSMResponseType: String {
     case xml = "xml"
 }
 
-public enum RestaurantFiltersType : Int {
-    case filters = 1, deliveryTime = 2
-}
-
-public enum FilterDictTags: String {
-    case FiltersDict, FiltersForListingsDict
-}
