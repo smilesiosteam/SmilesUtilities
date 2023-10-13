@@ -12,7 +12,6 @@ public protocol NibLoadable {
 }
 
 public extension NibLoadable where Self: UIView {
-
     static var nibName: String {
         return String(describing: Self.self) // defaults to the name of the class implementing this protocol.
     }
