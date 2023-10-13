@@ -13,6 +13,7 @@ public protocol NoContentViewDelegate {
 }
 
 public class NoContentView: UIView, NibLoadable {
+    
     // MARK: - Outlets
     @IBOutlet private weak var retryBtnParentView: UIView!
     @IBOutlet private weak var lbl_error: UILabel!

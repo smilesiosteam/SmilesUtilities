@@ -16,6 +16,7 @@ enum NoContentKeys {
     case errorImageString
     
     var text: String {
+        
         switch self {
         case .noContent:
             return "NoContent"
