@@ -343,4 +343,38 @@ public class AppCommonMethods {
         }
     }
     
+    public static func getStringBetweenTags(_ HTMLString: String, startTag: String, endTag: String) -> String? {
+        guard let rangeStart = HTMLString.range(of: startTag) else {
+            return nil
+        }
+        
+        guard let rangeEnd = HTMLString.range(of: endTag, options: .literal, range: rangeStart.upperBound..<HTMLString.endIndex) else {
+            return nil
+        }
+        
+        let contentRange = rangeStart.upperBound..<rangeEnd.lowerBound
+        return String(HTMLString[contentRange])
+    }
+    
+    public static func removeCustomObject(withKey key: String) {
+        UserDefaults.standard.removeObject(forKey: key)
+        UserDefaults.standard.synchronize()
+    }
+    
+    public static func getViewController(fromStoryboardName storyboardName: String, withIdentifier identifier: String) -> UIViewController? {
+        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: identifier)
+    }
+    
+    public static func serializeDictionaryObject(_ modelDictionary: [String: Any]) -> Data? {
+        do {
+            // Serialize the dictionary
+            let json = try JSONSerialization.data(withJSONObject: modelDictionary, options: .prettyPrinted)
+            return json
+        } catch {
+            print("Error serializing dictionary to JSON: \(error)")
+            return nil
+        }
+    }
+
 }
