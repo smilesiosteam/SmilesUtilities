@@ -8,5 +8,5 @@
 import Foundation
 
 public enum ServiceErrorTypes: Int {
-    case noContent = 0, errorContent = 1, noRaffles = 2, noNotification = 3
+    case noContent = 0, errorContent = 1,  noRaffles = 2, noNotification = 3
 }

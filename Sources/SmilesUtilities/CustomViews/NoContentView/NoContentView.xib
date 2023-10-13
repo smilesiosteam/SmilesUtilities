@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,7 +38,7 @@
                             <rect key="frame" x="0.0" y="-40" width="428" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lx-qQ-iCS" customClass="CustomThemButton" customModule="Smiles" customModuleProvider="target">
-                                    <rect key="frame" x="174" y="3.6666666666666288" width="80" height="33"/>
+                                    <rect key="frame" x="174" y="4.6666666666666288" width="80" height="31"/>
                                     <color key="backgroundColor" red="0.5725490196078431" green="0.45882352941176469" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="JLT-Wz-uTV"/>
@@ -65,7 +65,7 @@
                             <color key="textColor" red="0.14117647058823529" green="0.14117647058823529" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Empty" translatesAutoresizingMaskIntoConstraints="NO" id="dOp-M6-TUU">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Empt" translatesAutoresizingMaskIntoConstraints="NO" id="dOp-M6-TUU">
                             <rect key="frame" x="0.0" y="20" width="428" height="247"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="247" id="PXb-aR-Izp"/>
@@ -85,13 +85,8 @@
             <point key="canvasLocation" x="60" y="97.601199400299862"/>
         </view>
     </objects>
-    <designables>
-        <designable name="0lx-qQ-iCS">
-            <size key="intrinsicContentSize" width="48" height="33"/>
-        </designable>
-    </designables>
     <resources>
-        <image name="Empty" width="375" height="247"/>
+        <image name="Empt" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
