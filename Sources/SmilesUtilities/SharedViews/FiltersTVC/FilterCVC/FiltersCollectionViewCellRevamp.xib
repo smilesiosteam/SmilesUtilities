@@ -34,16 +34,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKO-gh-fW3">
-                                        <rect key="frame" x="0.0" y="5.9999999999999982" width="130" height="20.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="5.9999999999999982" width="126" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="36l-St-kQ8">
-                                        <rect key="frame" x="134" y="10" width="12" height="12"/>
+                                        <rect key="frame" x="130" y="8" width="16" height="16"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="JsD-gP-vPe"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="12" id="fIz-G6-ghO"/>
+                                            <constraint firstAttribute="height" constant="16" id="JsD-gP-vPe"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="16" id="fIz-G6-ghO"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
