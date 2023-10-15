@@ -295,6 +295,10 @@ public extension UIColor {
     @objc static var appRedColor3: UIColor { return UIColor(red: 204.0 / 255.0, green: 25.0 / 255.0, blue: 0 / 255.0, alpha: 1.0) }
     
     @objc static var fullGreyColor: UIColor { return UIColor(red: 233.0 / 255.0, green: 233.0 / 255.0, blue: 233 / 255.0, alpha: 1.0) }
+    
+    static var appRevampFoodDisableTextGrayColor: UIColor { return UIColor(red: 102.0 / 255.0, green: 102.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0) }
+    
+    static var appRevampFoodDisableIconGrayColor: UIColor { return UIColor(red: 88.0 / 255.0, green: 88.0 / 255.0, blue: 93.0 / 255.0, alpha: 1.0) }
 }
 
 public extension UIColor {
