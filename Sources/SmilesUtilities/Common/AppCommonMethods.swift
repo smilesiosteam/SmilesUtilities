@@ -377,4 +377,23 @@ public class AppCommonMethods {
         }
     }
 
+    public static func getParameterFromUrl(url: String?, isLastParameter: Bool, index: Int) -> String? {
+        var targetString: String?
+        
+        if let url {
+            let splittedArray = url.components(separatedBy: "/")
+            
+            if isLastParameter {
+                targetString = splittedArray.last
+            } else {
+                if index < splittedArray.count {
+                    targetString = splittedArray[index]
+                } else {
+                    return ""
+                }
+            }
+        }
+        
+        return targetString ?? ""
+    }
 }
