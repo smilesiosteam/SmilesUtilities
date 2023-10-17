@@ -10,15 +10,15 @@ import Combine
 import UIKit
 
 extension UIControl {
-    struct EventPublisher: Publisher {
+   public struct EventPublisher: Publisher {
         
-        typealias Output = Void
-        typealias Failure = Never
+       public typealias Output = Void
+       public typealias Failure = Never
         
         fileprivate var control: UIControl
         fileprivate var event: Event
         
-        func receive<S>(subscriber: S) where S : Subscriber, Never == S.Failure, Void == S.Input {
+       public func receive<S>(subscriber: S) where S : Subscriber, Never == S.Failure, Void == S.Input {
             let subscription = EventSubscription<S>(subscriber: subscriber)
             subscriber.receive(subscription: subscription)
             control.addTarget(subscription, action: #selector(subscription.trigger), for: event)

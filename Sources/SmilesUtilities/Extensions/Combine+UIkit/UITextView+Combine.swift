@@ -48,7 +48,7 @@ fileprivate class EventSubscription<S: Subscriber>: NSObject, UITextViewDelegate
 }
 
 extension UITextView {
-    var textPublisher: AnyPublisher<String, Never> {
+   public var textPublisher: AnyPublisher<String, Never> {
         Publishers
             .EventTextViewPublisher(textView: self)
             .eraseToAnyPublisher()

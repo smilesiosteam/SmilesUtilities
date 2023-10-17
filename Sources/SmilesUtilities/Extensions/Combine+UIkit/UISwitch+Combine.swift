@@ -10,7 +10,7 @@ import Combine
 import UIKit
 
 extension UISwitch {
-    var switchPublisher: AnyPublisher<Bool, Never> {
+   public var switchPublisher: AnyPublisher<Bool, Never> {
         publisher(for: .valueChanged)
             .map { self.isOn }
             .eraseToAnyPublisher()
