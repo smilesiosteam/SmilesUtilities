@@ -16,4 +16,9 @@ public struct TableSectionData<T: SectionIdentifierProtocol> {
     public let index: Int
     public let identifier: T
     
+    public init(index: Int, identifier: T) {
+        self.index = index
+        self.identifier = identifier
+    }
+    
 }
