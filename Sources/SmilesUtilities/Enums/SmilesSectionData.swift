@@ -11,7 +11,7 @@ public protocol SectionIdentifierProtocol {
     var identifier: String { get }
 }
 
-public struct SmilesSectionData<T: SectionIdentifierProtocol> {
+public struct TableSectionData<T: SectionIdentifierProtocol> {
     
     public let index: Int
     public let identifier: T
