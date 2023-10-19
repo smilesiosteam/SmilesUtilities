@@ -348,3 +348,16 @@ public extension UILabel {
         }
     }
 }
+
+
+extension UILabel {
+    public func setLineHeight(lineHeight: CGFloat) {
+        guard let labelText = self.text else { return }
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineHeight
+
+        let attributedString = NSMutableAttributedString(string: labelText)
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
+        self.attributedText = attributedString
+    }
+}
