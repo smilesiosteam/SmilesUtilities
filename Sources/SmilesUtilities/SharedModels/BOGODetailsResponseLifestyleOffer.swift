@@ -123,7 +123,7 @@ public class BOGODetailsResponseLifestyleOffer: Codable {
         packageType = try values.decodeIfPresent(String.self, forKey: .packageType)
         catalogImageUrl = try values.decodeIfPresent(String.self, forKey: .catalogImageUrl)
         whatYouMissTitle = try values.decodeIfPresent(String.self, forKey: .whatYouMissTitle)
-        whatYouMissTextList = try values.decodeIfPresent([String].self, forKey: .whatYouMissTextList) ?? []
+        whatYouMissTextList = try values.decodeIfPresent([String].self, forKey: .whatYouMissTextList)
         disclaimerText = try values.decodeIfPresent(String.self, forKey: .disclaimerText)
         subscriptionIcon = try values.decodeIfPresent(String.self, forKey: .subscriptionIcon)
         priceBeforeDiscount = try values.decodeIfPresent(Int.self, forKey: .priceBeforeDiscount)
