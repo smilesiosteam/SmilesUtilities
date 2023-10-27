@@ -15,7 +15,7 @@ open class BaseRowModel: NSObject {
     public var rowTitle: String = ""
     public var rowHeight: CGFloat = UITableView.automaticDimension
     public var rowWidth: CGFloat = UITableView.automaticDimension
-    public var delegate: Any?
+    public weak var delegate: AnyObject?
     public var isSelected = false
     public var tag: Int = 0
     public var direction: UICollectionView.ScrollDirection? 
