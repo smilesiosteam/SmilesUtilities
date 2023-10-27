@@ -56,6 +56,7 @@ public class StringPickerPopupViewController: UIViewController {
     
     func setupUI() {
         headingLabel.localizedString = heading
+        headingLabel.textAlignment = AppCommonMethods.languageIsArabic() ? .right : .left
         tableView.dataSource = self
         tableView.delegate = self
         setTableViewHeight()
@@ -107,6 +108,7 @@ extension StringPickerPopupViewController:UITableViewDataSource, UITableViewDele
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PickerOptionTableViewCell") as! PickerOptionTableViewCell
         cell.titleLbl.text = options[indexPath.row]
+        cell.titleLbl.textAlignment = AppCommonMethods.languageIsArabic() ? .right : .left
         return cell
     }
     
