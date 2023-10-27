@@ -299,6 +299,12 @@ public extension UIColor {
     static var appRevampFoodDisableTextGrayColor: UIColor { return UIColor(red: 102.0 / 255.0, green: 102.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0) }
     
     static var appRevampFoodDisableIconGrayColor: UIColor { return UIColor(red: 88.0 / 255.0, green: 88.0 / 255.0, blue: 93.0 / 255.0, alpha: 1.0) }
+    
+    static var appErrorMessageTextColor: UIColor { return UIColor(red: 190.0 / 255.0, green: 24.0 / 255.0, blue: 0.0 / 255.0, alpha: 1.0) }
+    
+    static var appErrorMessageCellBackgroundColor: UIColor { return UIColor(red: 255.0 / 255.0, green: 218.0 / 255.0, blue: 212.0 / 255.0, alpha: 1.0) }
+    
+    static var appDarkGrayButtonBorderColor: UIColor { return UIColor(red: 190.0 / 255.0, green: 190.0 / 255.0, blue: 190.0 / 255.0, alpha: 1.0) }
 }
 
 public extension UIColor {
