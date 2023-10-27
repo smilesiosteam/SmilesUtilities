@@ -16,7 +16,7 @@ public extension UITableView {
         register(UINib(nibName: String(describing: T.self), bundle: bundle), forCellReuseIdentifier: reuseIdentifier)
     }
     
-    public func dequeueCell<T: UITableViewCell>(_ type: T.Type = T.self, withIdentifier reuseIdentifier: String = String(describing: T.self)) -> T {
+    func dequeueCell<T: UITableViewCell>(_ type: T.Type = T.self, withIdentifier reuseIdentifier: String = String(describing: T.self)) -> T {
         guard let cell = dequeueReusableCell(withIdentifier: reuseIdentifier) as? T else {
             fatalError("Unknown cell type (\(T.self)) for reuse identifier: \(reuseIdentifier)")
         }
@@ -30,7 +30,7 @@ public extension UITableView {
         return cell
     }
     
-    public func insert(_ indices: [Int], section: Int = 0, animation: UITableView.RowAnimation = .automatic) {
+    func insert(_ indices: [Int], section: Int = 0, animation: UITableView.RowAnimation = .automatic) {
         guard !indices.isEmpty else { return }
         
         let indexPaths = indices.map { IndexPath(row: $0, section: section) }
@@ -40,7 +40,7 @@ public extension UITableView {
         endUpdates()
     }
     
-    public func delete(_ indices: [Int], section: Int = 0, animation: UITableView.RowAnimation = .automatic) {
+    func delete(_ indices: [Int], section: Int = 0, animation: UITableView.RowAnimation = .automatic) {
         guard !indices.isEmpty else { return }
         
         let indexPaths = indices.map { IndexPath(row: $0, section: section) }
@@ -50,7 +50,7 @@ public extension UITableView {
         endUpdates()
     }
     
-    public func reload(_ indices: [Int], section: Int = 0, animation: UITableView.RowAnimation = .automatic) {
+    func reload(_ indices: [Int], section: Int = 0, animation: UITableView.RowAnimation = .automatic) {
         guard !indices.isEmpty else { return }
         
         let indexPaths = indices.map { IndexPath(row: $0, section: section) }
@@ -64,17 +64,17 @@ public extension UITableView {
 // MARK: - IndexPathTraversing
 
 public extension UITableView {
-    public var minimumIndexPath: IndexPath {
+    var minimumIndexPath: IndexPath {
         return IndexPath(row: 0, section: 0)
     }
     
-    public var maximumIndexPath: IndexPath {
+    var maximumIndexPath: IndexPath {
         let lastSection = max(0, numberOfSections - 1)
         let lastRow = max(0, numberOfRows(inSection: lastSection) - 1)
         return IndexPath(row: lastRow, section: lastSection)
     }
     
-    public func indexPath(after indexPath: IndexPath) -> IndexPath? {
+    func indexPath(after indexPath: IndexPath) -> IndexPath? {
         if indexPath == self.maximumIndexPath {
             return nil
         }
@@ -89,7 +89,7 @@ public extension UITableView {
         }
     }
     
-    public func indexPath(before indexPath: IndexPath) -> IndexPath? {
+    func indexPath(before indexPath: IndexPath) -> IndexPath? {
         if indexPath == self.minimumIndexPath {
             return nil
         }

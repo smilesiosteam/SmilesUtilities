@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SmilesUtilities
 
 public class RestaurantRequest: Codable {
     public var userInfo: AppUserInfo?

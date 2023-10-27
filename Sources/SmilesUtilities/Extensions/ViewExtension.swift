@@ -38,7 +38,7 @@ public extension UIView {
         return Bundle.main.loadNibNamed(String(describing: self), owner: nil, options: nil)?[0] as! T
     }
     
-    public func RoundedViewConrner(cornerRadius: CGFloat) {
+    func RoundedViewConrner(cornerRadius: CGFloat) {
         clipsToBounds = true
         layer.cornerRadius = cornerRadius
     }
