@@ -305,6 +305,8 @@ public extension UIColor {
     static var appErrorMessageCellBackgroundColor: UIColor { return UIColor(red: 255.0 / 255.0, green: 218.0 / 255.0, blue: 212.0 / 255.0, alpha: 1.0) }
     
     static var appDarkGrayButtonBorderColor: UIColor { return UIColor(red: 190.0 / 255.0, green: 190.0 / 255.0, blue: 190.0 / 255.0, alpha: 1.0) }
+    
+    static var filterRevampCellSeparatorColor: UIColor { return UIColor(red: 217.0 / 255.0, green: 217.0 / 255.0, blue: 217.0 / 255.0, alpha: 1.0) }
 }
 
 public extension UIColor {
