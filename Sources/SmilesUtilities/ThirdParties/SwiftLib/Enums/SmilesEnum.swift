@@ -20,3 +20,10 @@ public enum RestaurantFiltersType : Int {
 public enum FilterDictTags: String {
     case FiltersDict, FiltersForListingsDict
 }
+
+public enum ConsentActionType {
+    case elGrocer
+    case yallaCompare
+    case serviceMarketConsent
+    case topBrand
+}

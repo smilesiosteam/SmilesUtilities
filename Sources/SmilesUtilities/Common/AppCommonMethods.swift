@@ -396,4 +396,19 @@ public class AppCommonMethods {
         
         return targetString ?? ""
     }
+    
+    public static func openExternalUrl(urlString: String?, completion: ((Bool) -> Void)? = nil) {
+        guard let url = URL(string: urlString.asStringOrEmpty()) else { return }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, completionHandler: { success in
+                completion?(success)
+            })
+        }
+    }
+    
+    public static func getSchemeFromUrl(urlString: String?) -> String? {
+        guard let url = URL(string: urlString.asStringOrEmpty()) else { return nil }
+        return url.scheme
+    }
 }
