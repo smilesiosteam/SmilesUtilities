@@ -34,6 +34,19 @@ import Foundation
     
     public override init() {}
     
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(self.isLocationUpdated, forKey: .isLocationUpdated)
+        try container.encodeIfPresent(self.latitude, forKey: .latitude)
+        try container.encodeIfPresent(self.location, forKey: .location)
+        try container.encodeIfPresent(self.locationId, forKey: .locationId)
+        try container.encodeIfPresent(self.longitude, forKey: .longitude)
+        try container.encodeIfPresent(self.mambaId, forKey: .mambaId)
+        try container.encodeIfPresent(self.cityId, forKey: .cityId)
+        try container.encodeIfPresent(self.nickName, forKey: .nickName)
+        try container.encodeIfPresent(self.cityName, forKey: .cityName)
+    }
+    
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         isLocationUpdated = try values.decodeIfPresent(Bool.self, forKey: .isLocationUpdated)
