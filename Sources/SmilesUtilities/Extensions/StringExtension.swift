@@ -90,6 +90,12 @@ public extension String {
     static let favouritesTabbarUnSelectedImage = "FavTab"
     static let favouritesTabbarTitle = "Favourites"
     
+    // MARK: ExploreAll tab
+    
+    static let exploreAllTabbarSelectedImage = "exploreSelected"
+    static let exploreAllTabbarUnSelectedImage = "exploreUnselected"
+    static let exploreAllTabbarTitle = "Explore all"
+    
     // CellIds
     
     static let moreCategoriesCellId = "moreCategoriesCellId"
