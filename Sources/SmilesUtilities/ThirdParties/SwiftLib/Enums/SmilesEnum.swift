@@ -27,3 +27,7 @@ public enum ConsentActionType {
     case serviceMarketConsent
     case topBrand
 }
+
+public enum RestaurantMenuType: String, Codable {
+    case DELIVERY, PICK_UP
+}
