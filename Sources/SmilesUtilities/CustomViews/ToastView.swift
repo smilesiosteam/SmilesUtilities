@@ -17,7 +17,7 @@ public final class ToastView: UIView {
     private let toastModel: ToastModel
     
     // MARK: - Init
-    init(toastModel: ToastModel) {
+   public init(toastModel: ToastModel) {
         self.toastModel = toastModel
         super.init(frame: CGRect.zero)
         configureView()
