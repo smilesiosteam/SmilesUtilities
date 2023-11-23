@@ -11,6 +11,7 @@ public class Nicknames : Codable {
     public var isSelected : Bool?
     public var nickname : String?
     public var otherNickname : String?
+    public var nickNameIcon : String?
 
     public init(){
         
@@ -22,6 +23,7 @@ public class Nicknames : Codable {
         case isSelected = "isSelected"
         case nickname = "nickname"
         case otherNickname = "otherNickname"
+        case nickNameIcon = "nicknameIcon"
     }
 
     required public init(from decoder: Decoder) throws {
@@ -29,6 +31,7 @@ public class Nicknames : Codable {
         isSelected = try values.decodeIfPresent(Bool.self, forKey: .isSelected)
         nickname = try values.decodeIfPresent(String.self, forKey: .nickname)
         otherNickname = try values.decodeIfPresent(String.self, forKey: .otherNickname)
+        nickNameIcon = try values.decodeIfPresent(String.self, forKey: .nickNameIcon)
     }
 
 }

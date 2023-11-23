@@ -12,6 +12,7 @@ public class Address: Codable {
     public var nickname: String?
     public var locationId: String?
     public var locationName: String?
+    public var nicknameIcon: String?
     public var street: String?
     public var building: String?
     public var flatNo: String?
@@ -49,6 +50,7 @@ public class Address: Codable {
         case latitude
         case longitude
         case nicknames
+        case nicknameIcon
     }
 
     public init() {}
@@ -78,6 +80,7 @@ public class Address: Codable {
         createdDate = try values.decodeIfPresent(String.self, forKey: .createdDate)
         latitude = try values.decodeIfPresent(String.self, forKey: .latitude)
         longitude = try values.decodeIfPresent(String.self, forKey: .longitude)
+        nicknameIcon = try values.decodeIfPresent(String.self, forKey: .nicknameIcon)
         nicknames = try values.decodeIfPresent([Nicknames].self, forKey: .nicknames)
 
     }

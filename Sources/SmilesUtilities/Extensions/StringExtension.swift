@@ -11,6 +11,7 @@ import CryptoSwift
 import Foundation
 import UIKit
 import SmilesLanguageManager
+import SmilesFontsManager
 
 public extension Character {
     /// A simple emoji is one scalar and presented to the user as an Emoji
@@ -88,6 +89,12 @@ public extension String {
     static let favouritesTabbarSelectedImage = "iconFavorite"
     static let favouritesTabbarUnSelectedImage = "FavTab"
     static let favouritesTabbarTitle = "Favourites"
+    
+    // MARK: ExploreAll tab
+    
+    static let exploreAllTabbarSelectedImage = "exploreSelected"
+    static let exploreAllTabbarUnSelectedImage = "exploreUnselected"
+    static let exploreAllTabbarTitle = "Explore all"
     
     // CellIds
     
@@ -422,6 +429,26 @@ public extension String {
         let upperCased = self.upperCamelCased
         return upperCased.prefix(1).lowercased() + upperCased.dropFirst()
     }
+    
+    @MainActor func getAttributedString(style: UIFont.TextStyle, color: UIColor) -> NSAttributedString {
+        
+        guard let typography = Typography(for: style) else { return NSAttributedString(string: "") }
+        let attrString = NSMutableAttributedString(string: self)
+        let spacingString = NSMutableAttributedString(attributedString: attrString)
+        let textRange = NSRange(location: 0, length: attrString.string.count)
+        spacingString.addAttribute(NSAttributedString.Key.kern, value: typography.letterSpacing, range: textRange)
+        spacingString.addAttributes([NSAttributedString.Key.font : typography.font()!], range: textRange)
+        spacingString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: textRange)
+        if let lineHeight = typography.textLineHeight {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = lineHeight
+            spacingString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, spacingString.length))
+        }
+        return spacingString
+        
+    }
+
+    
 }
 
 public extension NSMutableAttributedString {

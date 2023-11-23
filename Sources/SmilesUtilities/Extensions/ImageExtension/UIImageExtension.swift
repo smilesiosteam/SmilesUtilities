@@ -51,7 +51,7 @@ public extension UIImage {
         case BackArrow_black, backIcon, pin, recentLocation, closed, icon_BackWithBG
     }
     
-    convenience init!(assetIdentifier: AssetIdentifier) {
+    convenience init?(assetIdentifier: AssetIdentifier) {
         self.init(named: assetIdentifier.rawValue)
     }
     
