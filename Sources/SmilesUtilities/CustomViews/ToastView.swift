@@ -99,8 +99,8 @@ public protocol Toastable {
     func showToast(model: ToastModel)
 }
 
-extension Toastable where Self: UIViewController {
-    func showToast(model: ToastModel) {
+public extension Toastable where Self: UIViewController {
+     func showToast(model: ToastModel) {
         let toastView = ToastView(toastModel: model)
 
         view.addSubview(toastView)
