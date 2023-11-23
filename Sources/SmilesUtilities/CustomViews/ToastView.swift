@@ -86,6 +86,8 @@ public final class ToastView: UIView {
 }
 
 public struct ToastModel {
+    
+    public init() {}
     public var title: String?
     public var imageIcon: UIImage?
     public var backgroundColor: UIColor = UIColor.black.withAlphaComponent(0.7)
