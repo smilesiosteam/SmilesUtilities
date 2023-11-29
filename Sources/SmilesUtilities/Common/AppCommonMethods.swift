@@ -146,7 +146,10 @@ public class AppCommonMethods {
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancel)
-        present(alert, animated: true)
+       
+        if let topVC = UIApplication.getTopViewController() {
+            topVC.present(alert, animated: true, completion: nil)
+        }
     }
     
     public static func getWithAEDValue(string: String) -> String {
