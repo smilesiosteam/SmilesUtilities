@@ -122,34 +122,31 @@ public class AppCommonMethods {
         
         
         let application = UIApplication.shared
-        let coordinate = "\(latitude),\(longitude)"
-        let encodedTitle = ""
-        let handlers = [
-            ("Apple", "http://maps.apple.com/?q=\(encodedTitle)&ll=\(coordinate)"),
-            ("Google", "comgooglemaps://?q=\(coordinate)"),
-            ("Waze", "waze://?ll=\(coordinate)"),
-            ("Citymapper", "citymapper://directions?endcoord=\(coordinate)&endname=\(encodedTitle)")
-        ]
-            .compactMap { (name, address) in URL(string: address).map { (name, $0) } }
-            .filter { (_, url) in application.canOpenURL(url) }
-        
-        guard handlers.count > 1 else {
-            if let (_, _) = handlers.first {
-                mapItem.openInMaps(launchOptions: options)
-            }
-            return
-        }
-        let alert = UIAlertController(title:"", message: nil, preferredStyle: .actionSheet)
-        handlers.forEach { (name, url) in
-            alert.addAction(UIAlertAction(title: name, style: .default) { _ in
-                application.open(url, options: [:])
-            })
-        }
-        alert.addAction(UIAlertAction(title: "btn_Cancel".localizedString, style: .cancel, handler: nil))
-        
-        //        if let topVC = UIApplication.getTopViewController() {
-        //            topVC.present(alert, animated: true, completion: nil)
-        //        }
+          let coordinate = "\(latitude),\(longitude)"
+          let encodedTitle = title?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+          let handlers = [
+              ("Apple Maps", "http://maps.apple.com/?q=\(encodedTitle)&ll=\(coordinate)"),
+              ("Google Maps", "comgooglemaps://?q=\(coordinate)"),
+              ("Waze", "waze://?ll=\(coordinate)"),
+              ("Citymapper", "citymapper://directions?endcoord=\(coordinate)&endname=\(encodedTitle)")
+          ]
+              .compactMap { (name, address) in URL(string: address).map { (name, $0) } }
+              .filter { (_, url) in application.canOpenURL(url) }
+
+          guard handlers.count > 1 else {
+              if let (_, url) = handlers.first {
+                  application.open(url, options: [:])
+              }
+              return
+          }
+          let alert = UIAlertController(title: R.string.localizable.select_map_app(), message: nil, preferredStyle: .actionSheet)
+          handlers.forEach { (name, url) in
+              alert.addAction(UIAlertAction(title: name, style: .default) { _ in
+                  application.open(url, options: [:])
+              })
+          }
+          alert.addAction(UIAlertAction(title: R.string.localizable.cancel(), style: .cancel, handler: nil))
+          contextProvider.currentViewController.present(alert, animated: true, completion: nil)
     }
     
     public static func getWithAEDValue(string: String) -> String {
