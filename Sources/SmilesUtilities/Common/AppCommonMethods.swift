@@ -121,32 +121,32 @@ public class AppCommonMethods {
         
         
         
-        let application = UIApplication.shared
-          let coordinate = "\(latitude),\(longitude)"
-          let encodedTitle = title?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-          let handlers = [
-              ("Apple Maps", "http://maps.apple.com/?q=\(encodedTitle)&ll=\(coordinate)"),
-              ("Google Maps", "comgooglemaps://?q=\(coordinate)"),
-              ("Waze", "waze://?ll=\(coordinate)"),
-              ("Citymapper", "citymapper://directions?endcoord=\(coordinate)&endname=\(encodedTitle)")
-          ]
-              .compactMap { (name, address) in URL(string: address).map { (name, $0) } }
-              .filter { (_, url) in application.canOpenURL(url) }
+        let appleURL = "http://maps.apple.com/?daddr=\(latitude),\(longitude)"
+        let googleURL = "comgooglemaps://?daddr=\(latitude),\(longitude)&directionsmode=driving"
+        let wazeURL = "waze://?ll=\(latitude),\(longitude)&navigate=false"
 
-          guard handlers.count > 1 else {
-              if let (_, url) = handlers.first {
-                  application.open(url, options: [:])
-              }
-              return
-          }
-          let alert = UIAlertController(title: R.string.localizable.select_map_app(), message: nil, preferredStyle: .actionSheet)
-          handlers.forEach { (name, url) in
-              alert.addAction(UIAlertAction(title: name, style: .default) { _ in
-                  application.open(url, options: [:])
-              })
-          }
-          alert.addAction(UIAlertAction(title: R.string.localizable.cancel(), style: .cancel, handler: nil))
-          contextProvider.currentViewController.present(alert, animated: true, completion: nil)
+        let googleItem = ("Google Map", URL(string:googleURL)!)
+        let wazeItem = ("Waze", URL(string:wazeURL)!)
+        var installedNavigationApps = [("Apple Maps", URL(string:appleURL)!)]
+
+        if UIApplication.shared.canOpenURL(googleItem.1) {
+            installedNavigationApps.append(googleItem)
+        }
+
+        if UIApplication.shared.canOpenURL(wazeItem.1) {
+            installedNavigationApps.append(wazeItem)
+        }
+
+        let alert = UIAlertController(title: "Selection", message: "Select Navigation App", preferredStyle: .actionSheet)
+        for app in installedNavigationApps {
+            let button = UIAlertAction(title: app.0, style: .default, handler: { _ in
+                UIApplication.shared.open(app.1, options: [:], completionHandler: nil)
+            })
+            alert.addAction(button)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        present(alert, animated: true)
     }
     
     public static func getWithAEDValue(string: String) -> String {
