@@ -24,6 +24,7 @@ public final class ToastView: UIView {
         configureIconImageView()
         configureMessageLabel()
         setupView()
+       addTapGesture()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -53,12 +54,27 @@ public final class ToastView: UIView {
     
     private func configureMessageLabel() {
         messageLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        messageLabel.text = toastModel.title
+        if let attributedString = toastModel.attributedString {
+            messageLabel.attributedText = attributedString
+        } else {
+            messageLabel.text = toastModel.title
+            messageLabel.fontTextStyle = toastModel.titleStyle
+        }
+       
         messageLabel.textColor = toastModel.titileColor
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
-        messageLabel.fontTextStyle = toastModel.titleStyle
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelAction))
+        self.isUserInteractionEnabled = true
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func labelAction() {
+        toastModel.viewDidTapped?()
     }
 
     private func setupView() {
@@ -85,7 +101,7 @@ public final class ToastView: UIView {
     }
 }
 
-public struct ToastModel {
+public class ToastModel {
     
     public init() {}
     public var title: String?
@@ -93,16 +109,18 @@ public struct ToastModel {
     public var backgroundColor: UIColor = UIColor.black.withAlphaComponent(0.7)
     public var titileColor: UIColor = .white
     public var titleStyle: UIFont.TextStyle = .smilesHeadline5
+    public var attributedString: NSMutableAttributedString? = nil
+    public var viewDidTapped: (() -> Void)? = nil
 }
 
 public protocol Toastable {
-    func showToast(model: ToastModel)
+   @discardableResult func showToast(model: ToastModel) -> ToastView
 }
 
 public extension Toastable where Self: UIViewController {
-     func showToast(model: ToastModel) {
+    @discardableResult
+     func showToast(model: ToastModel) -> ToastView {
         let toastView = ToastView(toastModel: model)
-
         view.addSubview(toastView)
 
         NSLayoutConstraint.activate([
@@ -112,10 +130,12 @@ public extension Toastable where Self: UIViewController {
             toastView.heightAnchor.constraint(equalToConstant: 50)
         ])
 
-        UIView.animate(withDuration: 0.3, delay: 10.0, options: .curveEaseOut, animations: {
-            toastView.alpha = 0
-        }) { _ in
-            toastView.removeFromSuperview()
-        }
+//        UIView.animate(withDuration: 0.3, delay: 10.0, options: .curveEaseOut, animations: {
+//            toastView.alpha = 0
+//        }) { _ in
+//            toastView.removeFromSuperview()
+//        }
+         
+         return toastView
     }
 }
