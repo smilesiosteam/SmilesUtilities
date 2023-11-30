@@ -121,35 +121,35 @@ public class AppCommonMethods {
         
         
         
-        let application = UIApplication.shared
-        let coordinate = "\(latitude),\(longitude)"
-        let encodedTitle = ""
-        let handlers = [
-            ("Apple", "http://maps.apple.com/?q=\(encodedTitle)&ll=\(coordinate)"),
-            ("Google", "comgooglemaps://?q=\(coordinate)"),
-            ("Waze", "waze://?ll=\(coordinate)"),
-            ("Citymapper", "citymapper://directions?endcoord=\(coordinate)&endname=\(encodedTitle)")
-        ]
-            .compactMap { (name, address) in URL(string: address).map { (name, $0) } }
-            .filter { (_, url) in application.canOpenURL(url) }
-        
-        guard handlers.count > 1 else {
-            if let (_, _) = handlers.first {
-                mapItem.openInMaps(launchOptions: options)
-            }
-            return
+        let appleURL = "http://maps.apple.com/?daddr=\(latitude),\(longitude)"
+        let googleURL = "comgooglemaps://?daddr=\(latitude),\(longitude)&directionsmode=driving"
+        let wazeURL = "waze://?ll=\(latitude),\(longitude)&navigate=false"
+
+        let googleItem = ("Google Map", URL(string:googleURL)!)
+        let wazeItem = ("Waze", URL(string:wazeURL)!)
+        var installedNavigationApps = [("Apple Maps", URL(string:appleURL)!)]
+
+        if UIApplication.shared.canOpenURL(googleItem.1) {
+            installedNavigationApps.append(googleItem)
         }
-        let alert = UIAlertController(title:"", message: nil, preferredStyle: .actionSheet)
-        handlers.forEach { (name, url) in
-            alert.addAction(UIAlertAction(title: name, style: .default) { _ in
-                application.open(url, options: [:])
+
+        if UIApplication.shared.canOpenURL(wazeItem.1) {
+            installedNavigationApps.append(wazeItem)
+        }
+
+        let alert = UIAlertController(title: "Selection", message: "Select Navigation App", preferredStyle: .actionSheet)
+        for app in installedNavigationApps {
+            let button = UIAlertAction(title: app.0, style: .default, handler: { _ in
+                UIApplication.shared.open(app.1, options: [:], completionHandler: nil)
             })
+            alert.addAction(button)
         }
-        alert.addAction(UIAlertAction(title: "btn_Cancel".localizedString, style: .cancel, handler: nil))
-        
-        //        if let topVC = UIApplication.getTopViewController() {
-        //            topVC.present(alert, animated: true, completion: nil)
-        //        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+       
+        if let topVC = UIApplication.getTopViewController() {
+            topVC.present(alert, animated: true, completion: nil)
+        }
     }
     
     public static func getWithAEDValue(string: String) -> String {
