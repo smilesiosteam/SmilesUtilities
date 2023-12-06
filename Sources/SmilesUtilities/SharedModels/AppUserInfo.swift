@@ -16,6 +16,7 @@ import Foundation
     public var longitude: String?
     public var mambaId: String?
     public var cityId : Int?
+    public var cityLocationId: String?
     public var nickName : String?
     public var cityName: String?
     
@@ -43,6 +44,7 @@ import Foundation
         try container.encodeIfPresent(self.longitude, forKey: .longitude)
         try container.encodeIfPresent(self.mambaId, forKey: .mambaId)
         try container.encodeIfPresent(self.cityId, forKey: .cityId)
+        try container.encodeIfPresent(self.cityLocationId, forKey: .cityId)
         try container.encodeIfPresent(self.nickName, forKey: .nickName)
         try container.encodeIfPresent(self.cityName, forKey: .cityName)
     }
@@ -56,6 +58,7 @@ import Foundation
         longitude = try values.decodeIfPresent(String.self, forKey: .longitude)
         mambaId = try values.decodeIfPresent(String.self, forKey: .mambaId)
         cityId =  try values.decodeIfPresent(Int.self, forKey: .cityId)
+        cityLocationId =  try values.decodeIfPresent(String.self, forKey: .cityId)
         nickName = try values.decodeIfPresent(String.self, forKey: .nickName)
         cityName = try values.decodeIfPresent(String.self, forKey: .cityName)
     }
