@@ -16,9 +16,10 @@ import Foundation
     public var longitude: String?
     public var mambaId: String?
     public var cityId : Int?
-    public var cityLocationId: String?
     public var nickName : String?
     public var cityName: String?
+    /// Added this key to handle cityId type as string
+    public var cityLocationId: String?
     
     
     enum CodingKeys: String, CodingKey {
