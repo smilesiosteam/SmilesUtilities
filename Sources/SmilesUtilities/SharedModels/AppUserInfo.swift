@@ -56,9 +56,11 @@ import Foundation
         longitude = try values.decodeIfPresent(String.self, forKey: .longitude)
         mambaId = try values.decodeIfPresent(String.self, forKey: .mambaId)
         do {
-            cityId = try Int(values.decode(String.self, forKey: .cityId))
+            if let cityIdString = try values.decodeIfPresent(String.self, forKey: .cityId) {
+                cityId = Int(cityIdString)
+            }
         } catch DecodingError.typeMismatch {
-            cityId = try values.decode(Int.self, forKey: .cityId)
+            cityId = try values.decodeIfPresent(Int.self, forKey: .cityId)
         }
         nickName = try values.decodeIfPresent(String.self, forKey: .nickName)
         cityName = try values.decodeIfPresent(String.self, forKey: .cityName)
