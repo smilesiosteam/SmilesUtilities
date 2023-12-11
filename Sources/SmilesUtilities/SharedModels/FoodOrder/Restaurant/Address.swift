@@ -28,7 +28,6 @@ public class Address: Codable {
     public var latitude: String?
     public var longitude: String?
     public var nicknames: [Nicknames]?
-  
 
     enum CodingKeys: String, CodingKey {
         case addressId
@@ -82,6 +81,5 @@ public class Address: Codable {
         longitude = try values.decodeIfPresent(String.self, forKey: .longitude)
         nicknameIcon = try values.decodeIfPresent(String.self, forKey: .nicknameIcon)
         nicknames = try values.decodeIfPresent([Nicknames].self, forKey: .nicknames)
-
     }
 }

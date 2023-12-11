@@ -123,12 +123,12 @@ public extension Toastable where Self: UIViewController {
         let toastView = ToastView(toastModel: model)
         view.addSubview(toastView)
 
-        NSLayoutConstraint.activate([
-            toastView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
-            toastView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60),
-            toastView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            toastView.heightAnchor.constraint(equalToConstant: 50)
-        ])
+         NSLayoutConstraint.activate([
+             toastView.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Center the view horizontally
+             toastView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+             toastView.heightAnchor.constraint(equalToConstant: 50),
+             toastView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -120) // Adjust the maximum width if needed
+         ])
 
         UIView.animate(withDuration: 0.3, delay: 10.0, options: .curveEaseOut, animations: {
             toastView.alpha = 0
