@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SmilesLanguageManager
 
 public extension UILabel {
     func updateAttributedTextTo(string: String, subString: String, stringColor: UIColor = .appLabelLightGrayColor, subStringColor: UIColor = .appLabelLightGrayColor, fontsize: CGFloat = 12.0) {
@@ -361,3 +362,11 @@ extension UILabel {
         self.attributedText = attributedString
     }
 }
+
+extension UILabel {
+   public func setAlignment() {
+        let isRightToLeft = SmilesLanguageManager.shared.isRightToLeft
+        self.textAlignment =  isRightToLeft ? .right : .left
+    }
+}
+
