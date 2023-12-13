@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "7f9fb5d43ecd4aa714c00746f54873f354403438",
-        "version" : "5.15.8"
+        "revision" : "e278c13e46e8d20c895c221e922c6ac6b72aaca9",
+        "version" : "5.18.7"
       }
     },
     {
@@ -33,7 +33,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesFontsManager.git",
       "state" : {
         "branch" : "main",
-        "revision" : "1a7068cb5a728cb7761aceb44d1c1ab2e88eba74"
+        "revision" : "08f10b60a92cf507339595161289eabd55c9ab10"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesLanguageManager.git",
       "state" : {
         "branch" : "main",
-        "revision" : "c28ecadeb4df3785ba082363895b3d0248a9903a"
+        "revision" : "d70bc6f7a910dd4e7dcae9224b4988500cd1006e"
       }
     },
     {
