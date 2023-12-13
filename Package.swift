@@ -35,5 +35,6 @@ let package = Package(
                 .product(name: "SDWebImage", package: "SDWebImage"),
                 .product(name: "SmilesFontsManager", package: "SmilesFontsManager")
             ]),
+        .testTarget(name: "SmilesUtilitiesTests", dependencies: ["SmilesUtilities"])
     ]
 )
