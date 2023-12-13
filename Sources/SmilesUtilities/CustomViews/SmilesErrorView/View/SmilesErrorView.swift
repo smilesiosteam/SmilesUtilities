@@ -23,6 +23,7 @@ class SmilesErrorView: UIViewController {
     // MARK: - PROPERTIES -
     private var errorViewType: ErrorViewType = .popUp
     private var buttonPressed: (() -> Void)?
+    private var error: SmilesError
     
     // MARK: - ACTIONS -
     @IBAction func buttonTapped(_ sender: Any) {
@@ -32,8 +33,9 @@ class SmilesErrorView: UIViewController {
     
     // MARK: - INITIALIZERS -
     init(error: SmilesError, buttonPressed: (() -> Void)? = nil) {
+        self.error = error
+        self.buttonPressed = buttonPressed
         super.init(nibName: "SmilesErrorView", bundle: .module)
-        setupViews(error: error, buttonPressed: buttonPressed)
     }
     
     required init?(coder: NSCoder) {
@@ -43,11 +45,10 @@ class SmilesErrorView: UIViewController {
     // MARK: - METHODS -
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupViews()
     }
     
-    private func setupViews(error: SmilesError, buttonPressed: (() -> Void)? = nil) {
+    private func setupViews() {
         
         errorImageView.isHidden = error.errorImage == nil
         errorImageView.image = error.errorImage
@@ -61,8 +62,6 @@ class SmilesErrorView: UIViewController {
         view.backgroundColor = errorViewType == .fullScreen ? .white : .black.withAlphaComponent(0.2)
         retryButton.isHidden = errorViewType == .fullScreen
         popUpButton.isHidden = errorViewType == .popUp
-        
-        self.buttonPressed = buttonPressed
         
     }
     
