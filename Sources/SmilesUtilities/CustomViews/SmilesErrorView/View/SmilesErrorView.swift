@@ -59,9 +59,9 @@ class SmilesErrorView: UIViewController {
         retryButton.setTitle(error.buttonTitle, for: .normal)
         
         self.errorViewType = error.errorViewType
-        view.backgroundColor = errorViewType == .fullScreen ? .white : .black.withAlphaComponent(0.2)
-        retryButton.isHidden = errorViewType == .fullScreen
-        popUpButton.isHidden = errorViewType == .popUp
+        view.backgroundColor = errorViewType == .fullScreen ? .white : .black.withAlphaComponent(0.6)
+        retryButton.isHidden = errorViewType == .popUp
+        popUpButton.isHidden = errorViewType == .fullScreen
         
     }
     
