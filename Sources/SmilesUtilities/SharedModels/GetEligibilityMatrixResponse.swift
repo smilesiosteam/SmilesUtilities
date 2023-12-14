@@ -8,14 +8,14 @@
 import Foundation
 
 @objcMembers
-public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
+public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying, Codable {
     
     public var responseCode: String?
     public var responseMsg: String?
     public var additionalInfo: [Any]?
     public var extTransactionId: String?
-    public var eligibleFeatures: [Any]?
-    public var nonEligibleFeatures: [Any]?
+    public var eligibleFeatures: [String]?
+    public var nonEligibleFeatures: [String]?
     public var emailVerified: Bool = false
     public var accountType: String?
     public var isEtisalatUser: Bool = false
@@ -25,15 +25,56 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
     public var hasLinkedAccounts: Bool = false
     public var notEligibleObject: NotEligibleObject?
     
+    public enum CodingKeys: String, CodingKey {
+        case responseCode
+        case responseMsg
+        case additionalInfo
+        case extTransactionId
+        case eligibleFeatures
+        case nonEligibleFeatures
+        case emailVerified
+        case accountType
+        case isEtisalatUser = "etisalatUser"
+        case accountTypeNumber
+        case loyaltyID
+        case emailAddress
+        case hasLinkedAccounts
+    }
+    
     public required override init() {
         super.init()
-        
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        eligibleFeatures = try values.decodeIfPresent([String].self, forKey: .eligibleFeatures)
+        nonEligibleFeatures = try values.decodeIfPresent([String].self, forKey: .nonEligibleFeatures)
+        emailVerified = try values.decodeIfPresent(Bool.self, forKey: .emailVerified) ?? false
+        accountType = try values.decodeIfPresent(String.self, forKey: .accountType)
+        isEtisalatUser = try values.decodeIfPresent(Bool.self, forKey: .isEtisalatUser) ?? false
+        accountTypeNumber = try values.decodeIfPresent(String.self, forKey: .accountTypeNumber)
+        loyaltyID = try values.decodeIfPresent(String.self, forKey: .loyaltyID)
+        emailAddress = try values.decodeIfPresent(String.self, forKey: .emailAddress)
+        hasLinkedAccounts = try values.decodeIfPresent(Bool.self, forKey: .hasLinkedAccounts) ?? false
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(self.eligibleFeatures, forKey: .eligibleFeatures)
+        try container.encodeIfPresent(self.nonEligibleFeatures, forKey: .nonEligibleFeatures)
+        try container.encodeIfPresent(self.emailVerified, forKey: .emailVerified)
+        try container.encodeIfPresent(self.accountType, forKey: .accountType)
+        try container.encodeIfPresent(self.isEtisalatUser, forKey: .isEtisalatUser)
+        try container.encodeIfPresent(self.accountTypeNumber, forKey: .accountTypeNumber)
+        try container.encodeIfPresent(self.loyaltyID, forKey: .loyaltyID)
+        try container.encodeIfPresent(self.emailAddress, forKey: .emailAddress)
+        try container.encodeIfPresent(self.hasLinkedAccounts, forKey: .hasLinkedAccounts)
     }
     
     public required init(withDictionary: NSDictionary) {
         super.init()
-        self.eligibleFeatures = withDictionary["eligibleFeatures"] as? [Any]
-        self.nonEligibleFeatures = withDictionary["nonEligibleFeatures"] as? [Any]
+        self.eligibleFeatures = withDictionary["eligibleFeatures"] as? [String]
+        self.nonEligibleFeatures = withDictionary["nonEligibleFeatures"] as? [String]
         self.emailVerified = (withDictionary["emailVerified"] as? Bool) ?? false
         self.accountType = withDictionary["accountType"] as? String
         self.isEtisalatUser = (withDictionary["etisalatUser"] as? Bool) ?? false
@@ -48,8 +89,8 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         self.responseMsg = aDecoder.decodeObject(forKey: "responseMsg") as? String
         self.additionalInfo = aDecoder.decodeObject(forKey: "additionalInfo") as? [Any]
         self.extTransactionId = aDecoder.decodeObject(forKey: "extTransactionId") as? String
-        self.eligibleFeatures = aDecoder.decodeObject(forKey: "eligibleFeatures") as? [Any]
-        self.nonEligibleFeatures = aDecoder.decodeObject(forKey: "nonEligibleFeatures") as? [Any]
+        self.eligibleFeatures = aDecoder.decodeObject(forKey: "eligibleFeatures") as? [String]
+        self.nonEligibleFeatures = aDecoder.decodeObject(forKey: "nonEligibleFeatures") as? [String]
         self.emailVerified = aDecoder.decodeBool(forKey: "emailVerified")
         self.accountType = aDecoder.decodeObject(forKey: "accountType") as? String
         self.isEtisalatUser = aDecoder.decodeBool(forKey: "etisalatUser")
@@ -99,8 +140,8 @@ public class GetEligibilityMatrixResponse: NSObject, NSCoding, NSCopying {
         instance.responseMsg = dict["responseMsg"] as? String
         instance.additionalInfo = dict["additionalInfo"] as? [Any]
         instance.extTransactionId = dict["extTransactionId"] as? String
-        instance.eligibleFeatures = dict["eligibleFeatures"] as? [Any]
-        instance.nonEligibleFeatures = dict["nonEligibleFeatures"] as? [Any]
+        instance.eligibleFeatures = dict["eligibleFeatures"] as? [String]
+        instance.nonEligibleFeatures = dict["nonEligibleFeatures"] as? [String]
         instance.emailVerified = dict["emailVerified"] as? Bool ?? false
         instance.accountType = dict["accountType"] as? String
         instance.isEtisalatUser = dict["etisalatUser"] as? Bool ?? false

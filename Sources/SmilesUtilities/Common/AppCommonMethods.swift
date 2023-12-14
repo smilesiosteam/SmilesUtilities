@@ -411,4 +411,8 @@ public class AppCommonMethods {
         guard let url = URL(string: urlString.asStringOrEmpty()) else { return nil }
         return url.scheme
     }
+    
+    public static func saveCustomObject(_ object: Any?, forKey key: String) {
+        UserDefaults.standard.setValue(object, forKey: key)
+    }
 }
