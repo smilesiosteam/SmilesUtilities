@@ -11,11 +11,6 @@ public enum ErrorViewType {
     case fullScreen, popUp
 }
 
-public protocol SmilesErrorButtonDelegate: AnyObject {
-    func primaryButtonPressed()
-    func secondaryButtonPressed()
-}
-
 class SmilesErrorView: UIViewController {
 
     // MARK: - OUTLETS -
@@ -30,7 +25,7 @@ class SmilesErrorView: UIViewController {
     // MARK: - PROPERTIES -
     private var errorViewType: ErrorViewType = .popUp
     private var error: SmilesError
-    private var delegate: SmilesErrorButtonDelegate?
+    private weak var delegate: SmilesErrorViewDelegate?
     
     // MARK: - ACTIONS -
     @IBAction func primaryButtonTapped(_ sender: Any) {
@@ -44,7 +39,7 @@ class SmilesErrorView: UIViewController {
     }
     
     // MARK: - INITIALIZERS -
-    init(error: SmilesError, delegate: SmilesErrorButtonDelegate?) {
+    init(error: SmilesError, delegate: SmilesErrorViewDelegate?) {
         self.error = error
         self.delegate = delegate
         super.init(nibName: "SmilesErrorView", bundle: .module)

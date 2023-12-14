@@ -14,7 +14,7 @@ public class SmilesErrorHandler {
     
     private init() {}
     
-    public func showError(on vc: UIViewController, error: SmilesError, delegate: SmilesErrorButtonDelegate? = nil) {
+    public func showError(on vc: UIViewController, error: SmilesError, delegate: SmilesErrorViewDelegate? = nil) {
         
         let errorVC = SmilesErrorView(error: error, delegate: delegate)
         errorVC.modalPresentationStyle = error.errorViewType == .fullScreen ? .overFullScreen : .overCurrentContext
