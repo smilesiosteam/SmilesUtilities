@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -10,10 +11,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SmilesErrorView" customModule="SmilesUtilities">
             <connections>
+                <outlet property="buttonsStack" destination="hIb-at-E14" id="W9m-gL-QkN"/>
                 <outlet property="descriptionLabel" destination="Ea0-OW-001" id="tuv-cj-ddv"/>
                 <outlet property="errorImageView" destination="gUK-PT-pbj" id="f2i-ES-u3z"/>
-                <outlet property="popUpButton" destination="lal-E4-CbQ" id="kU7-Uu-UrX"/>
-                <outlet property="retryButton" destination="lHO-G3-5Lp" id="97W-VF-uQI"/>
+                <outlet property="popUpButtonsStack" destination="x9T-Kb-yQf" id="FeD-6s-pje"/>
+                <outlet property="primaryButton" destination="Snp-Ph-WI8" id="vtZ-td-9xU"/>
+                <outlet property="secondaryButton" destination="TKm-TV-QrT" id="He9-tX-CZo"/>
                 <outlet property="titleLabel" destination="2At-Wh-Zo4" id="QpE-V1-PYp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,22 +27,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hNz-wn-nZ8" customClass="UICustomView" customModule="SmilesUtilities">
-                    <rect key="frame" x="50.666666666666657" y="265.33333333333326" width="291.66666666666674" height="346.66666666666674"/>
+                    <rect key="frame" x="43" y="265.33333333333326" width="307" height="346.66666666666674"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ZFG-DH-IaX">
-                            <rect key="frame" x="16" y="24" width="259.66666666666669" height="298.66666666666669"/>
+                            <rect key="frame" x="16" y="24" width="275" height="298.66666666666669"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gUK-PT-pbj">
-                                    <rect key="frame" x="0.0" y="0.0" width="259.66666666666669" height="154"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="275" height="154"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="154" id="xye-MC-wFO"/>
                                     </constraints>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gHP-6L-xCB">
-                                    <rect key="frame" x="0.0" y="178" width="259.66666666666669" height="48.666666666666657"/>
+                                    <rect key="frame" x="0.0" y="178" width="275" height="48.666666666666657"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2At-Wh-Zo4">
-                                            <rect key="frame" x="0.0" y="0.0" width="259.66666666666669" height="20.333333333333332"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="275" height="20.333333333333332"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.074509803920000006" green="0.090196078430000007" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -48,7 +51,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ea0-OW-001">
-                                            <rect key="frame" x="0.0" y="28.333333333333371" width="259.66666666666669" height="20.333333333333329"/>
+                                            <rect key="frame" x="0.0" y="28.333333333333371" width="275" height="20.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.42745098040000001" green="0.40000000000000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -58,26 +61,57 @@
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lal-E4-CbQ" customClass="UICustomButton" customModule="SmilesUtilities">
-                                    <rect key="frame" x="0.0" y="250.66666666666669" width="259.66666666666669" height="48"/>
-                                    <color key="backgroundColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="48" id="QCc-4w-2cV"/>
-                                    </constraints>
-                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="OK">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline4"/>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="24"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="4Sp-Mj-rFY"/>
-                                    </connections>
-                                </button>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="x9T-Kb-yQf">
+                                    <rect key="frame" x="0.0" y="250.66666666666669" width="275" height="48"/>
+                                    <subviews>
+                                        <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGO-z3-epA" customClass="UICustomButton" customModule="SmilesUtilities">
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="48"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="qNb-jw-RbM"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="OK">
+                                                <color key="titleColor" red="0.45882352941176469" green="0.25882352941176467" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline4"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="24"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="0.45882352941176469" green="0.25882352941176467" blue="0.55686274509803924" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="1.5"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="secondaryButtonTapped:" destination="-1" eventType="touchUpInside" id="woy-UP-H7S"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lal-E4-CbQ" customClass="UICustomButton" customModule="SmilesUtilities">
+                                            <rect key="frame" x="0.0" y="0.0" width="275" height="48"/>
+                                            <color key="backgroundColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="QCc-4w-2cV"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="RETRY">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline4"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="24"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="primaryButtonTapped:" destination="-1" eventType="touchUpInside" id="PwQ-pC-QL5"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                         </stackView>
                     </subviews>
@@ -94,40 +128,88 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHO-G3-5Lp" customClass="UICustomButton" customModule="SmilesUtilities">
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hIb-at-E14">
                     <rect key="frame" x="16" y="754" width="361" height="48"/>
-                    <color key="backgroundColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    <subviews>
+                        <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TKm-TV-QrT" customClass="UICustomButton" customModule="SmilesUtilities">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="48"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="r0D-LY-4Kq"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="OK">
+                                <color key="titleColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline4"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="24"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="0.45882352941176469" green="0.25882352941176467" blue="0.55686274509803924" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="secondaryButtonTapped:" destination="-1" eventType="touchUpInside" id="3dL-KS-CID"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snp-Ph-WI8" customClass="UICustomButton" customModule="SmilesUtilities">
+                            <rect key="frame" x="0.0" y="0.0" width="361" height="48"/>
+                            <color key="backgroundColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="F4U-ab-apb"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="RETRY">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline4"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="24"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="primaryButtonTapped:" destination="-1" eventType="touchUpInside" id="3pb-Gb-laR"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="Sfe-ZF-VIN"/>
+                        <constraint firstAttribute="height" constant="48" id="s1k-Et-8L3"/>
                     </constraints>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="OK">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline4"/>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="24"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="4IP-rB-sKo"/>
-                    </connections>
-                </button>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="hIb-at-E14" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="7cb-1B-9xp"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hIb-at-E14" secondAttribute="trailing" constant="16" id="H7x-fD-jaU"/>
                 <constraint firstItem="hNz-wn-nZ8" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="RTN-Hz-Fqx"/>
-                <constraint firstAttribute="trailing" secondItem="lHO-G3-5Lp" secondAttribute="trailing" constant="16" id="TbX-yK-Xun"/>
                 <constraint firstItem="hNz-wn-nZ8" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="epc-N0-Q1l"/>
-                <constraint firstItem="lHO-G3-5Lp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="fvs-Te-Ae7"/>
-                <constraint firstItem="ZFG-DH-IaX" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.66" id="s6J-nH-BMh"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lHO-G3-5Lp" secondAttribute="bottom" constant="16" id="xwE-E4-dfE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="hIb-at-E14" secondAttribute="bottom" constant="16" id="q2E-2X-wpO"/>
+                <constraint firstItem="ZFG-DH-IaX" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="s6J-nH-BMh"/>
             </constraints>
             <point key="canvasLocation" x="-68" y="-1"/>
         </view>
     </objects>
+    <designables>
+        <designable name="OGO-z3-epA">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="Snp-Ph-WI8">
+            <size key="intrinsicContentSize" width="47" height="30"/>
+        </designable>
+        <designable name="TKm-TV-QrT">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="lal-E4-CbQ">
+            <size key="intrinsicContentSize" width="47" height="30"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

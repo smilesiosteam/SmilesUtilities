@@ -11,30 +11,42 @@ public enum ErrorViewType {
     case fullScreen, popUp
 }
 
+public protocol SmilesErrorButtonDelegate: AnyObject {
+    func primaryButtonPressed()
+    func secondaryButtonPressed()
+}
+
 class SmilesErrorView: UIViewController {
 
     // MARK: - OUTLETS -
     @IBOutlet weak var errorImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var popUpButton: UICustomButton!
-    @IBOutlet weak var retryButton: UICustomButton!
+    @IBOutlet weak var primaryButton: UICustomButton!
+    @IBOutlet weak var secondaryButton: UICustomButton!
+    @IBOutlet weak var popUpButtonsStack: UIStackView!
+    @IBOutlet weak var buttonsStack: UIStackView!
     
     // MARK: - PROPERTIES -
     private var errorViewType: ErrorViewType = .popUp
-    private var buttonPressed: (() -> Void)?
     private var error: SmilesError
+    private var delegate: SmilesErrorButtonDelegate?
     
     // MARK: - ACTIONS -
-    @IBAction func buttonTapped(_ sender: Any) {
+    @IBAction func primaryButtonTapped(_ sender: Any) {
         dismiss(animated: true)
-        buttonPressed?()
+        delegate?.primaryButtonPressed()
+    }
+    
+    @IBAction func secondaryButtonTapped(_ sender: Any) {
+        dismiss(animated: true)
+        delegate?.secondaryButtonPressed()
     }
     
     // MARK: - INITIALIZERS -
-    init(error: SmilesError, buttonPressed: (() -> Void)? = nil) {
+    init(error: SmilesError, delegate: SmilesErrorButtonDelegate?) {
         self.error = error
-        self.buttonPressed = buttonPressed
+        self.delegate = delegate
         super.init(nibName: "SmilesErrorView", bundle: .module)
     }
     
@@ -55,13 +67,19 @@ class SmilesErrorView: UIViewController {
         setupLabel(label: titleLabel, text: error.title)
         setupLabel(label: descriptionLabel, text: error.description)
         
-        popUpButton.setTitle(error.buttonTitle, for: .normal)
-        retryButton.setTitle(error.buttonTitle, for: .normal)
+        if error.showForRetry {
+            error.primaryButtonTitle = "btn_Retry".localizedString
+            error.secondaryButtonTitle = "btn_Ok".localizedString
+        }
+        
+        primaryButton.setTitle(error.primaryButtonTitle, for: .normal)
+        secondaryButton.setTitle(error.secondaryButtonTitle, for: .normal)
+        secondaryButton.isHidden = error.secondaryButtonTitle == nil
         
         self.errorViewType = error.errorViewType
         view.backgroundColor = errorViewType == .fullScreen ? .white : .black.withAlphaComponent(0.6)
-        retryButton.isHidden = errorViewType == .popUp
-        popUpButton.isHidden = errorViewType == .fullScreen
+        buttonsStack.isHidden = errorViewType == .popUp
+        popUpButtonsStack.isHidden = errorViewType == .fullScreen
         
     }
     
