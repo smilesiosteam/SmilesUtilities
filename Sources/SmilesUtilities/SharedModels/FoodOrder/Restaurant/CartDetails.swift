@@ -17,7 +17,7 @@ public struct CartDetails: Codable {
     public var restaurant: Restaurant?
     public var instructionList: [InstructionList]?
     public var address: Address?
-    public var loyalityAddress: Address?
+    public var loyaltyAddress: Address?
     public var deliveryTip: DeliveryTip?
     public var isChoicesAvailable: Bool?
     public var menuChoiceDetails: [MenuConfigResponseModelMenuChoiceDetail]?
@@ -40,7 +40,7 @@ public struct CartDetails: Codable {
         case restaurant
         case instructionList
         case address
-        case loyalityAddress
+        case loyaltyAddress
         case deliveryTip
         case isCartEmpty
         case isChoicesAvailable
@@ -69,7 +69,7 @@ public struct CartDetails: Codable {
             restaurant = try values.decodeIfPresent(Restaurant.self, forKey: .restaurant)
             instructionList = try values.decodeIfPresent([InstructionList].self, forKey: .instructionList)
             address = try values.decodeIfPresent(Address.self, forKey: .address)
-            loyalityAddress = try values.decodeIfPresent(Address.self, forKey: .loyalityAddress)
+            loyaltyAddress = try values.decodeIfPresent(Address.self, forKey: .loyaltyAddress)
             deliveryTip = try values.decodeIfPresent(DeliveryTip.self, forKey: .deliveryTip)
             isChoicesAvailable = try values.decodeIfPresent(Bool.self, forKey: .isChoicesAvailable)
             isCartEmpty = try values.decodeIfPresent(Bool.self, forKey: .isCartEmpty)
