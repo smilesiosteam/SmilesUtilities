@@ -32,7 +32,6 @@ class SmilesErrorView: UIViewController {
         button.backgroundColor = UIColor(hexString: "75428E")
         button.setTitleColor(.white, for: .normal)
         button.fontTextStyle = .smilesHeadline4
-        button.cornerRadius = 24
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -44,7 +43,6 @@ class SmilesErrorView: UIViewController {
         button.borderWidth = 1.5
         button.borderColor = UIColor(hexString: "75428E").withAlphaComponent(0.4)
         button.fontTextStyle = .smilesHeadline4
-        button.cornerRadius = 24
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -76,6 +74,12 @@ class SmilesErrorView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        primaryButton.cornerRadius = errorViewType == .popUp ? popUpButtonsStack.frame.height / 2 : buttonsStack.frame.height / 2
+        secondaryButton.cornerRadius = errorViewType == .popUp ? popUpButtonsStack.frame.height / 2 : buttonsStack.frame.height / 2
     }
     
     private func setupViews() {
