@@ -34,7 +34,6 @@ class SmilesErrorView: UIViewController {
         button.fontTextStyle = .smilesHeadline4
         button.cornerRadius = 24
         button.clipsToBounds = true
-        button.addTarget(SmilesErrorView.self, action: #selector(primaryButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -47,7 +46,6 @@ class SmilesErrorView: UIViewController {
         button.fontTextStyle = .smilesHeadline4
         button.cornerRadius = 24
         button.clipsToBounds = true
-        button.addTarget(SmilesErrorView.self, action: #selector(secondaryButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -81,6 +79,9 @@ class SmilesErrorView: UIViewController {
     }
     
     private func setupViews() {
+        
+        primaryButton.addTarget(self, action: #selector(primaryButtonTapped), for: .touchUpInside)
+        secondaryButton.addTarget(self, action: #selector(secondaryButtonTapped), for: .touchUpInside)
         
         errorImageView.isHidden = error.errorImage == nil
         errorImageView.image = error.errorImage
