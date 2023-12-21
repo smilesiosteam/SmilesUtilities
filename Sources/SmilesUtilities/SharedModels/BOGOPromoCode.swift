@@ -60,7 +60,7 @@ public class BOGOPromoCode : NSObject, Codable {
         descriptionText = try values.decodeIfPresent(String.self, forKey: .descriptionText)
     }
     
-    override init(){}
+    public override init(){}
     
     init(fromDictionary dictionary: [AnyHashable: Any]) {
         consumedCounter = dictionary["consumedCounter"] as? Int
