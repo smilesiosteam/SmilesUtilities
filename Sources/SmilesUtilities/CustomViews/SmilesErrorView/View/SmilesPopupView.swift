@@ -101,7 +101,7 @@ class SmilesPopupView: UIViewController {
         primaryButton.setTitle(model.primaryButtonTitle, for: .normal)
         secondaryButton.setTitle(model.secondaryButtonTitle, for: .normal)
         
-        self.presentationType = model.popUpType
+        self.presentationType = model.presentationType
         view.backgroundColor = presentationType == .fullScreen ? .white : .black.withAlphaComponent(0.6)
         buttonsStack.isHidden = presentationType == .popUp
         popUpButtonsStack.isHidden = presentationType == .fullScreen

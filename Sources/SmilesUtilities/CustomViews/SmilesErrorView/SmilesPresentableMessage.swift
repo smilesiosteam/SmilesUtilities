@@ -17,8 +17,8 @@ public extension SmilesPresentableMessage where Self: UIViewController {
     func showMessage(model: SmilesPopupModel, delegate: SmilesMessageViewDelegate? = nil) {
         
         let messageVC = SmilesPopupView(model: model, delegate: delegate)
-        messageVC.modalPresentationStyle = model.popUpType == .fullScreen ? .overFullScreen : .overCurrentContext
-        messageVC.modalTransitionStyle = model.popUpType == .fullScreen ? .coverVertical : .crossDissolve
+        messageVC.modalPresentationStyle = model.presentationType == .fullScreen ? .overFullScreen : .overCurrentContext
+        messageVC.modalTransitionStyle = model.presentationType == .fullScreen ? .coverVertical : .crossDissolve
         self.present(messageVC, animated: true)
         
     }
