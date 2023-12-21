@@ -7,12 +7,12 @@
 
 import Foundation
 
-public protocol SmilesMessageViewDelegate: AnyObject {
+public protocol SmilesErrorViewDelegate: AnyObject {
     func primaryButtonPressed()
     func secondaryButtonPressed()
 }
 
-extension SmilesMessageViewDelegate {
+extension SmilesErrorViewDelegate {
     func primaryButtonPressed() {}
     func secondaryButtonPressed() {}
 }

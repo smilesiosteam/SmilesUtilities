@@ -1,5 +1,5 @@
 //
-//  SmilesPopupView 2.swift
+//  SmilesErrorView 2.swift
 //  
 //
 //  Created by Abdul Rehman Amjad on 13/12/2023.
@@ -8,11 +8,11 @@
 import UIKit
 import SmilesFontsManager
 
-public enum MessagePresentationType {
+public enum ErrorViewType {
     case fullScreen, popUp
 }
 
-class SmilesPopupView: UIViewController {
+class SmilesErrorView: UIViewController {
 
     // MARK: - OUTLETS -
     @IBOutlet weak var errorImageView: UIImageView!
@@ -20,12 +20,11 @@ class SmilesPopupView: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var popUpButtonsStack: UIStackView!
     @IBOutlet weak var buttonsStack: UIStackView!
-    @IBOutlet weak var popUpButtonStackWidth: NSLayoutConstraint!
     
     // MARK: - PROPERTIES -
-    private var presentationType: MessagePresentationType = .popUp
-    private var model: SmilesPopupModel
-    private weak var delegate: SmilesMessageViewDelegate?
+    private var errorViewType: ErrorViewType = .popUp
+    private var error: SmilesError
+    private weak var delegate: SmilesErrorViewDelegate?
     
     // MARK: - VIEWS -
     private let primaryButton: UICustomButton = {
@@ -61,10 +60,10 @@ class SmilesPopupView: UIViewController {
     }
     
     // MARK: - INITIALIZERS -
-    init(model: SmilesPopupModel, delegate: SmilesMessageViewDelegate?) {
-        self.model = model
+    init(error: SmilesError, delegate: SmilesErrorViewDelegate?) {
+        self.error = error
         self.delegate = delegate
-        super.init(nibName: "SmilesPopupView", bundle: .module)
+        super.init(nibName: "SmilesErrorView", bundle: .module)
     }
     
     required init?(coder: NSCoder) {
@@ -79,8 +78,8 @@ class SmilesPopupView: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        primaryButton.cornerRadius = presentationType == .popUp ? popUpButtonsStack.frame.height / 2 : buttonsStack.frame.height / 2
-        secondaryButton.cornerRadius = presentationType == .popUp ? popUpButtonsStack.frame.height / 2 : buttonsStack.frame.height / 2
+        primaryButton.cornerRadius = errorViewType == .popUp ? popUpButtonsStack.frame.height / 2 : buttonsStack.frame.height / 2
+        secondaryButton.cornerRadius = errorViewType == .popUp ? popUpButtonsStack.frame.height / 2 : buttonsStack.frame.height / 2
     }
     
     private func setupViews() {
@@ -88,32 +87,31 @@ class SmilesPopupView: UIViewController {
         primaryButton.addTarget(self, action: #selector(primaryButtonTapped), for: .touchUpInside)
         secondaryButton.addTarget(self, action: #selector(secondaryButtonTapped), for: .touchUpInside)
         
-        errorImageView.isHidden = model.image == nil
-        errorImageView.image = model.image
-        setupLabel(label: titleLabel, text: model.title)
-        setupLabel(label: descriptionLabel, text: model.description)
+        errorImageView.isHidden = error.errorImage == nil
+        errorImageView.image = error.errorImage
+        setupLabel(label: titleLabel, text: error.title)
+        setupLabel(label: descriptionLabel, text: error.description)
         
-        if model.showForRetry {
-            model.primaryButtonTitle = "btn_Retry".localizedString
-            model.secondaryButtonTitle = "btn_Ok".localizedString
+        if error.showForRetry {
+            error.primaryButtonTitle = "btn_Retry".localizedString
+            error.secondaryButtonTitle = "btn_Ok".localizedString
         }
         
-        primaryButton.setTitle(model.primaryButtonTitle, for: .normal)
-        secondaryButton.setTitle(model.secondaryButtonTitle, for: .normal)
+        primaryButton.setTitle(error.primaryButtonTitle, for: .normal)
+        secondaryButton.setTitle(error.secondaryButtonTitle, for: .normal)
         
-        self.presentationType = model.presentationType
-        view.backgroundColor = presentationType == .fullScreen ? .white : .black.withAlphaComponent(0.6)
-        buttonsStack.isHidden = presentationType == .popUp
-        popUpButtonsStack.isHidden = presentationType == .fullScreen
+        self.errorViewType = error.errorViewType
+        view.backgroundColor = errorViewType == .fullScreen ? .white : .black.withAlphaComponent(0.6)
+        buttonsStack.isHidden = errorViewType == .popUp
+        popUpButtonsStack.isHidden = errorViewType == .fullScreen
         
-        if presentationType == .popUp {
-            if model.secondaryButtonTitle != nil {
+        if errorViewType == .popUp {
+            if error.secondaryButtonTitle != nil {
                 popUpButtonsStack.addArrangedSubview(secondaryButton)
-                popUpButtonStackWidth.constant = UIScreen.main.bounds.width * 0.25
             }
             popUpButtonsStack.addArrangedSubview(primaryButton)
         } else {
-            if model.secondaryButtonTitle != nil {
+            if error.secondaryButtonTitle != nil {
                 buttonsStack.addArrangedSubview(secondaryButton)
             }
             buttonsStack.addArrangedSubview(primaryButton)

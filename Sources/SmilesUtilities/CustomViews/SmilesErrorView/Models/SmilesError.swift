@@ -8,23 +8,23 @@
 import Foundation
 import UIKit
 
-public struct SmilesPopupModel {
+public struct SmilesError {
     
-    let image: UIImage?
+    let errorImage: UIImage?
     let title: String?
     let description: String?
     var primaryButtonTitle: String
     var secondaryButtonTitle: String?
-    let presentationType: MessagePresentationType
+    let errorViewType: ErrorViewType
     let showForRetry: Bool
     
-    public init(image: UIImage? = nil, title: String? = nil, description: String? = nil, primaryButtonTitle: String = "btn_Ok".localizedString, secondaryButtonTitle: String? = nil, presentationType: MessagePresentationType = .popUp, showForRetry: Bool = false) {
-        self.image = image
+    public init(errorImage: UIImage? = nil, title: String? = nil, description: String? = nil, primaryButtonTitle: String = "btn_Ok".localizedString, secondaryButtonTitle: String? = nil, errorViewType: ErrorViewType = .popUp, showForRetry: Bool = false) {
+        self.errorImage = errorImage
         self.title = title
         self.description = description
         self.primaryButtonTitle = primaryButtonTitle
         self.secondaryButtonTitle = secondaryButtonTitle
-        self.presentationType = presentationType
+        self.errorViewType = errorViewType
         self.showForRetry = showForRetry
     }
     
