@@ -114,28 +114,39 @@ public class ToastModel {
 }
 
 public protocol Toastable {
-   @discardableResult func showToast(model: ToastModel) -> ToastView
+   @discardableResult func showToast(model: ToastModel, atPosition position: ToastPosition) -> ToastView
 }
 
 public extension Toastable where Self: UIViewController {
     @discardableResult
-     func showToast(model: ToastModel) -> ToastView {
+    func showToast(model: ToastModel, atPosition position: ToastPosition = .bottom) -> ToastView {
         let toastView = ToastView(toastModel: model)
         view.addSubview(toastView)
 
-         NSLayoutConstraint.activate([
-             toastView.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Center the view horizontally
-             toastView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-             toastView.heightAnchor.constraint(equalToConstant: 50),
-             toastView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -120) // Adjust the maximum width if needed
-         ])
+        let isTop = position == .top
+        let verticalConstraint = isTop ? toastView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.0)
+            : toastView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20.0)
+            
+
+        NSLayoutConstraint.activate([
+            toastView.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Center the view horizontally
+            toastView.heightAnchor.constraint(equalToConstant: 50),
+            toastView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -120), // Adjust the maximum width if needed
+            verticalConstraint
+        ])
 
         UIView.animate(withDuration: 0.3, delay: 10.0, options: .curveEaseOut, animations: {
             toastView.alpha = 0
         }) { _ in
             toastView.removeFromSuperview()
         }
-         
-         return toastView
+
+        return toastView
     }
+}
+
+
+public enum ToastPosition {
+    case top
+    case bottom
 }
