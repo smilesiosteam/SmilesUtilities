@@ -10,6 +10,12 @@ import UIKit
 
 public protocol SmilesPresentableMessage {
     func showMessage(model: SmilesMessageModel, delegate: SmilesMessageViewDelegate?)
+    func showMessage(on vc: UIViewController, model: SmilesMessageModel, delegate: SmilesMessageViewDelegate?)
+}
+
+public extension SmilesPresentableMessage {
+    func showMessage(model: SmilesMessageModel, delegate: SmilesMessageViewDelegate? = nil) {}
+    func showMessage(on vc: UIViewController, model: SmilesMessageModel, delegate: SmilesMessageViewDelegate? = nil) {}
 }
 
 public extension SmilesPresentableMessage where Self: UIViewController {
