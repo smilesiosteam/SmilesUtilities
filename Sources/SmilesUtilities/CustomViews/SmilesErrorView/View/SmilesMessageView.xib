@@ -14,7 +14,7 @@
                 <outlet property="buttonsStack" destination="hIb-at-E14" id="W9m-gL-QkN"/>
                 <outlet property="descriptionLabel" destination="Ea0-OW-001" id="tuv-cj-ddv"/>
                 <outlet property="errorImageView" destination="gUK-PT-pbj" id="f2i-ES-u3z"/>
-                <outlet property="popUpButtonStackWidth" destination="8Cz-cu-oRr" id="4oY-p1-NoP"/>
+                <outlet property="popUpButtonStackWidth" destination="hYD-sf-Oul" id="oS1-xW-41w"/>
                 <outlet property="popUpButtonsStack" destination="x9T-Kb-yQf" id="FeD-6s-pje"/>
                 <outlet property="titleLabel" destination="2At-Wh-Zo4" id="QpE-V1-PYp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -61,9 +61,10 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="x9T-Kb-yQf">
-                                    <rect key="frame" x="88.333333333333343" y="250.66666666666669" width="98.333333333333343" height="40"/>
+                                    <rect key="frame" x="87.666666666666657" y="250.66666666666669" width="100" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="LoL-pP-H6r"/>
+                                        <constraint firstAttribute="width" constant="100" id="hYD-sf-Oul"/>
                                     </constraints>
                                 </stackView>
                             </subviews>
@@ -93,7 +94,6 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="hIb-at-E14" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="7cb-1B-9xp"/>
-                <constraint firstItem="x9T-Kb-yQf" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.25" id="8Cz-cu-oRr"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hIb-at-E14" secondAttribute="trailing" constant="16" id="H7x-fD-jaU"/>
                 <constraint firstItem="hNz-wn-nZ8" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="RTN-Hz-Fqx"/>
                 <constraint firstItem="hNz-wn-nZ8" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="epc-N0-Q1l"/>
