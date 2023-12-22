@@ -25,7 +25,7 @@ public class Menu: NSObject, Codable {
     public var isNutsIncluded: Bool?
     public var isOrganic: Bool?
     public var isSpicy: Bool?
-    public var isExclusiveItem: String?
+    public var isExclusiveItem: Bool?
     public var exclusiveItemDescription: String?
     public var isVeg: Bool?
     public var isVegan: Bool?
@@ -158,7 +158,7 @@ public class Menu: NSObject, Codable {
         maxLimit = try values.decodeIfPresent(Int.self, forKey: .maxLimit)
         itemRating = try values.decodeIfPresent(Double.self, forKey: .itemRating)
         itemRatingCount = try values.decodeIfPresent(Int.self, forKey: .itemRatingCount)
-        isExclusiveItem = try values.decodeIfPresent(String.self, forKey: .isExclusiveItem)
+        isExclusiveItem = try values.decodeIfPresent(Bool.self, forKey: .isExclusiveItem)
         exclusiveItemDescription = try values.decodeIfPresent(String.self, forKey: .exclusiveItemDescription)
     }
 }
