@@ -52,7 +52,7 @@ class SmilesMessageView: UIViewController {
     // MARK: - ACTIONS -
     @objc func primaryButtonTapped() {
         dismiss(animated: true)
-        delegate?.primaryButtonPressed()
+        delegate?.primaryButtonPressed(isForRetry: model.showForRetry)
     }
     
     @objc func secondaryButtonTapped() {

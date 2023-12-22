@@ -8,11 +8,11 @@
 import Foundation
 
 public protocol SmilesMessageViewDelegate: AnyObject {
-    func primaryButtonPressed()
+    func primaryButtonPressed(isForRetry: Bool)
     func secondaryButtonPressed()
 }
 
 public extension SmilesMessageViewDelegate {
-    func primaryButtonPressed() {}
+    func primaryButtonPressed(isForRetry: Bool) {}
     func secondaryButtonPressed() {}
 }
