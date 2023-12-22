@@ -12,7 +12,7 @@ public enum MessagePresentationType {
     case fullScreen, popUp
 }
 
-class SmilesMessageView: UIViewController {
+public class SmilesMessageView: UIViewController {
 
     // MARK: - OUTLETS -
     @IBOutlet weak var errorImageView: UIImageView!
@@ -61,7 +61,7 @@ class SmilesMessageView: UIViewController {
     }
     
     // MARK: - INITIALIZERS -
-    init(model: SmilesMessageModel, delegate: SmilesMessageViewDelegate?) {
+    public init(model: SmilesMessageModel, delegate: SmilesMessageViewDelegate?) {
         self.model = model
         self.delegate = delegate
         super.init(nibName: "SmilesMessageView", bundle: .module)
@@ -72,12 +72,12 @@ class SmilesMessageView: UIViewController {
     }
     
     // MARK: - METHODS -
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
     
-    override func viewDidLayoutSubviews() {
+    public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         primaryButton.cornerRadius = presentationType == .popUp ? popUpButtonsStack.frame.height / 2 : buttonsStack.frame.height / 2
         secondaryButton.cornerRadius = presentationType == .popUp ? popUpButtonsStack.frame.height / 2 : buttonsStack.frame.height / 2
