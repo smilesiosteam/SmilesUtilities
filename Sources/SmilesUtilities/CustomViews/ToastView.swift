@@ -131,7 +131,6 @@ public extension Toastable where Self: UIViewController {
         NSLayoutConstraint.activate([
             toastView.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Center the view horizontally
             toastView.heightAnchor.constraint(equalToConstant: 50),
-            toastView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -120), // Adjust the maximum width if needed
             verticalConstraint
         ])
 
