@@ -62,7 +62,7 @@ public final class ToastView: UIView {
         }
        
         messageLabel.textColor = toastModel.titileColor
-        messageLabel.textAlignment = .center
+        messageLabel.textAlignment = toastModel.titleAlignment
         messageLabel.numberOfLines = 0
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -108,30 +108,31 @@ public class ToastModel {
     public var imageIcon: UIImage?
     public var backgroundColor: UIColor = UIColor.black.withAlphaComponent(0.7)
     public var titileColor: UIColor = .white
+    public var titleAlignment: NSTextAlignment = .center
     public var titleStyle: UIFont.TextStyle = .smilesHeadline5
     public var attributedString: NSMutableAttributedString? = nil
     public var viewDidTapped: (() -> Void)? = nil
 }
 
 public protocol Toastable {
-    @discardableResult func showToast(model: ToastModel, atPosition position: ToastPosition, _ height: CGFloat, _ width: CGFloat) -> ToastView
+    @discardableResult func showToast(model: ToastModel, atPosition position: ToastPosition, _ height: CGFloat) -> ToastView
 }
 
 public extension Toastable where Self: UIViewController {
     @discardableResult
-    func showToast(model: ToastModel, atPosition position: ToastPosition = .bottom , _ height: CGFloat = 50.0 , _ width: CGFloat = -120.0 ) -> ToastView {
+    func showToast(model: ToastModel, atPosition position: ToastPosition = .bottom , _ height: CGFloat = 50.0 ) -> ToastView {
         let toastView = ToastView(toastModel: model)
         view.addSubview(toastView)
 
         let isTop = position == .top
         let verticalConstraint = isTop ? toastView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.0)
             : toastView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20.0)
-            
-
+        
         NSLayoutConstraint.activate([
             toastView.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Center the view horizontally
             toastView.heightAnchor.constraint(equalToConstant: height),
-            toastView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: width), // Adjust the maximum width if needed
+            toastView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 16),
+            toastView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: 16), // Adjust the maximum width if needed
             verticalConstraint
         ])
 
