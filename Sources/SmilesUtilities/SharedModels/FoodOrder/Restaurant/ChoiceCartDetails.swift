@@ -29,6 +29,8 @@ public class ChoiceCartDetails : Codable {
     public var maxLimit: String?
     public var isBucketDiscountExcluded: Bool?
     public var isAvailable: Bool?
+    public var isExclusiveItem: Bool?
+    public var exclusiveItemDescription: String?
     
     enum CodingKeys: String, CodingKey {
         
@@ -53,6 +55,8 @@ public class ChoiceCartDetails : Codable {
         case maxLimit
         case isBucketDiscountExcluded
         case isAvailable
+        case isExclusiveItem
+        case exclusiveItemDescription
     }
     
     public init(){}
@@ -80,6 +84,8 @@ public class ChoiceCartDetails : Codable {
         maxLimit = try values.decodeIfPresent(String.self, forKey: .maxLimit)
         isBucketDiscountExcluded = try values.decodeIfPresent(Bool.self, forKey: .isBucketDiscountExcluded)
         isAvailable = try values.decodeIfPresent(Bool.self, forKey: .isAvailable)
+        isExclusiveItem = try values.decodeIfPresent(Bool.self, forKey: .isExclusiveItem)
+        exclusiveItemDescription = try values.decodeIfPresent(String.self, forKey: .exclusiveItemDescription)
     }
     
 }

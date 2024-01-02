@@ -135,9 +135,7 @@ public extension Toastable where Self: UIViewController {
             verticalConstraint
         ])
 
-        UIView.animate(withDuration: 0.3, delay: 10.0, options: .curveEaseOut, animations: {
-            toastView.alpha = 0
-        }) { _ in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             toastView.removeFromSuperview()
         }
 
