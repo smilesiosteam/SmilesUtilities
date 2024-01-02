@@ -114,12 +114,12 @@ public class ToastModel {
 }
 
 public protocol Toastable {
-   @discardableResult func showToast(model: ToastModel, atPosition position: ToastPosition) -> ToastView
+    @discardableResult func showToast(model: ToastModel, atPosition position: ToastPosition, _ height: CGFloat, _ width: CGFloat) -> ToastView
 }
 
 public extension Toastable where Self: UIViewController {
     @discardableResult
-    func showToast(model: ToastModel, atPosition position: ToastPosition = .bottom) -> ToastView {
+    func showToast(model: ToastModel, atPosition position: ToastPosition = .bottom , _ height: CGFloat = 50.0 , _ width: CGFloat = -120.0 ) -> ToastView {
         let toastView = ToastView(toastModel: model)
         view.addSubview(toastView)
 
@@ -130,8 +130,8 @@ public extension Toastable where Self: UIViewController {
 
         NSLayoutConstraint.activate([
             toastView.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Center the view horizontally
-            toastView.heightAnchor.constraint(equalToConstant: 50),
-            toastView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -120), // Adjust the maximum width if needed
+            toastView.heightAnchor.constraint(equalToConstant: height),
+            toastView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: width), // Adjust the maximum width if needed
             verticalConstraint
         ])
 
