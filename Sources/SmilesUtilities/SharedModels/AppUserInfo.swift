@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc open class AppUserInfo: NSObject, Codable {
+@objc public class AppUserInfo: NSObject, Codable {
     
     public var isLocationUpdated: Bool?
     public var latitude: String?
