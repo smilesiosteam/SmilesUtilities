@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Ahmed Naguib on 23/11/2023.
 //
@@ -10,23 +10,22 @@ import SmilesFontsManager
 
 public final class ToastView: UIView {
     
-     // MARK: - Properties
+    // MARK: - Properties
     private let iconImageView = UIImageView()
     private let messageLabel = UILabel()
     private let stackView = UIStackView()
     private let toastModel: ToastModel
     
     // MARK: - Init
-   public init(toastModel: ToastModel) {
+    public init(toastModel: ToastModel) {
         self.toastModel = toastModel
         super.init(frame: CGRect.zero)
         configureView()
         configureIconImageView()
         configureMessageLabel()
-        setupView()
-       addTapGesture()
+        addTapGesture()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -42,15 +41,19 @@ public final class ToastView: UIView {
     private func configureIconImageView() {
         let isHidden = toastModel.imageIcon == nil
         iconImageView.isHidden = isHidden
-        
         iconImageView.image = toastModel.imageIcon
         iconImageView.contentMode = .scaleAspectFit
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(iconImageView)
         NSLayoutConstraint.activate([
+            iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0),
             iconImageView.widthAnchor.constraint(equalToConstant: 24),
             iconImageView.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
+    
+    
     
     private func configureMessageLabel() {
         messageLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -60,11 +63,17 @@ public final class ToastView: UIView {
             messageLabel.text = toastModel.title
             messageLabel.fontTextStyle = toastModel.titleStyle
         }
-       
+        
         messageLabel.textColor = toastModel.titileColor
         messageLabel.textAlignment = toastModel.titleAlignment
         messageLabel.numberOfLines = 0
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(messageLabel)
+        NSLayoutConstraint.activate([
+            messageLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 8),
+            messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            messageLabel.centerYAnchor.constraint(equalTo: iconImageView.centerYAnchor, constant: 0)
+        ])
     }
     
     private func addTapGesture() {
@@ -76,29 +85,8 @@ public final class ToastView: UIView {
     @objc func labelAction() {
         toastModel.viewDidTapped?()
     }
-
-    private func setupView() {
-        // Configure the stack view
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.spacing = 2
-
-        // Add arranged subviews to the stack view
-        stackView.addArrangedSubview(iconImageView)
-        stackView.addArrangedSubview(messageLabel)
-
-        // Add the stack view to the ToastView
-        addSubview(stackView)
-
-        // Set constraints for the stack view
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
-        ])
-    }
+    
+    
 }
 
 public class ToastModel {
@@ -123,23 +111,23 @@ public extension Toastable where Self: UIViewController {
     func showToast(model: ToastModel, atPosition position: ToastPosition = .bottom , _ height: CGFloat = 50.0 ) -> ToastView {
         let toastView = ToastView(toastModel: model)
         view.addSubview(toastView)
-
+        
         let isTop = position == .top
         let verticalConstraint = isTop ? toastView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.0)
-            : toastView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20.0)
+        : toastView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20.0)
         
         NSLayoutConstraint.activate([
-            toastView.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Center the view horizontally
+            toastView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             toastView.heightAnchor.constraint(equalToConstant: height),
             toastView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 16),
-            toastView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: 16), // Adjust the maximum width if needed
+            toastView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: 16),
             verticalConstraint
         ])
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             toastView.removeFromSuperview()
         }
-
+        
         return toastView
     }
 }
