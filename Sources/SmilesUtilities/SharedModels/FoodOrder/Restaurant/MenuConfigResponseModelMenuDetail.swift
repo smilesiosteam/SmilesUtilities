@@ -15,6 +15,8 @@ public struct MenuConfigResponseModelMenuDetail : Codable {
     public let location : String?
     public let restaurantId : String?
     public let restaurantName : String?
+    public let isExclusiveItem: Bool?
+    public let exclusiveItemLimit: Int?
     
     enum CodingKeys: String, CodingKey {
         case itemDescription = "itemDescription"
@@ -23,6 +25,8 @@ public struct MenuConfigResponseModelMenuDetail : Codable {
         case location = "location"
         case restaurantId = "restaurantId"
         case restaurantName = "restaurantName"
+        case isExclusiveItem
+        case exclusiveItemLimit
     }
     
     public init(from decoder: Decoder) throws {
@@ -33,6 +37,9 @@ public struct MenuConfigResponseModelMenuDetail : Codable {
         location = try values.decodeIfPresent(String.self, forKey: .location)
         restaurantId = try values.decodeIfPresent(String.self, forKey: .restaurantId)
         restaurantName = try values.decodeIfPresent(String.self, forKey: .restaurantName)
+        
+        isExclusiveItem = try values.decodeIfPresent(Bool.self, forKey: .isExclusiveItem)
+        exclusiveItemLimit = try values.decodeIfPresent(Int.self, forKey: .exclusiveItemLimit)
     }
     
 }
