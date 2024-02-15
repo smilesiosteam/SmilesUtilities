@@ -101,34 +101,6 @@ public class RestaurantRequestWithNameFilter : Codable, Hashable {
     
 }
 
-
-public class RemoveCartRequest: Codable {
-    public var userInfo: AppUserInfo?
-    public var restaurantId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case userInfo
-        case restaurantId
-    }
-    
-    public init() {}
-
-    required public init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        userInfo = try values.decodeIfPresent(AppUserInfo.self, forKey: .userInfo)
-        restaurantId = try values.decodeIfPresent(String.self, forKey: .restaurantId)
-    }
-    
-    public func asDictionary(dictionary: [String: Any]) -> [String: Any] {
-        let encoder = DictionaryEncoder()
-        guard let encoded = try? encoder.encode(self) as [String: Any] else {
-            return [:]
-        }
-        return encoded.mergeDictionaries(dictionary: dictionary)
-    }
-}
-
-
 public class SubscriptionBannerRequest: Codable {
     public var userInfo: AppUserInfo?
     public var menuItemType: String?
