@@ -539,3 +539,9 @@ public extension String{
 extension String: LocalizedError {
     public var errorDescription: String? { return self.localizedString }
 }
+
+extension NSObject {
+   public static var className: String {
+        return String(describing: self)
+    }
+}
