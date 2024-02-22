@@ -47,6 +47,7 @@ import Foundation
         try container.encodeIfPresent(self.cityId, forKey: .cityId)
         try container.encodeIfPresent(self.nickName, forKey: .nickName)
         try container.encodeIfPresent(self.cityName, forKey: .cityName)
+        try container.encodeIfPresent(self.addressId, forKey: .addressId)
     }
     
     public required init(from decoder: Decoder) throws {
