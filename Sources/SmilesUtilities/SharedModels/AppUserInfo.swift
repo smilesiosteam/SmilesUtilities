@@ -18,6 +18,7 @@ import Foundation
     public var cityId : Int?
     public var nickName : String?
     public var cityName: String?
+    public var addressId: String?
     
     
     enum CodingKeys: String, CodingKey {
@@ -30,6 +31,7 @@ import Foundation
         case cityId
         case nickName
         case cityName
+        case addressId
     }
     
     public override init() {}
@@ -45,6 +47,7 @@ import Foundation
         try container.encodeIfPresent(self.cityId, forKey: .cityId)
         try container.encodeIfPresent(self.nickName, forKey: .nickName)
         try container.encodeIfPresent(self.cityName, forKey: .cityName)
+        try container.encodeIfPresent(self.addressId, forKey: .addressId)
     }
     
     public required init(from decoder: Decoder) throws {
@@ -64,6 +67,7 @@ import Foundation
         }
         nickName = try values.decodeIfPresent(String.self, forKey: .nickName)
         cityName = try values.decodeIfPresent(String.self, forKey: .cityName)
+        addressId = try values.decodeIfPresent(String.self, forKey: .addressId)
     }
     
     public func asDictionary() -> [String: Any] {
