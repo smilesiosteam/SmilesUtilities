@@ -53,8 +53,11 @@ public class Menu: NSObject, Codable {
         else if let veg = isVeg, veg {
             return "vegDot"
         }
-        else {
+        else if let nonVeg = isNonVeg, nonVeg {
             return "nonVegDot"
+        }
+        else {
+            return ""
         }
     }
     
