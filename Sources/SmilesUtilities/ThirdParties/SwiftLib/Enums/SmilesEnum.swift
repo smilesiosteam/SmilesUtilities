@@ -26,6 +26,7 @@ public enum ConsentActionType {
     case yallaCompare
     case serviceMarketConsent
     case topBrand
+    case easyInsurance
 }
 
 public enum RestaurantMenuType: String, Codable {
