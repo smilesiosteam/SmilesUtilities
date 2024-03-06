@@ -22,7 +22,8 @@ public struct MenuConfigResponseModelMenuChoice : Codable {
     public let minimumChoice: Int?
     public let defaultSelection: Int?
     public let quantityFlag: Bool?
-
+    public let choiceFlag: Bool?
+    
     enum CodingKeys: String, CodingKey {
         case choiceId = "choiceId"
         case choiceName = "choiceName"
@@ -37,6 +38,7 @@ public struct MenuConfigResponseModelMenuChoice : Codable {
         case defaultSelection
         case quantityFlag
         case subChoiceTypeList = "subMenuChoiceDetails"
+        case choiceFlag
     }
     
     public init(from decoder: Decoder) throws {
@@ -54,6 +56,7 @@ public struct MenuConfigResponseModelMenuChoice : Codable {
         defaultSelection = try values.decodeIfPresent(Int.self, forKey: .defaultSelection)
         quantityFlag = try values.decodeIfPresent(Bool.self, forKey: .quantityFlag)
         subChoiceTypeList = try values.decodeIfPresent([MenuConfigResponseModelMenuChoiceDetail].self, forKey: .subChoiceTypeList)
+        choiceFlag = try values.decodeIfPresent(Bool.self, forKey: .choiceFlag)
     }
     
 }
