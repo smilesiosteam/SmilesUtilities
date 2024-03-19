@@ -9,7 +9,6 @@
 import UIKit
 
 public class RestaurantRequest: Codable {
-    public var userInfo: AppUserInfo?
     public var pageNo: Int?
     public var menuItemType: String?
     public var filters : [RestaurantRequestFilter]?
@@ -17,7 +16,6 @@ public class RestaurantRequest: Codable {
     public var isGuestUser: Bool?
     
     enum CodingKeys: String, CodingKey {
-        case userInfo
         case pageNo
         case menuItemType
         case filters
@@ -29,7 +27,6 @@ public class RestaurantRequest: Codable {
 
     required public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        userInfo = try values.decodeIfPresent(AppUserInfo.self, forKey: .userInfo)
         pageNo = try values.decodeIfPresent(Int.self, forKey: .pageNo)
         menuItemType = try values.decodeIfPresent(String.self, forKey: .menuItemType)
         filters = try values.decodeIfPresent([RestaurantRequestFilter].self, forKey: .filters)
@@ -103,11 +100,9 @@ public class RestaurantRequestWithNameFilter : Codable, Hashable {
 
 
 public class RemoveCartRequest: Codable {
-    public var userInfo: AppUserInfo?
     public var restaurantId: String?
 
     enum CodingKeys: String, CodingKey {
-        case userInfo
         case restaurantId
     }
     
@@ -115,7 +110,6 @@ public class RemoveCartRequest: Codable {
 
     required public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        userInfo = try values.decodeIfPresent(AppUserInfo.self, forKey: .userInfo)
         restaurantId = try values.decodeIfPresent(String.self, forKey: .restaurantId)
     }
     
@@ -130,11 +124,9 @@ public class RemoveCartRequest: Codable {
 
 
 public class SubscriptionBannerRequest: Codable {
-    public var userInfo: AppUserInfo?
     public var menuItemType: String?
 
     enum CodingKeys: String, CodingKey {
-        case userInfo
         case menuItemType
     }
     
@@ -142,7 +134,6 @@ public class SubscriptionBannerRequest: Codable {
     
     required public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        userInfo = try values.decodeIfPresent(AppUserInfo.self, forKey: .userInfo)
         menuItemType = try values.decodeIfPresent(String.self, forKey: .menuItemType)
     }
     
