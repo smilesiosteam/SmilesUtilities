@@ -26,12 +26,19 @@ public extension UIImageView {
         }
     }
 
-    func setImageWithUrlString(_ urlString: String, defaultImage: String? = "") {
+    func setImageWithUrlString(_ urlString: String, defaultImage: String? = nil) {
         if let imageURL = URL(string: urlString) {
-            self.sd_setImage(with: imageURL, placeholderImage: UIImage(named: defaultImage ?? ""))
-        }
-        else {
-            self.image = UIImage(named: defaultImage ?? "")
+            if let defaultImage, !defaultImage.isEmpty {
+                self.sd_setImage(with: imageURL, placeholderImage: UIImage(named: defaultImage))
+            } else {
+                self.sd_setImage(with: imageURL)
+            }
+        } else {
+            if let defaultImage, !defaultImage.isEmpty {
+                self.image = UIImage(named: defaultImage)
+            } else {
+                self.image = nil
+            }
         }
     }
     
@@ -46,7 +53,11 @@ public extension UIImageView {
             }
         }
         else {
-            self.image = UIImage(named: defaultImage ?? "")
+            if let defaultImage, !defaultImage.isEmpty {
+                self.image = UIImage(named: defaultImage)
+            } else {
+                self.image = nil
+            }
             completionBlock(self.image)
         }
     }

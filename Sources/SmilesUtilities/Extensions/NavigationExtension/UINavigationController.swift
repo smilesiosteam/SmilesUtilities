@@ -12,8 +12,8 @@ public extension UINavigationController {
     func addTabbarItem(title: String, selectedImageName: String, imageName image: String) {
         self.isNavigationBarHidden = true
         self.tabBarItem = UITabBarItem()
-        self.tabBarItem.selectedImage = UIImage(named: selectedImageName)?.withRenderingMode(.alwaysOriginal)
-        self.tabBarItem.image = UIImage(named: image)?.withRenderingMode(.alwaysOriginal)
+        self.tabBarItem.selectedImage = UIImage(named: selectedImageName, in: .main, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+        self.tabBarItem.image = UIImage(named: image, in: .main, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
         self.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         self.tabBarItem.title = title
     }
