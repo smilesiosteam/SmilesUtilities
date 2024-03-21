@@ -15,18 +15,22 @@ public extension UIImageView {
         self.layer.masksToBounds = true
     }
     
-    func setProfileImageWithUrlString(_ urlString: String, defaultImage: String? = "") {
+    func setProfileImageWithUrlString(_ urlString: String, defaultImage: String? = "", bundle: Bundle = .main) {
         if let imageURL = URL(string: urlString) {
             SDImageCache.shared.removeImage(forKey: urlString) {
                 self.sd_setImage(with: imageURL, placeholderImage: UIImage(named: defaultImage ?? ""))
             }
         }
         else {
-            self.image = UIImage(named: defaultImage ?? "")
+            if let defaultImage, !defaultImage.isEmpty {
+                self.image = UIImage(named: defaultImage, in: bundle, compatibleWith: nil)
+            } else {
+                self.image = nil
+            }
         }
     }
 
-    func setImageWithUrlString(_ urlString: String, defaultImage: String? = nil) {
+    func setImageWithUrlString(_ urlString: String, defaultImage: String? = nil, bundle: Bundle = .main) {
         if let imageURL = URL(string: urlString) {
             if let defaultImage, !defaultImage.isEmpty {
                 self.sd_setImage(with: imageURL, placeholderImage: UIImage(named: defaultImage))
@@ -35,14 +39,14 @@ public extension UIImageView {
             }
         } else {
             if let defaultImage, !defaultImage.isEmpty {
-                self.image = UIImage(named: defaultImage)
+                self.image = UIImage(named: defaultImage, in: bundle, compatibleWith: nil)
             } else {
                 self.image = nil
             }
         }
     }
     
-    func setImageWithUrlString(_ urlString: String, defaultImage: String? = "", backgroundColor: UIColor? = .appRevampImageBackgroundColor, completionBlock: @escaping (_ image: UIImage?) -> ()) {
+    func setImageWithUrlString(_ urlString: String, defaultImage: String? = "", bundle: Bundle = .main, backgroundColor: UIColor? = .appRevampImageBackgroundColor, completionBlock: @escaping (_ image: UIImage?) -> ()) {
         if let imageURL = URL(string: urlString) {
             self.sd_setImage(with: imageURL) { (image, error, type, url) in
                 if (error != nil) {
@@ -54,7 +58,7 @@ public extension UIImageView {
         }
         else {
             if let defaultImage, !defaultImage.isEmpty {
-                self.image = UIImage(named: defaultImage)
+                self.image = UIImage(named: defaultImage, in: bundle, compatibleWith: nil)
             } else {
                 self.image = nil
             }
