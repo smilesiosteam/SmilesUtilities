@@ -107,8 +107,20 @@ public protocol Toastable {
 }
 
 public extension Toastable where Self: UIViewController {
+    
+    private var currentToastView: ToastView? {
+            return view.subviews.compactMap { $0 as? ToastView }.first
+        }
+    
     @discardableResult
     func showToast(model: ToastModel, atPosition position: ToastPosition = .bottom , _ height: CGFloat = 50.0 ) -> ToastView {
+        
+        // Check if a toast view is already visible, and if so, return nil
+        // If a toast view is already visible, return it
+            if let currentToastView = currentToastView {
+                return currentToastView
+            }
+        
         let toastView = ToastView(toastModel: model)
         view.addSubview(toastView)
         
